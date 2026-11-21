@@ -247,7 +247,7 @@ Use this to remove the driver and app while choosing whether to keep your preset
 
 ## Credits
 
-Made by obtentio
+Made by obtentio, with engineering and audit contributions from Claude and Antigravity (Neon).
 
 Based on Equaliser by Christophe Knage and contributors, originally `cvknage/equaliser`.
 
