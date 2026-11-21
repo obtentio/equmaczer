@@ -1,4 +1,5 @@
 // equmaczer — Copyright (C) 2026 obtentio. Licensed under the GNU GPL v3 (see LICENSE).
+import CoreAudio
 import XCTest
 @testable import equmaczer
 
@@ -73,6 +74,125 @@ final class LoudnessProbeTests: XCTestCase {
             probe.feed(buffers: [UnsafePointer(zeros), UnsafePointer(zeros)], frameCount: 1024)
         }
         XCTAssertNil(LoudnessMeter.gatedIntegratedLUFS(blockZ: probe.drainBlocks()))
+    }
+
+    func testConcurrentFeedAndResetDoesNotCrashOrCorruptState() {
+        let probe = LoudnessProbe()
+        probe.configure(sampleRate: 48000)
+
+        let group = DispatchGroup()
+        let audioQueue = DispatchQueue(label: "test.loudness.audio")
+        let controlQueue = DispatchQueue(label: "test.loudness.control")
+
+        group.enter()
+        audioQueue.async {
+            let left = UnsafeMutablePointer<Float>.allocate(capacity: 512)
+            let right = UnsafeMutablePointer<Float>.allocate(capacity: 512)
+            for i in 0..<512 {
+                let s = Float(0.25 * sin(2.0 * Double.pi * 1000.0 * Double(i) / 48000.0))
+                left[i] = s
+                right[i] = s
+            }
+            defer { left.deallocate(); right.deallocate() }
+            let ptrs = [UnsafePointer(left), UnsafePointer(right)]
+            for _ in 0..<2000 {
+                probe.feed(buffers: ptrs, frameCount: 512)
+            }
+            group.leave()
+        }
+
+        group.enter()
+        controlQueue.async {
+            for i in 0..<200 {
+                if i % 3 == 0 {
+                    probe.reset()
+                } else {
+                    let blocks = probe.drainBlocks()
+                    XCTAssertTrue(blocks.allSatisfy { $0.isFinite && $0 >= 0 })
+                }
+            }
+            group.leave()
+        }
+
+        XCTAssertEqual(group.wait(timeout: .now() + 10), .success)
+    }
+
+    func testOversizedMeterFrameCountClampsWithoutCrashing() {
+        let context = RenderCallbackContext(inputHALUnit: nil, channelCount: 2, maxFrameCount: 256)
+        context.setMetersEnabled(true)
+        context.meterInput(frameCount: 1024)
+        let snapshot = context.meterSnapshot()
+        XCTAssertEqual(snapshot.input.count, 2)
+        XCTAssertTrue(snapshot.input.allSatisfy { $0.isFinite })
+    }
+
+    func testTPTFilterAndLimiterRecoverFromNaN() {
+        let filter = TPTFilter()
+        let coeffs = SVFMath.calculateDecrampedSVF(type: .parametric, sampleRate: 48000, frequency: 1000, q: 1.0, gain: 6.0)
+        filter.setSVFCoefficients(coeffs, resetState: true)
+
+        var bad = [Double](repeating: 0.1, count: 64)
+        bad[10] = .nan
+        bad.withUnsafeMutableBufferPointer { ptr in
+            filter.processDoubleInPlace(buffer: ptr.baseAddress!, frameCount: ptr.count)
+        }
+
+        // Next buffer must recover cleanly (integrator states not permanently latched to NaN).
+        var clean = [Double](repeating: 0.25, count: 64)
+        clean.withUnsafeMutableBufferPointer { ptr in
+            filter.processDoubleInPlace(buffer: ptr.baseAddress!, frameCount: ptr.count)
+        }
+        XCTAssertTrue(clean.allSatisfy { $0.isFinite })
+        XCTAssertGreaterThan(abs(clean.last ?? 0), 0.01)
+
+        // TruePeakLimiter must never pass NaN through to DAC.
+        let limiter = TruePeakLimiter(ceilingDBTP: -1.0)
+        var samples = [Float](repeating: 0.5, count: 64)
+        samples[5] = .nan
+        samples[6] = .infinity
+        samples.withUnsafeMutableBufferPointer { ptr in
+            limiter.processInPlace(buffer: ptr.baseAddress!, frameCount: ptr.count)
+        }
+        XCTAssertTrue(samples.allSatisfy { $0.isFinite })
+    }
+
+    func testProcessTapMonoOutputDownmixesBothChannels() {
+        let frames = 64
+        let context = RenderCallbackContext(inputHALUnit: nil, channelCount: 2, maxFrameCount: 256)
+        context.useTapInputBuffers()
+        context.processingMode = 0
+        context.hardwareOutputChannelCount = 1
+
+        var inInterleaved = [Float](repeating: 0, count: frames * 2)
+        for i in 0..<frames {
+            inInterleaved[i * 2] = 0.8
+            inInterleaved[i * 2 + 1] = 0.2
+        }
+        var outMono = [Float](repeating: 0, count: frames)
+
+        inInterleaved.withUnsafeMutableBufferPointer { inPtr in
+            outMono.withUnsafeMutableBufferPointer { outPtr in
+                var inABL = AudioBufferList(
+                    mNumberBuffers: 1,
+                    mBuffers: AudioBuffer(
+                        mNumberChannels: 2,
+                        mDataByteSize: UInt32(frames * 2 * MemoryLayout<Float>.size),
+                        mData: UnsafeMutableRawPointer(inPtr.baseAddress)
+                    )
+                )
+                var outABL = AudioBufferList(
+                    mNumberBuffers: 1,
+                    mBuffers: AudioBuffer(
+                        mNumberChannels: 1,
+                        mDataByteSize: UInt32(frames * MemoryLayout<Float>.size),
+                        mData: UnsafeMutableRawPointer(outPtr.baseAddress)
+                    )
+                )
+                ProcessTapCapture.renderSingle(context: context, input: &inABL, output: &outABL)
+            }
+        }
+        XCTAssertEqual(outMono[0], 0.5, accuracy: 1e-5)
+        XCTAssertEqual(outMono[frames - 1], 0.5, accuracy: 1e-5)
     }
 }
 

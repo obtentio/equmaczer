@@ -14,6 +14,18 @@ final class DeviceSampleRateService: SampleRateObserving {
     private nonisolated(unsafe) var sampleRateListenerBlocks: [AudioDeviceID: AudioObjectPropertyListenerBlock] = [:]
     private let listenerQueue = DispatchQueue(label: "com.obtentio.equmaczer.DeviceSampleRateService.listener")
     private let logger = Logger(subsystem: "com.obtentio.equmaczer", category: "DeviceSampleRateService")
+
+    deinit {
+        var address = AudioObjectPropertyAddress(
+            mSelector: kAudioDevicePropertyNominalSampleRate,
+            mScope: kAudioObjectPropertyScopeGlobal,
+            mElement: kAudioObjectPropertyElementMain
+        )
+        for (deviceID, block) in sampleRateListenerBlocks {
+            AudioObjectRemovePropertyListenerBlock(deviceID, &address, listenerQueue, block)
+        }
+        sampleRateListenerBlocks.removeAll()
+    }
     
     // MARK: - Sample Rate Queries
     
@@ -78,6 +90,8 @@ final class DeviceSampleRateService: SampleRateObserving {
     // MARK: - Sample Rate Observation
     
     func observeSampleRateChanges(on deviceID: AudioDeviceID, handler: @escaping (Float64) -> Void) {
+        stopObservingSampleRateChanges(on: deviceID)
+
         var address = AudioObjectPropertyAddress(
             mSelector: kAudioDevicePropertyNominalSampleRate,
             mScope: kAudioObjectPropertyScopeGlobal,

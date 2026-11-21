@@ -93,7 +93,9 @@ final class EQChain {
             bypass.initialize(repeating: false, count: count)
             published.advanced(by: i).initialize(to: PublishedState(coefficients: coefficients, bypass: bypass))
         }
-        doubleBufferCapacity = max(Int(maxFrameCount), 65536)
+        // Process in <=4096-frame chunks (32 KB instead of 512 KB per chain);
+        // the chunking loop in process() handles arbitrary frameCount.
+        doubleBufferCapacity = min(max(Int(maxFrameCount), 256), 4096)
         doubleBufferPtr = UnsafeMutablePointer<Double>.allocate(capacity: doubleBufferCapacity)
         doubleBufferPtr.initialize(repeating: 0.0, count: doubleBufferCapacity)
     }

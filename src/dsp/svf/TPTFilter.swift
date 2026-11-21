@@ -110,13 +110,16 @@ final class TPTFilter {
                 let a2 = current.a2
                 let a3 = current.a3
                 for i in 0..<frameCount {
-                    let x = buffer[i]
+                    let raw = buffer[i]
+                    let x = raw.isFinite ? raw : 0.0
                     let v3 = x - s2
                     let v1 = a1 * s1 + a2 * v3
                     let v2 = s2 + a2 * s1 + a3 * v3
                     s1 = 2.0 * v1 - s1
                     s2 = 2.0 * v2 - s2
                 }
+                if !s1.isFinite || abs(s1) < 1e-30 { s1 = 0.0 }
+                if !s2.isFinite || abs(s2) < 1e-30 { s2 = 0.0 }
                 ic1eq = s1
                 ic2eq = s2
             }
@@ -265,8 +268,8 @@ final class TPTFilter {
             }
         }
 
-        if abs(s1) < 1e-30 { s1 = 0.0 }
-        if abs(s2) < 1e-30 { s2 = 0.0 }
+        if !s1.isFinite || abs(s1) < 1e-30 { s1 = 0.0 }
+        if !s2.isFinite || abs(s2) < 1e-30 { s2 = 0.0 }
         ic1eq = s1
         ic2eq = s2
     }
@@ -294,13 +297,16 @@ final class TPTFilter {
                 let a2 = current.a2
                 let a3 = current.a3
                 for i in 0..<count {
-                    let x = Double(input[i])
+                    let raw = Double(input[i])
+                    let x = raw.isFinite ? raw : 0.0
                     let v3 = x - s2
                     let v1 = a1 * s1 + a2 * v3
                     let v2 = s2 + a2 * s1 + a3 * v3
                     s1 = 2.0 * v1 - s1
                     s2 = 2.0 * v2 - s2
                 }
+                if !s1.isFinite || abs(s1) < 1e-30 { s1 = 0.0 }
+                if !s2.isFinite || abs(s2) < 1e-30 { s2 = 0.0 }
                 ic1eq = s1
                 ic2eq = s2
             }
@@ -406,8 +412,8 @@ final class TPTFilter {
             }
         }
 
-        if abs(s1) < 1e-30 { s1 = 0.0 }
-        if abs(s2) < 1e-30 { s2 = 0.0 }
+        if !s1.isFinite || abs(s1) < 1e-30 { s1 = 0.0 }
+        if !s2.isFinite || abs(s2) < 1e-30 { s2 = 0.0 }
         ic1eq = s1
         ic2eq = s2
     }

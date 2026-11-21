@@ -47,6 +47,14 @@ final class AudioRoutingCoordinator: ObservableObject {
         }
         return captureMode
     }
+
+    /// True when the active/pending automatic route runs via CoreAudio Process Tap
+    /// without needing the virtual HAL driver (recording off, not a driver fallback).
+    var usesDriverlessProcessTap: Bool {
+        guard !routingMode.isManual else { return false }
+        let preference = captureModeOverride ?? self.captureMode
+        return preference == .processTap && !recordingConfiguration.enabled
+    }
     
     // MARK: - Dependencies
 
@@ -270,6 +278,13 @@ final class AudioRoutingCoordinator: ObservableObject {
                 self?.isReconfiguring ?? false
             }
         )
+
+        NotificationCenter.default.publisher(for: .audioServiceDidRestart)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.handleAudioServiceRestarted()
+            }
+            .store(in: &cancellables)
     }
     
     // MARK: - Public Methods
@@ -280,8 +295,10 @@ final class AudioRoutingCoordinator: ObservableObject {
     func reconfigureRouting() {
         let modeStr = manualModeEnabled ? "manual" : "automatic"
         logger.debug("reconfigureRouting(mode=\(modeStr))")
-        // Increment generation for fresh routing session
+        // Increment generation for fresh routing session; supersedes any pending async stopRouting()
         bumpRouteGeneration()
+        isStopping = false
+        stopGeneration = nil
         // An explicit reconfigure supersedes any pending coalesced commit:
         // its timer stays scheduled but will find no window to close.
         seam.cancelWindow()
@@ -341,38 +358,48 @@ final class AudioRoutingCoordinator: ObservableObject {
             return
         }
 
-        // Automatic mode: update selected devices and pre-sync volume
+        let driverlessTap = usesDriverlessProcessTap
+
+        // Automatic mode: update selected devices and (when using the driver) pre-sync volume & default
         if !routingMode.isManual {
             selectedInputDeviceID = devices.inputUID
             selectedOutputDeviceID = devices.outputUID
 
-            // Pre-sync driver volume BEFORE updateDriverName() to prevent macOS volume sync
-            // from overwriting the new output device's volume.
-            if let outputDeviceID = deviceProvider.deviceID(forUID: devices.outputUID),
-               let driverID = driverAccess.deviceID,
-               let volume = volumeService.getDeviceVolumeScalar(deviceID: outputDeviceID) {
-                _ = volumeService.setDeviceVolumeScalar(deviceID: driverID, volume: volume)
-                logger.info("Pre-synced driver volume to: \(volume)")
-            }
-
-            // Rename driver to match output device
-            _ = updateDriverName()
-
-            // Set driver as macOS default IMMEDIATELY (before pipeline starts)
-            systemDefaultObserver.setDriverAsDefault(
-                onSuccess: { [weak self] in
-                    self?.logger.info("Automatic mode: set driver as system default output")
-                },
-                onFailure: { [weak self] in
-                    self?.routingStatus = .error("Failed to set system default output device")
-                    self?.logger.error("Automatic mode: failed to set driver as system default")
-                    self?.driverAccess.restoreToBuiltInSpeakers()
+            if driverlessTap {
+                // Process Tap taps apps directly and outputs to the physical DAC:
+                // keep macOS default output on the physical device so a crash never silences the Mac.
+                if systemDefaultObserver.getCurrentSystemDefaultOutputUID() == DRIVER_DEVICE_UID {
+                    _ = systemDefaultObserver.restoreSystemDefaultOutput(to: devices.outputUID)
                 }
-            )
+            } else {
+                // Pre-sync driver volume BEFORE updateDriverName() to prevent macOS volume sync
+                // from overwriting the new output device's volume.
+                if let outputDeviceID = deviceProvider.deviceID(forUID: devices.outputUID),
+                   let driverID = driverAccess.deviceID,
+                   let volume = volumeService.getDeviceVolumeScalar(deviceID: outputDeviceID) {
+                    _ = volumeService.setDeviceVolumeScalar(deviceID: driverID, volume: volume)
+                    logger.info("Pre-synced driver volume to: \(volume)")
+                }
+
+                // Rename driver to match output device
+                _ = updateDriverName()
+
+                // Set driver as macOS default IMMEDIATELY (before pipeline starts)
+                systemDefaultObserver.setDriverAsDefault(
+                    onSuccess: { [weak self] in
+                        self?.logger.info("Automatic mode: set driver as system default output")
+                    },
+                    onFailure: { [weak self] in
+                        self?.routingStatus = .error("Failed to set system default output device")
+                        self?.logger.error("Automatic mode: failed to set driver as system default")
+                        self?.driverAccess.restoreToBuiltInSpeakers()
+                    }
+                )
+            }
         }
 
-        // Sync driver sample rate to match output device (automatic mode only)
-        if routingMode.requiresSampleRateSync {
+        // Sync driver sample rate to match output device (driver-backed automatic modes only)
+        if routingMode.requiresSampleRateSync && !driverlessTap {
             syncDriverSampleRate(to: devices.outputDeviceID)
         }
 
@@ -455,10 +482,10 @@ final class AudioRoutingCoordinator: ObservableObject {
         return true
     }
 
-    /// Ensures the driver is installed and visible (automatic mode prerequisite).
+    /// Ensures the driver is installed and visible (driver-backed automatic modes only).
     /// Returns true if routing should proceed, false if blocked (driver not ready or retry issued).
     private func ensureDriverReady() -> Bool {
-        guard routingMode.requiresDriverVisibility else { return true }
+        guard routingMode.requiresDriverVisibility && !usesDriverlessProcessTap else { return true }
 
         guard driverAccess.isReady else {
             routingStatus = .driverNotInstalled
@@ -503,8 +530,10 @@ final class AudioRoutingCoordinator: ObservableObject {
             return nil
         }
 
-        // For automatic mode, ensure driver is still visible before proceeding
-        if routingMode.requiresDriverVisibility && inputUID == DRIVER_DEVICE_UID {
+        let driverlessTap = usesDriverlessProcessTap
+
+        // For driver-backed automatic modes, ensure driver is still visible before proceeding
+        if routingMode.requiresDriverVisibility && !driverlessTap && inputUID == DRIVER_DEVICE_UID {
             if !driverAccess.isDriverVisible() {
                 ensureDriverVisible { [weak self] in
                     self?.reconfigureRouting()
@@ -514,9 +543,10 @@ final class AudioRoutingCoordinator: ObservableObject {
         }
 
         // Resolve device IDs with diagnostic logging
-        let inputDeviceID = deviceProvider.deviceID(forUID: inputUID)
         let outputDeviceID = deviceProvider.deviceID(forUID: outputUID)
         let outputDevice = deviceProvider.device(forUID: outputUID)
+        // Process Tap does not read from a HAL input device; fall back to outputDeviceID when driverless.
+        let inputDeviceID = driverlessTap ? outputDeviceID : deviceProvider.deviceID(forUID: inputUID)
 
         if inputDeviceID == nil {
             logger.error("Failed to resolve input device ID for UID: \(inputUID)")
@@ -627,13 +657,14 @@ final class AudioRoutingCoordinator: ObservableObject {
 
         let registry: DriverDeviceRegistry? = resolvedCaptureMode == .sharedMemory ? driverAccess.deviceRegistry : nil
 
+        let driverlessTap = resolvedCaptureMode == .processTap && !recordingConfiguration.enabled
         let result = pipelineManager.startPipeline(
             inputDeviceID: inputDeviceID,
             outputDeviceID: outputDeviceID,
             captureMode: resolvedCaptureMode,
             driverRegistry: registry,
             isAutomaticMode: !routingMode.isManual,
-            driverID: driverAccess.deviceID,
+            driverID: driverlessTap ? nil : driverAccess.deviceID,
             driverOutputDeviceID: outputDeviceID,
             outputDevice: outputDevice,
             channelTapAssignments: resolvedCaptureMode == .processTap ? channelTapAssignments : [],
@@ -733,6 +764,10 @@ final class AudioRoutingCoordinator: ObservableObject {
     /// Set when stopRouting() begins, cleared when continueStopRouting() finishes.
     private var isStopping = false
 
+    /// Route generation stamped when an async stopRouting() begins; if a newer
+    /// reconfigureRouting() starts during the 50 ms fade-out, the stale stop aborts.
+    private var stopGeneration: UInt64?
+
     /// Stops the current audio routing and restores system defaults (automatic mode only).
     /// Guarded against re-entrant calls — if a stop is already in progress, this is a no-op.
     func stopRouting() {
@@ -745,6 +780,8 @@ final class AudioRoutingCoordinator: ObservableObject {
         }
         isStopping = true
         if pipelineManager.renderPipeline?.activeCaptureMode == .processTap { bumpRouteGeneration() }
+        let stampedGeneration = routeGeneration
+        stopGeneration = stampedGeneration
         cancelLivenessMonitor()
         // Cancel any pending coalesced restart so it cannot resurrect
         // routing after teardown.
@@ -760,20 +797,43 @@ final class AudioRoutingCoordinator: ObservableObject {
         if pipelineManager.renderPipeline != nil {
             pipelineManager.prepareForStop()
             DispatchQueue.main.asyncAfter(deadline: .now() + Constants.fadeOutDuration) { [weak self] in
-                self?.continueStopRouting()
+                guard let self, self.stopGeneration == stampedGeneration else { return }
+                self.continueStopRouting()
             }
         } else {
             continueStopRouting()
         }
     }
 
+    /// Synchronous teardown for app termination: skips the async fade-out delay so
+    /// macOS's default output is guaranteed to be restored before `exit()`.
+    func stopRoutingImmediately() {
+        let alreadyStopped = !isStopping && pipelineManager.renderPipeline == nil && routingStatus == .idle
+        guard !alreadyStopped else { return }
+        isStopping = true
+        stopGeneration = nil
+        if pipelineManager.renderPipeline?.activeCaptureMode == .processTap { bumpRouteGeneration() }
+        cancelLivenessMonitor()
+        seam.cancelWindow()
+        committedTuple = nil
+        isQuiescentCommitReconfigure = false
+        currentCaptureMode = nil
+        activeInputDeviceID = nil
+        activeOutputDeviceID = nil
+        logger.info("stopRoutingImmediately called, manualMode=\(self.manualModeEnabled)")
+        continueStopRouting()
+    }
+
     /// Continues stopping after the fade-out delay.
     private func continueStopRouting() {
+        guard isStopping else { return }
+        stopGeneration = nil
         // Stop the pipeline
         stopPipeline()
 
-        // In automatic mode, restore macOS default
-        if !routingMode.isManual {
+        // In automatic mode, restore macOS default only if our driver is currently the default
+        if !routingMode.isManual,
+           systemDefaultObserver.getCurrentSystemDefaultOutputUID() == DRIVER_DEVICE_UID {
             // Restore to selected output device
             if let outputUID = selectedOutputDeviceID,
                outputUID != DRIVER_DEVICE_UID {
@@ -880,9 +940,9 @@ final class AudioRoutingCoordinator: ObservableObject {
     }
     
     /// Switches to automatic mode from manual mode.
-    /// Shows driver and starts routing.
     func switchToAutomaticMode() {
-        guard driverAccess.isReady else {
+        let canRunDriverless = captureMode == .processTap && !recordingConfiguration.enabled
+        guard driverAccess.isReady || canRunDriverless else {
             logger.warning("Cannot switch to automatic mode: driver not installed")
             return
         }
@@ -890,7 +950,7 @@ final class AudioRoutingCoordinator: ObservableObject {
         manualModeEnabled = false
         logger.info("Switched to automatic mode")
 
-        // Start routing (this will rename the driver)
+        // Start routing (driverless in Process Tap mode, or driver-backed otherwise)
         reconfigureRouting()
     }
     
@@ -1201,6 +1261,24 @@ final class AudioRoutingCoordinator: ObservableObject {
         scheduleQuiescentCommit(window: .wake)
     }
 
+    /// Recovery from `kAudioHardwarePropertyServiceRestarted` (`coreaudiod` restart):
+    /// all prior AudioObjectIDs and IOProcs are invalid, so tear down the dead pipeline
+    /// and schedule a coalesced rebuild once devices re-enumerate.
+    public func handleAudioServiceRestarted() {
+        let wasActive = routingStatus.isActive || pipelineManager.renderPipeline != nil
+        logger.warning("Handling coreaudiod restart (wasActive=\(wasActive))")
+        cancelLivenessMonitor()
+        stopPipeline()
+        committedTuple = nil
+        activeInputDeviceID = nil
+        activeOutputDeviceID = nil
+        currentCaptureMode = nil
+        bumpRouteGeneration()
+        if wasActive {
+            scheduleQuiescentCommit(window: .wake)
+        }
+    }
+
     /// A capture route started but produced no audio. Rebuilds Process Tap
     /// once, then marks failed routes and tries the planner's next candidate,
     /// or stops routing honestly when no candidate remains.
@@ -1260,6 +1338,12 @@ final class AudioRoutingCoordinator: ObservableObject {
         // Stop device alive monitors
         stopDeviceAliveMonitors()
 
+        // Unregister sample-rate observer so listeners do not leak while stopped
+        if let observedID = observedOutputDeviceID {
+            sampleRateService.stopObservingSampleRateChanges(on: observedID)
+            observedOutputDeviceID = nil
+        }
+
         // Clean up jack connection listener (Intel Macs)
         deviceChangeCoordinator.cleanupJackConnectionListener()
     }
@@ -1270,15 +1354,17 @@ final class AudioRoutingCoordinator: ObservableObject {
     /// Uses `kAudioDevicePropertyDeviceIsAlive` for immediate, direct notification
     /// rather than waiting for the full device list to refresh.
     private func startDeviceAliveMonitors(inputDeviceID: AudioDeviceID, outputDeviceID: AudioDeviceID) {
-        // Monitor input device
-        let inputMonitor = DeviceAliveMonitor()
-        inputMonitor.startMonitoring(deviceID: inputDeviceID) { [weak self] in
-            guard let self = self else { return }
-            self.logger.warning("Input device removed during active routing")
-            self.routingStatus = .error("Input device removed")
-            self.stopRouting()
+        // Monitor input device (skip duplicate monitor when driverless Process Tap shares outputDeviceID)
+        if inputDeviceID != outputDeviceID {
+            let inputMonitor = DeviceAliveMonitor()
+            inputMonitor.startMonitoring(deviceID: inputDeviceID) { [weak self] in
+                guard let self = self else { return }
+                self.logger.warning("Input device removed during active routing")
+                self.routingStatus = .error("Input device removed")
+                self.stopRouting()
+            }
+            inputDeviceAliveMonitor = inputMonitor
         }
-        inputDeviceAliveMonitor = inputMonitor
 
         // Monitor output device
         let outputMonitor = DeviceAliveMonitor()
@@ -1376,7 +1462,17 @@ final class AudioRoutingCoordinator: ObservableObject {
             // Only sync if routing is active and in automatic mode
             guard case .active = self.routingStatus, !self.manualModeEnabled else { return }
             
-            self.logger.info("Output device sample rate changed to \(newRate) Hz, re-syncing driver")
+            self.logger.info("Output device sample rate changed to \(newRate) Hz")
+
+            // In Process Tap mode, the aggregate device slaves directly to the physical output DAC
+            // (including Bluetooth HFP 16/24 kHz): reconfigure directly without gating on the HAL driver.
+            if self.currentCaptureMode == .processTap {
+                self.bumpRouteGeneration()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                    self?.reconfigureRouting()
+                }
+                return
+            }
 
             // Validate rate against device's supported rates
             let syncRate: Float64
@@ -1429,8 +1525,10 @@ final class AudioRoutingCoordinator: ObservableObject {
         // When user clicks the same device in System Settings, just restore the driver as default
         if device.uid == selectedOutputDeviceID {
             if routingStatus.isActive {
-                logger.info("handleSystemDefaultChanged: Same device already selected - restoring driver as default")
-                systemDefaultObserver.setDriverAsDefault(shortTimeout: true)
+                if !usesDriverlessProcessTap {
+                    logger.info("handleSystemDefaultChanged: Same device already selected - restoring driver as default")
+                    systemDefaultObserver.setDriverAsDefault(shortTimeout: true)
+                }
             } else {
                 logger.info("handleSystemDefaultChanged: Same device selected but routing inactive - reconfiguring")
                 reconfigureRouting()
@@ -1470,19 +1568,17 @@ final class AudioRoutingCoordinator: ObservableObject {
         }
         
         logger.info("Selected output device missing: \(uid)")
-        // A device event: coalesce rather than restart immediately.
-        // (scheduleQuiescentCommit notes the event itself.)
-        scheduleQuiescentCommit()
-        
+
         // Find replacement device
         if let replacement = deviceChangeCoordinator.findReplacementDevice(for: selectedOutputDeviceID) {
             selectedOutputDeviceID = replacement.uid
             logger.info("Using replacement device: \(replacement.name)")
-            // Route changed: invalidate in-flight async work.
+            // Route changed: invalidate in-flight async work (including any pending stopRouting).
             bumpRouteGeneration()
             reconfigureRouting()
         } else {
-            // No output device available
+            // No output device available; coalesce in case devices are still enumerating.
+            scheduleQuiescentCommit()
             logger.error("No output device available after disconnect")
             routingStatus = .error("No output device available")
         }

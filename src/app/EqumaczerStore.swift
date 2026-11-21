@@ -514,14 +514,15 @@ final class EqumaczerStore: ObservableObject {
                 }
                 .store(in: &self.cancellables)
             
-            if !routingCoordinator.manualModeEnabled && !routingCoordinator.driverAccess.isReady {
-                self.logger.info("Automatic mode but driver not installed - showing prompt")
+            if !routingCoordinator.manualModeEnabled
+                && !routingCoordinator.usesDriverlessProcessTap
+                && !routingCoordinator.driverAccess.isReady {
+                self.logger.info("Automatic mode requires driver but driver not installed - showing prompt")
                 self.routingCoordinator.showDriverPrompt = true
                 self.routingCoordinator.routingStatus = .driverNotInstalled
             } else {
-                // Driver visibility is now automatic
+                // Process Tap runs driverless; driver modes auto-start when driver is ready.
                 if routingCoordinator.selectedOutputDeviceID != nil {
-                    // Auto-start routing if devices are selected
                     self.routingCoordinator.reconfigureRouting()
                 }
             }
@@ -618,9 +619,8 @@ final class EqumaczerStore: ObservableObject {
     // MARK: - App Lifecycle
     
     @objc private func handleAppWillTerminate() {
-        logger.info("App terminating, stopping routing")
-        routingCoordinator.stopRouting()
-        // Driver visibility is now automatic
+        logger.info("App terminating, stopping routing synchronously")
+        routingCoordinator.stopRoutingImmediately()
     }
     
     // MARK: - Routing Delegation

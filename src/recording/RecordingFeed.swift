@@ -36,21 +36,45 @@ final class RecordingFeed {
 
     func mix(finalLeft: UnsafePointer<Float>, finalRight: UnsafePointer<Float>,
              input: UnsafePointer<AudioBufferList>, frames: Int) {
-        let count = min(frames, capacity)
         let on = enabled.load(ordering: .acquiring)
-        let mic = on && includeMic.load(ordering: .acquiring) && micChannelCount > 0
+        guard on else { return }
+        let count = min(frames, capacity)
+        let mic = includeMic.load(ordering: .acquiring) && micChannelCount > 0
         let gain = Float(bitPattern: micGainBits.load(ordering: .relaxed))
         let compensation = Float(bitPattern: compensationGainBits.load(ordering: .relaxed))
+        let micLeft = mic ? Self.resolveChannel(input, channel: micInputOffset) : nil
+        let micRight = mic ? Self.resolveChannel(input, channel: micInputOffset + min(1, micChannelCount - 1)) : nil
         for frame in 0..<count {
-            left[frame] = on ? finalLeft[frame] : 0
-            right[frame] = on ? finalRight[frame] : 0
-            if mic {
-                left[frame] += Self.sample(input, channel: micInputOffset, frame: frame) * gain
-                right[frame] += Self.sample(input, channel: micInputOffset + min(1, micChannelCount - 1), frame: frame) * gain
+            var l = finalLeft[frame]
+            var r = finalRight[frame]
+            if let ml = micLeft, frame < ml.availableFrames {
+                l += ml.base[frame * ml.stride] * gain
             }
-            left[frame] *= compensation
-            right[frame] *= compensation
+            if let mr = micRight, frame < mr.availableFrames {
+                r += mr.base[frame * mr.stride] * gain
+            }
+            left[frame] = l * compensation
+            right[frame] = r * compensation
         }
+    }
+
+    /// Resolves a channel's base pointer, sample stride, and frame count once per callback.
+    @inline(__always)
+    static func resolveChannel(
+        _ list: UnsafePointer<AudioBufferList>,
+        channel: Int
+    ) -> (base: UnsafePointer<Float>, stride: Int, availableFrames: Int)? {
+        var base = 0
+        for buffer in UnsafeMutableAudioBufferListPointer(UnsafeMutablePointer(mutating: list)) {
+            let channels = Int(buffer.mNumberChannels)
+            if channel >= base, channel < base + channels {
+                guard channels > 0, let data = buffer.mData?.assumingMemoryBound(to: Float.self) else { return nil }
+                let available = Int(buffer.mDataByteSize) / (4 * channels)
+                return (UnsafePointer(data.advanced(by: channel - base)), channels, available)
+            }
+            base += channels
+        }
+        return nil
     }
 
     static func availableFrames(_ list: UnsafePointer<AudioBufferList>, channel: Int) -> Int {

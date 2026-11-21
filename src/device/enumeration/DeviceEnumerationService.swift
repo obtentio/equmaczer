@@ -6,6 +6,10 @@ import CoreAudio
 import Foundation
 import OSLog
 
+extension Notification.Name {
+    static let audioServiceDidRestart = Notification.Name("com.obtentio.equmaczer.audioServiceDidRestart")
+}
+
 /// Device enumeration service.
 /// Provides cached lists of audio input/output devices and device lookup.
 /// Emits change events when device enumeration changes in meaningful ways.
@@ -51,6 +55,7 @@ final class DeviceEnumerationService: ObservableObject, Enumerating {
     
     private nonisolated(unsafe) var deviceListenerBlock: AudioObjectPropertyListenerBlock?
     private nonisolated(unsafe) var defaultOutputListenerBlock: AudioObjectPropertyListenerBlock?
+    private nonisolated(unsafe) var serviceRestartedListenerBlock: AudioObjectPropertyListenerBlock?
     private nonisolated(unsafe) var jackConnectionListenerBlock: AudioObjectPropertyListenerBlock?
     private var observedJackDeviceID: AudioDeviceID?
     private let listenerBlockQueue = DispatchQueue(label: "com.obtentio.equmaczer.DeviceEnumerationService.listener")
@@ -67,6 +72,7 @@ final class DeviceEnumerationService: ObservableObject, Enumerating {
         self.refreshOutputDevices()
         self.setupDeviceChangeListener()
         self.setupDefaultOutputListener()
+        self.setupServiceRestartedListener()
         self.setupDriverInstallNotification()
     }
     
@@ -130,6 +136,36 @@ final class DeviceEnumerationService: ObservableObject, Enumerating {
         }
     }
 
+    private func setupServiceRestartedListener() {
+        var address = AudioObjectPropertyAddress(
+            mSelector: kAudioHardwarePropertyServiceRestarted,
+            mScope: kAudioObjectPropertyScopeGlobal,
+            mElement: kAudioObjectPropertyElementMain
+        )
+
+        let block: AudioObjectPropertyListenerBlock = { [weak self] _, _ in
+            Task { @MainActor in
+                guard let self else { return }
+                self.logger.warning("coreaudiod service restarted — refreshing devices and notifying coordinator")
+                self.refreshDevices()
+                NotificationCenter.default.post(name: .audioServiceDidRestart, object: nil)
+            }
+        }
+
+        serviceRestartedListenerBlock = block
+
+        let status = AudioObjectAddPropertyListenerBlock(
+            AudioObjectID(kAudioObjectSystemObject),
+            &address,
+            listenerBlockQueue,
+            block
+        )
+
+        if status != noErr {
+            logger.warning("DeviceEnumerationService: Failed to add service-restarted listener: \(status)")
+        }
+    }
+
     private func setupDriverInstallNotification() {
         NotificationCenter.default.addObserver(
             self,
@@ -182,6 +218,20 @@ final class DeviceEnumerationService: ObservableObject, Enumerating {
                 &defaultAddress,
                 listenerBlockQueue,
                 defaultBlock
+            )
+        }
+        
+        if let restartBlock = serviceRestartedListenerBlock {
+            var restartAddress = AudioObjectPropertyAddress(
+                mSelector: kAudioHardwarePropertyServiceRestarted,
+                mScope: kAudioObjectPropertyScopeGlobal,
+                mElement: kAudioObjectPropertyElementMain
+            )
+            AudioObjectRemovePropertyListenerBlock(
+                AudioObjectID(kAudioObjectSystemObject),
+                &restartAddress,
+                listenerBlockQueue,
+                restartBlock
             )
         }
         

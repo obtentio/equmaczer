@@ -473,9 +473,21 @@ final class ProcessTapCapture: @unchecked Sendable {
         guard !context.isStopping, requested > 0 else { return }
         let frames = min(requested, Int(context.maxFrameCount))
         for channel in 0..<min(2, Int(context.channelCount)) {
-            for frame in 0..<frames {
-                context.inputSampleBuffers[channel][frame] = RecordingFeed.sample(input,
-                    channel: context.mixerInputChannelOffset + channel, frame: frame)
+            let dest = context.inputSampleBuffers[channel]
+            if let resolved = RecordingFeed.resolveChannel(input, channel: context.mixerInputChannelOffset + channel) {
+                let copyCount = min(frames, resolved.availableFrames)
+                if resolved.stride == 1 {
+                    memcpy(dest, resolved.base, copyCount * MemoryLayout<Float>.size)
+                } else {
+                    for frame in 0..<copyCount {
+                        dest[frame] = resolved.base[frame * resolved.stride]
+                    }
+                }
+                if copyCount < frames {
+                    memset(dest.advanced(by: copyCount), 0, (frames - copyCount) * MemoryLayout<Float>.size)
+                }
+            } else {
+                memset(dest, 0, frames * MemoryLayout<Float>.size)
             }
         }
         // The IOProc running proves the route alive (as before card 10): a warming tap hands
@@ -514,11 +526,20 @@ final class ProcessTapCapture: @unchecked Sendable {
                 let count = min(frames, Int(buffer.mDataByteSize) / (4 * channels))
                 for channel in 0..<channels {
                     let absolute = base + channel
-                    if absolute < min(2, context.hardwareOutputChannelCount) {
+                    if context.hardwareOutputChannelCount == 1 && absolute == 0 {
+                        // Mono output (e.g. Bluetooth HFP/SCO): downmix L+R rather than dropping Right.
+                        let leftSrc = sources[0]
+                        let rightSrc = sources[1]
+                        for frame in 0..<count {
+                            destination[frame * channels + channel] = 0.5 * (leftSrc[frame] + rightSrc[frame])
+                        }
+                    } else if absolute < min(2, context.hardwareOutputChannelCount) {
                         for frame in 0..<count { destination[frame * channels + channel] = sources[absolute][frame] }
                     } else if let offset = feed.driverOutputOffset, absolute >= offset, absolute < offset + 2 {
-                        let source = absolute == offset ? feed.left : feed.right
-                        for frame in 0..<count { destination[frame * channels + channel] = source[frame] }
+                        if feed.enabled.load(ordering: .acquiring) {
+                            let source = absolute == offset ? feed.left : feed.right
+                            for frame in 0..<count { destination[frame * channels + channel] = source[frame] }
+                        }
                     }
                 }
             }

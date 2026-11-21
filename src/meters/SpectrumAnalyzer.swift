@@ -20,7 +20,7 @@ final class SpectrumAnalyzer {
 
     private static let ringCapacity = 8192
 
-    private var ring: [Float]
+    private let ring: UnsafeMutablePointer<Float>
     private let writeCounter = ManagedAtomic<Int>(0)
     private var sampleRate: Double = 48000
 
@@ -33,7 +33,8 @@ final class SpectrumAnalyzer {
     private var fftSetup: FFTSetup?
 
     init() {
-        ring = [Float](repeating: 0, count: Self.ringCapacity)
+        ring = .allocate(capacity: Self.ringCapacity)
+        ring.initialize(repeating: 0, count: Self.ringCapacity)
         smoothed = [Float](repeating: Self.floorDB, count: Self.bandCount)
         var hann = [Float](repeating: 0, count: Self.fftSize)
         vDSP_hann_window(&hann, vDSP_Length(Self.fftSize), Int32(vDSP_HANN_NORM))
@@ -43,6 +44,8 @@ final class SpectrumAnalyzer {
     }
 
     deinit {
+        ring.deinitialize(count: Self.ringCapacity)
+        ring.deallocate()
         if let fftSetup {
             vDSP_destroy_fftsetup(fftSetup)
         }
@@ -67,7 +70,7 @@ final class SpectrumAnalyzer {
             ring[counter & (Self.ringCapacity - 1)] = sample
             counter += 1
         }
-        writeCounter.store(counter, ordering: .relaxed)
+        writeCounter.store(counter, ordering: .releasing)
     }
 
     /// Control side: the latest band levels in dBFS, smoothed. Band
@@ -75,7 +78,7 @@ final class SpectrumAnalyzer {
     /// the strongest FFT bin inside it.
     func computeBands() -> [Float] {
         let size = Self.fftSize
-        let total = writeCounter.load(ordering: .relaxed)
+        let total = writeCounter.load(ordering: .acquiring)
         guard total > 0, let fftSetup else { return smoothed }
 
         // Latest `size` samples, oldest first.

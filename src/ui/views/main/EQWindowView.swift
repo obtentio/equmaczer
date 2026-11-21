@@ -29,7 +29,9 @@ struct EQWindowView: View {
 
     /// Whether the driver installation overlay should be shown.
     private var needsDriverInstallation: Bool {
-        !driverManager.isReady && !store.routingCoordinator.manualModeEnabled
+        !driverManager.isReady
+            && !store.routingCoordinator.manualModeEnabled
+            && !store.routingCoordinator.usesDriverlessProcessTap
     }
 
     /// Whether the driver needs updating (outdated version).

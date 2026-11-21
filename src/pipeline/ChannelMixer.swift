@@ -122,7 +122,9 @@ final class ChannelMixer: @unchecked Sendable {
         slots = AudioChannel.allCases.map { ChannelMixerSlot(channel: $0, maxFrameCount: maxFrameCount) }
             + (0..<Self.maximumAppSlots).map { index in
                 let app = index < apps.count ? apps[index] : nil
-                return ChannelMixerSlot(channel: app?.channel ?? .music, maxFrameCount: maxFrameCount,
+                // Unused placeholder slots never receive audio; avoid pre-faulting multi-MB rings for them.
+                let slotFrames: UInt32 = app != nil ? maxFrameCount : min(maxFrameCount, 64)
+                return ChannelMixerSlot(channel: app?.channel ?? .music, maxFrameCount: slotFrames,
                     bundleID: app?.bundleID, skipEQ: app?.skipEQ ?? false, treatsChannel: app?.treatsChannel ?? true)
             }
         left = .allocate(capacity: Int(maxFrameCount))

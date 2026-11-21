@@ -481,9 +481,15 @@ final class RenderPipeline {
         // success while producing nothing.
         if captureMode == .processTap {
             let tap = ProcessTapCapture()
-            let mixer = ChannelMixer(maxFrameCount: maxFrameCount, appAssignments: channelTapAssignments)
-            switch tap.startMixer(outputDeviceID: configuredOutputDeviceID, context: context,
-                                  mixer: mixer, assignments: channelTapAssignments) {
+            let tapResult: Result<Void, ProcessTapError>
+            if channelTapAssignments.isEmpty {
+                tapResult = tap.start(outputDeviceID: configuredOutputDeviceID, context: context)
+            } else {
+                let mixer = ChannelMixer(maxFrameCount: maxFrameCount, appAssignments: channelTapAssignments)
+                tapResult = tap.startMixer(outputDeviceID: configuredOutputDeviceID, context: context,
+                                           mixer: mixer, assignments: channelTapAssignments)
+            }
+            switch tapResult {
             case .success:
                 processTapCapture = tap
             case .failure(let error):
@@ -519,16 +525,13 @@ final class RenderPipeline {
         // callbackContext deallocation.
         callbackContext?.setIsStopping(true)
 
-        // Stop driver capture if active
-        driverCapture?.stop()
-        driverCapture = nil
-
         // Stop process tap capture if active (its aggregate device
         // was the output; there is no output HAL unit to stop)
         processTapCapture?.stop()
         processTapCapture = nil
 
-        // Stop the output HAL unit first (stops the output callback)
+        // Stop the output HAL unit BEFORE unmapping shared memory so an
+        // in-flight output callback can never read an unmapped ring buffer.
         if captureMode != .processTap, let outputManager = outputHALManager {
             if case .failure(let error) = outputManager.stop() {
                 lastError = error
@@ -546,15 +549,19 @@ final class RenderPipeline {
             inputManager.uninitialise()
         }
 
+        // Log drift diagnostics before unmapping shared memory
+        if let drift = driverCapture?.getDriftDiagnostics() {
+            logger.info("Drift: start=\(drift.startGap) end=\(drift.endGap) delta=\(drift.deltaGap) overflows=\(drift.overflows)")
+        }
+
+        // Now safe to disconnect and unmap shared memory (no HAL callbacks in flight)
+        driverCapture?.stop()
+        driverCapture = nil
+
         // Log ring buffer diagnostics
         if let context = callbackContext {
             let diag = context.getDiagnostics()
             logger.info("Ring buffer: available=\(diag.availableToRead), underruns=\(diag.underruns), overflows=\(diag.overflows)")
-        }
-
-        // Log drift diagnostics (shared memory mode)
-        if let drift = driverCapture?.getDriftDiagnostics() {
-            logger.info("Drift: start=\(drift.startGap) end=\(drift.endGap) delta=\(drift.deltaGap) overflows=\(drift.overflows)")
         }
 
         // Release the callback context
@@ -854,8 +861,11 @@ final class RenderPipeline {
             return noErr
         }
 
+        let safeFrames = min(frameCount, context.maxFrameCount)
+        guard safeFrames > 0 else { return noErr }
+
         // Prepare the buffer list and pull audio from the input device
-        let inputBufferList = context.prepareInputBufferList(frameCount: frameCount)
+        let inputBufferList = context.prepareInputBufferList(frameCount: safeFrames)
         var flags = AudioUnitRenderActionFlags()
 
         let pullStatus = AudioUnitRender(
@@ -863,7 +873,7 @@ final class RenderPipeline {
             &flags,
             inTimeStamp,
             HALIOManager.inputElementID,
-            frameCount,
+            safeFrames,
             inputBufferList
         )
 
@@ -879,7 +889,7 @@ final class RenderPipeline {
         let targetBoostGain = context.getTargetBoostGain()
         context.applyGain(
             to: context.inputSampleBuffers,
-            frameCount: frameCount,
+            frameCount: safeFrames,
             currentGain: &context.boostGainLinear,
             targetGain: targetBoostGain
         )
@@ -890,14 +900,14 @@ final class RenderPipeline {
             let targetInputGain = context.getTargetInputGain()
             context.applyGain(
                 to: context.inputSampleBuffers,
-                frameCount: frameCount,
+                frameCount: safeFrames,
                 currentGain: &context.inputGainLinear,
                 targetGain: targetInputGain
             )
         }
 
         // Write captured audio to ring buffers
-        context.writeToRingBuffers(frameCount: frameCount)
+        context.writeToRingBuffers(frameCount: safeFrames)
 
         return noErr
     }
@@ -935,8 +945,14 @@ final class RenderPipeline {
         // Do not call mach_thread_self / os_log inside the real-time render callback
         hasCheckedThreadPriority = true
 
+        let safeFrames = min(frameCount, context.maxFrameCount)
+        if safeFrames == 0 {
+            RenderCallbackContext.zeroFill(ioData, frameCount: frameCount)
+            return noErr
+        }
+
         // 0. Provide frames for processing (handles both direct capture and ring buffer modes)
-        let framesRead = context.provideFrames(frameCount: frameCount)
+        let framesRead = context.provideFrames(frameCount: safeFrames)
 
         // If we got no samples, zero-fill output
         if framesRead == 0 {
@@ -944,32 +960,36 @@ final class RenderPipeline {
             // outputCallCount &+= 1
             // if outputCallCount % 1000 == 1 { audioThreadLogger.debug("Output #\(outputCallCount): No input audio (idle)") }
             RenderCallbackContext.zeroFill(ioData, frameCount: frameCount)
-            context.updateOutputMeters(from: ioData, frameCount: frameCount)
+            context.updateOutputMeters(from: ioData, frameCount: safeFrames)
             return noErr
         }
 
         // 2. Process EQ on the output buffers in-place
         // Processing mode: 0 = full bypass, 1 = normal (EQ + gains), 2 = gains only (compare flat)
         if context.processingMode == 1 {
-            context.measureLoudnessIn(frameCount: frameCount)
-            context.processEQ(frameCount: frameCount)
+            context.measureLoudnessIn(frameCount: safeFrames)
+            context.processEQ(frameCount: safeFrames)
         } else if context.processingMode == 2 {
-            context.applyBypassMatchGain(frameCount: frameCount)
+            context.applyBypassMatchGain(frameCount: safeFrames)
         }
-        context.measureLoudnessOut(frameCount: frameCount)
+        context.measureLoudnessOut(frameCount: safeFrames)
 
         // 3. Copy processed audio to output buffer list
         let outputBuffers = context.outputBufferPointers
         let bufferCount = Int(ioData.pointee.mNumberBuffers)
-        let framesToCopy = Int(frameCount)
+        let framesToCopy = Int(safeFrames)
+        let totalFrames = Int(frameCount)
 
         withUnsafeMutablePointer(to: &ioData.pointee.mBuffers) { buffersPtr in
             for index in 0..<bufferCount {
                 if let destData = buffersPtr[index].mData?.assumingMemoryBound(to: Float.self) {
                     if index < outputBuffers.count {
                         memcpy(destData, outputBuffers[index], framesToCopy * MemoryLayout<Float>.size)
+                        if totalFrames > framesToCopy {
+                            memset(destData + framesToCopy, 0, (totalFrames - framesToCopy) * MemoryLayout<Float>.size)
+                        }
                     } else {
-                        memset(destData, 0, framesToCopy * MemoryLayout<Float>.size)
+                        memset(destData, 0, totalFrames * MemoryLayout<Float>.size)
                     }
                 }
             }
@@ -977,11 +997,11 @@ final class RenderPipeline {
 
         // 4. Apply output gain after EQ processing (skip in full bypass mode)
         if context.processingMode != 0 {
-            context.applyOutputGainWithSoftStart(to: ioData, frameCount: frameCount)
+            context.applyOutputGainWithSoftStart(to: ioData, frameCount: safeFrames)
         }
 
         // 5. Update output meters with rendered audio
-        context.updateOutputMeters(from: ioData, frameCount: frameCount)
+        context.updateOutputMeters(from: ioData, frameCount: safeFrames)
 
         return noErr
     }

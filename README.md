@@ -7,12 +7,12 @@ A Mac equaliser for speakers and headphones. Adjust a curve, keep it as a preset
 Use this to install the app and hear your first adjustment. The app requires macOS 15 or later. The packaged build targets Apple Silicon.
 
 1. Download `equmaczer-<version>.zip` from [the latest release](https://github.com/obtentio/equmaczer/releases/latest). Extract the ZIP and drag `equmaczer.app` into `Applications`.
-2. On first open, right-click `equmaczer.app` in Applications and choose "Open". Confirm "Open" if macOS offers it. If macOS still blocks it, use System Settings, Privacy & Security, and the app's "Open Anyway" option if available.
+2. On first open, macOS may block the unnotarized app. Open System Settings → Privacy & Security, scroll to the bottom, and click "Open Anyway" for equmaczer (macOS 15+ requires Privacy & Security rather than right-click → Open).
 3. Click the five-bar menu bar icon, then "Open equmaczer". The app starts in the menu bar; the main window need not open by itself.
-4. This build can show "Virtual Audio Driver Required" on first launch. Click "Install Driver", authorise with your Mac administrator password, and use "Continue" if shown. The sheet currently appears even though the default capture method is "Process Tap", which can capture without the driver.
-5. Start some music. Open "Settings…" with ⌘, and choose "Driver", "Setup". Leave "Method" at "Process Tap" initially. Allow macOS's audio-capture permission if requested. Return to the main window and turn "System EQ" on.
+4. Start some music. The default capture method is "Process Tap", which routes audio without installing the virtual driver or changing your macOS default output. Allow macOS's audio-capture permission when requested, then turn "System EQ" on.
+5. Open "Settings…" with ⌘, and choose "Driver", "Setup" only if you want the optional virtual driver (for Shared Memory capture, HAL Input, or the recording feed described below).
 
-The driver is an optional capture method in the audio engine, and is needed for the recording feed described below. Installation and capture are separate choices. For permission problems, see Troubleshooting.
+The virtual driver is optional: Process Tap runs driverless, while installing the driver enables Shared Memory capture and the recording feed. For permission problems, see Troubleshooting.
 
 ## The window
 

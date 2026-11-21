@@ -2,6 +2,7 @@
 // TruePeakMeter.swift
 // ITU-R BS.1770-4 4x polyphase FIR oversampled True-Peak (dBTP) detector and lookahead True-Peak limiter.
 
+import Atomics
 import Foundation
 
 /// ITU-R BS.1770-4 compliant 4x oversampled polyphase FIR True-Peak detector.
@@ -204,16 +205,15 @@ final class TruePeakLimiter {
     private var releaseCoeff: Float = 0.99974
 
     /// Shallowest gain applied since the control side last consumed
-    /// the peak gain reduction (linear; 1.0 = no limiting). Tracked
-    /// in the linear domain — one comparison per sample — and
-    /// converted to dB only on consume.
-    private var minGainSinceRead: Float = 1.0
+    /// the peak gain reduction (linear Float bit pattern; 1.0 = no limiting).
+    /// Atomic for race-free audio-thread writes and control-thread consume.
+    private let minGainSinceReadAtomic = ManagedAtomic<UInt32>(Float(1.0).bitPattern)
 
     /// Control side: the peak gain reduction in dB (>= 0) since the
-    /// last call; clears the tracker.
+    /// last call; atomically resets the tracker to unity.
     func consumeMaxGainReductionDB() -> Float {
-        let minGain = minGainSinceRead
-        minGainSinceRead = 1.0
+        let bits = minGainSinceReadAtomic.exchange(Float(1.0).bitPattern, ordering: .acquiringAndReleasing)
+        let minGain = Float(bitPattern: bits)
         guard minGain < 1.0 else { return 0 }
         return -20.0 * log10f(minGain)
     }
@@ -251,7 +251,7 @@ final class TruePeakLimiter {
         attackStep = 0.0
         attackCounter = 0
         holdCounter = 0
-        minGainSinceRead = 1.0
+        minGainSinceReadAtomic.store(Float(1.0).bitPattern, ordering: .relaxed)
     }
 
     /// Advances the gain state machine by one sample and returns the
@@ -295,7 +295,10 @@ final class TruePeakLimiter {
             targetGain = currentGain
             if currentGain > 0.99999 { currentGain = 1.0; targetGain = 1.0 }
         }
-        if currentGain < minGainSinceRead { minGainSinceRead = currentGain }
+        let prevMin = Float(bitPattern: minGainSinceReadAtomic.load(ordering: .relaxed))
+        if currentGain < prevMin {
+            minGainSinceReadAtomic.store(currentGain.bitPattern, ordering: .relaxed)
+        }
         return currentGain
     }
 
@@ -306,7 +309,8 @@ final class TruePeakLimiter {
         let len = lookaheadLength
 
         for i in 0..<frameCount {
-            let inputSample = buffer[i]
+            let raw = buffer[i]
+            let inputSample: Float = raw.isFinite ? raw : 0.0
             let tp = detector.processSample(inputSample)
 
             // Read delayed sample aligned with polyphase FIR centre
@@ -315,8 +319,9 @@ final class TruePeakLimiter {
             writePos += 1
             if writePos >= len { writePos = 0 }
 
-            let requiredGain: Float = tp > ceiling ? (ceiling / tp) : 1.0
-            buffer[i] = delayedSample * stepGain(requiredGain: requiredGain)
+            let requiredGain: Float = (tp.isFinite && tp > ceiling) ? (ceiling / tp) : 1.0
+            let out = delayedSample * stepGain(requiredGain: requiredGain)
+            buffer[i] = out.isFinite ? out : 0.0
         }
     }
 
@@ -337,8 +342,10 @@ final class TruePeakLimiter {
         frameCount: Int
     ) {
         for i in 0..<frameCount {
-            let leftInput = leftBuffer[i]
-            let rightInput = rightBuffer[i]
+            let rawLeft = leftBuffer[i]
+            let rawRight = rightBuffer[i]
+            let leftInput: Float = rawLeft.isFinite ? rawLeft : 0.0
+            let rightInput: Float = rawRight.isFinite ? rawRight : 0.0
             let leftTP = detector.processSample(leftInput)
             let rightTP = other.detector.processSample(rightInput)
 
@@ -353,12 +360,14 @@ final class TruePeakLimiter {
             other.writePos += 1
             if other.writePos >= other.lookaheadLength { other.writePos = 0 }
 
-            let leftRequired: Float = leftTP > ceilingLinear ? (ceilingLinear / leftTP) : 1.0
-            let rightRequired: Float = rightTP > other.ceilingLinear ? (other.ceilingLinear / rightTP) : 1.0
+            let leftRequired: Float = (leftTP.isFinite && leftTP > ceilingLinear) ? (ceilingLinear / leftTP) : 1.0
+            let rightRequired: Float = (rightTP.isFinite && rightTP > other.ceilingLinear) ? (other.ceilingLinear / rightTP) : 1.0
             let gain = stepGain(requiredGain: min(leftRequired, rightRequired))
 
-            leftBuffer[i] = leftDelayed * gain
-            rightBuffer[i] = rightDelayed * gain
+            let leftOut = leftDelayed * gain
+            let rightOut = rightDelayed * gain
+            leftBuffer[i] = leftOut.isFinite ? leftOut : 0.0
+            rightBuffer[i] = rightOut.isFinite ? rightOut : 0.0
         }
     }
 }

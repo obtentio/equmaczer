@@ -377,22 +377,20 @@ final class RenderCallbackContext: @unchecked Sendable {
     /// 0 = full bypass (System EQ OFF) - skip gains, bypass EQ
     /// 1 = normal (EQ + gains)
     /// 2 = gains only (Compare Flat mode) - apply gains, bypass EQ
-    nonisolated(unsafe) var processingMode: Int32 = 1
+    private let processingModeAtomic = ManagedAtomic<Int32>(1)
+    var processingMode: Int32 {
+        get { processingModeAtomic.load(ordering: .relaxed) }
+        set { processingModeAtomic.store(newValue, ordering: .relaxed) }
+    }
 
     /// Number of channels exposed to the level meters (up to two for stereo visualization).
     private let meterChannelCount: Int
 
-    /// Storage for latest input peak levels per channel (in dBFS).
-    private let inputMeterStorage: UnsafeMutablePointer<Float>
-
-    /// Storage for latest output peak levels per channel (in dBFS).
-    private let outputMeterStorage: UnsafeMutablePointer<Float>
-
-    /// Storage for latest input RMS levels per channel (in dBFS).
-    private let inputRmsStorage: UnsafeMutablePointer<Float>
-
-    /// Storage for latest output RMS levels per channel (in dBFS).
-    private let outputRmsStorage: UnsafeMutablePointer<Float>
+    /// Atomic storage (Float bit patterns) for latest input/output peak & RMS levels per channel (dBFS).
+    private let inputMeterStorage: [ManagedAtomic<UInt32>]
+    private let outputMeterStorage: [ManagedAtomic<UInt32>]
+    private let inputRmsStorage: [ManagedAtomic<UInt32>]
+    private let outputRmsStorage: [ManagedAtomic<UInt32>]
 
     /// Pre-allocated raw pointer buffers for audio thread hot paths
     /// (avoids Swift Array `swift_beginAccess`/`swift_endAccess` runtime checks on the real-time thread).
@@ -501,14 +499,11 @@ final class RenderCallbackContext: @unchecked Sendable {
         self.processingBuffers = outputReadBuffers
         self.processingBufferPointers = outputBufferPointersPrecomputed
 
-        self.inputMeterStorage = UnsafeMutablePointer<Float>.allocate(capacity: meterChannelCount)
-        self.outputMeterStorage = UnsafeMutablePointer<Float>.allocate(capacity: meterChannelCount)
-        self.inputRmsStorage = UnsafeMutablePointer<Float>.allocate(capacity: meterChannelCount)
-        self.outputRmsStorage = UnsafeMutablePointer<Float>.allocate(capacity: meterChannelCount)
-        inputMeterStorage.initialize(repeating: Self.silenceDB, count: meterChannelCount)
-        outputMeterStorage.initialize(repeating: Self.silenceDB, count: meterChannelCount)
-        inputRmsStorage.initialize(repeating: Self.silenceDB, count: meterChannelCount)
-        outputRmsStorage.initialize(repeating: Self.silenceDB, count: meterChannelCount)
+        let silenceBits = Self.silenceDB.bitPattern
+        self.inputMeterStorage = (0..<meterChannelCount).map { _ in ManagedAtomic<UInt32>(silenceBits) }
+        self.outputMeterStorage = (0..<meterChannelCount).map { _ in ManagedAtomic<UInt32>(silenceBits) }
+        self.inputRmsStorage = (0..<meterChannelCount).map { _ in ManagedAtomic<UInt32>(silenceBits) }
+        self.outputRmsStorage = (0..<meterChannelCount).map { _ in ManagedAtomic<UInt32>(silenceBits) }
 
         // Pre-allocate raw pointer arrays and True-Peak detectors/limiters for audio thread hot paths
         self.maxBufferListChannels = max(Int(channelCount), 8)
@@ -556,15 +551,6 @@ final class RenderCallbackContext: @unchecked Sendable {
             buffer.deinitialize(count: framesPerBuffer)
             buffer.deallocate()
         }
-
-        inputMeterStorage.deinitialize(count: meterChannelCount)
-        inputMeterStorage.deallocate()
-        outputMeterStorage.deinitialize(count: meterChannelCount)
-        outputMeterStorage.deallocate()
-        inputRmsStorage.deinitialize(count: meterChannelCount)
-        inputRmsStorage.deallocate()
-        outputRmsStorage.deinitialize(count: meterChannelCount)
-        outputRmsStorage.deallocate()
 
         gainBuffersPtr.deallocate()
         meterChannelPointersPtr.deallocate()
@@ -854,15 +840,15 @@ final class RenderCallbackContext: @unchecked Sendable {
 
     /// Returns the latest per-channel meter snapshots in dBTP (True-Peak).
     func meterSnapshot() -> (input: [Float], output: [Float]) {
-        let input = Array(UnsafeBufferPointer(start: inputMeterStorage, count: meterChannelCount))
-        let output = Array(UnsafeBufferPointer(start: outputMeterStorage, count: meterChannelCount))
+        let input = inputMeterStorage.map { Float(bitPattern: $0.load(ordering: .relaxed)) }
+        let output = outputMeterStorage.map { Float(bitPattern: $0.load(ordering: .relaxed)) }
         return (input, output)
     }
 
     /// Returns the latest per-channel RMS meter snapshots in dBFS.
     func rmsSnapshot() -> (input: [Float], output: [Float]) {
-        let input = Array(UnsafeBufferPointer(start: inputRmsStorage, count: meterChannelCount))
-        let output = Array(UnsafeBufferPointer(start: outputRmsStorage, count: meterChannelCount))
+        let input = inputRmsStorage.map { Float(bitPattern: $0.load(ordering: .relaxed)) }
+        let output = outputRmsStorage.map { Float(bitPattern: $0.load(ordering: .relaxed)) }
         return (input, output)
     }
 
@@ -933,8 +919,8 @@ final class RenderCallbackContext: @unchecked Sendable {
     }
 
     private func updateMeterStorage(
-        storage: UnsafeMutablePointer<Float>,
-        rmsStorage: UnsafeMutablePointer<Float>,
+        storage: [ManagedAtomic<UInt32>],
+        rmsStorage: [ManagedAtomic<UInt32>],
         with channels: UnsafePointer<UnsafePointer<Float>>,
         channelPointerCount: Int,
         detectors: [TruePeakDetector],
@@ -944,23 +930,21 @@ final class RenderCallbackContext: @unchecked Sendable {
         guard metersEnabledAtomic.load(ordering: .relaxed) != 0
                 || meterProbeAtomic.load(ordering: .relaxed) != 0 else { return }
 
-        precondition(
-            frameCount <= framesPerBuffer,
-            "frameCount (\(frameCount)) exceeds framesPerBuffer (\(framesPerBuffer))"
-        )
+        let safeFrameCount = min(frameCount, framesPerBuffer)
+        let silenceBits = Self.silenceDB.bitPattern
 
-        guard frameCount > 0 else {
+        guard safeFrameCount > 0 else {
             for index in 0..<meterChannelCount {
-                storage[index] = Self.silenceDB
-                rmsStorage[index] = Self.silenceDB
+                storage[index].store(silenceBits, ordering: .relaxed)
+                rmsStorage[index].store(silenceBits, ordering: .relaxed)
             }
             return
         }
 
         for channel in 0..<meterChannelCount {
             guard channelPointerCount > 0 else {
-                storage[channel] = Self.silenceDB
-                rmsStorage[channel] = Self.silenceDB
+                storage[channel].store(silenceBits, ordering: .relaxed)
+                rmsStorage[channel].store(silenceBits, ordering: .relaxed)
                 continue
             }
 
@@ -970,7 +954,7 @@ final class RenderCallbackContext: @unchecked Sendable {
             var truePeak: Float = 0
             var sumSquares: Float = 0
             var frame = 0
-            while frame < frameCount {
+            while frame < safeFrameCount {
                 let sample = buffer[frame]
                 let tp = detector.processSample(sample)
                 if tp > truePeak {
@@ -980,10 +964,10 @@ final class RenderCallbackContext: @unchecked Sendable {
                 frame += 1
             }
             let db = AudioMath.linearToDB(max(truePeak, 1e-7), silence: Self.silenceDB)
-            let rms = sqrt(sumSquares / Float(frameCount))
+            let rms = sqrt(sumSquares / Float(safeFrameCount))
             let rmsDb = AudioMath.linearToDB(max(rms, 1e-7), silence: Self.silenceDB)
-            storage[channel] = db
-            rmsStorage[channel] = rmsDb
+            storage[channel].store(db.bitPattern, ordering: .relaxed)
+            rmsStorage[channel].store(rmsDb.bitPattern, ordering: .relaxed)
         }
     }
 
@@ -1011,8 +995,11 @@ final class RenderCallbackContext: @unchecked Sendable {
         for ringBuffer in ringBuffers {
             ringBuffer.reset()
         }
-        inputMeterStorage.initialize(repeating: Self.silenceDB, count: meterChannelCount)
-        outputMeterStorage.initialize(repeating: Self.silenceDB, count: meterChannelCount)
+        let silenceBits = Self.silenceDB.bitPattern
+        for index in 0..<meterChannelCount {
+            inputMeterStorage[index].store(silenceBits, ordering: .relaxed)
+            outputMeterStorage[index].store(silenceBits, ordering: .relaxed)
+        }
     }
 
     /// Returns diagnostic information about ring buffer state.

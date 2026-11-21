@@ -10,6 +10,10 @@ final class AppCleanupDelegate: NSObject, NSApplicationDelegate {
     func setStore(_ store: EqumaczerStore) {
         self.store = store
     }
+
+    func applicationWillTerminate(_ notification: Notification) {
+        store?.routingCoordinator.stopRoutingImmediately()
+    }
 }
 
 // MARK: - Main App
