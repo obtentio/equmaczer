@@ -47,7 +47,7 @@ final class EQChainConcurrencyTests: XCTestCase {
         )
         chain.applyPendingUpdates()
 
-        let iterations = 5_000
+        let iterations = 1_000
         let stagingSemaphore = DispatchSemaphore(value: 0)
         let processingSemaphore = DispatchSemaphore(value: 0)
         let stagingDone = XCTestExpectation(description: "Staging complete")

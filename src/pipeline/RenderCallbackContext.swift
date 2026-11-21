@@ -331,7 +331,7 @@ final class RenderCallbackContext: @unchecked Sendable {
     ///   - sampleRate: Current audio sample rate in Hz.
     ///   - targetOutputGain: The linear output gain to ramp to.
     ///   - duration: Ramp duration in seconds (default 4.0).
-    func startSoftStart(sampleRate: Double, targetOutputGain: Float, duration: Float = 4.0) {
+    func startSoftStart(sampleRate: Double, targetOutputGain: Float, duration: Float = 0.25) {
         let totalRampFrames = Int32(sampleRate * Double(duration))
         softStartFramesRemainingAtomic.store(totalRampFrames, ordering: .releasing)
         softStartGainPerFrameAtomic.store(Int32(bitPattern: (targetOutputGain / Float(totalRampFrames)).bitPattern), ordering: .releasing)

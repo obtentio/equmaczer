@@ -35,6 +35,10 @@ enum AppTapPlan {
     /// the default channel, excluding our own output to prevent feedback.
     static func includingUnbundledOutput(_ processes: [RunningAudioProcess], ownProcessID: Int32,
                                          assignments: [ChannelTapAssignment]) -> [ChannelTapAssignment] {
+        // In global tap mode (no per-app/channel assignments), CoreAudio already taps
+        // all processes including unbundled CLI/system sounds (e.g. screencapture).
+        // Never spin up ChannelMixer just for a transient unbundled sound.
+        guard !assignments.isEmpty else { return assignments }
         let ids = Set(processes.filter {
             ($0.bundleID == nil || $0.bundleID?.isEmpty == true) && $0.processID > 0 &&
                 $0.processID != ownProcessID && $0.objectID != kAudioObjectUnknown

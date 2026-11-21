@@ -131,6 +131,13 @@ final class AppTapPlanTests: XCTestCase {
         }
     }
 
+    func testGlobalModeDoesNotSwitchToMixerForTransientUnbundledProcess() {
+        let plan = AppTapPlan.includingUnbundledOutput([
+            RunningAudioProcess(objectID: 44, processID: 202, bundleID: nil)
+        ], ownProcessID: 100, assignments: [])
+        XCTAssertTrue(plan.isEmpty)
+    }
+
     func testVolumeAppIsOnlyInItsOwnTapAndHundredPercentKeepsChannelTap() {
         let plan = AppTapPlan.assignments(processes: ["a": [11, 12], "b": [22]],
             channels: ["a": .music, "b": .music], volumes: ["a": 0.4], excluded: [])
