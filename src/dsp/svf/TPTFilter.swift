@@ -190,8 +190,9 @@ final class TPTFilter {
                 i &+= 1
             }
 
-            let remaining = abs(g - tg) + abs(r - tr) + abs(c0 - tc0) + abs(c1 - tc1) + abs(c2 - tc2)
-                + abs(m1G - tg) + abs(m2G - tg)
+            // Split so older Swift (6.1) can type-check it in time.
+            let coefficientGap: Double = abs(g - tg) + abs(r - tr) + abs(c0 - tc0) + abs(c1 - tc1) + abs(c2 - tc2)
+            let remaining: Double = coefficientGap + abs(m1G - tg) + abs(m2G - tg)
             if remaining < 1e-7 {
                 current = target
                 stage1 = target
@@ -370,8 +371,9 @@ final class TPTFilter {
                 i &+= 1
             }
 
-            let remaining = abs(g - tg) + abs(r - tr) + abs(c0 - tc0) + abs(c1 - tc1) + abs(c2 - tc2)
-                + abs(m1G - tg) + abs(m2G - tg)
+            // Split so older Swift (6.1) can type-check it in time.
+            let coefficientGap: Double = abs(g - tg) + abs(r - tr) + abs(c0 - tc0) + abs(c1 - tc1) + abs(c2 - tc2)
+            let remaining: Double = coefficientGap + abs(m1G - tg) + abs(m2G - tg)
             if remaining < 1e-7 {
                 current = target
                 stage1 = target

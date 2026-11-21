@@ -56,9 +56,8 @@ final class VolumeManager: ObservableObject {
     // MARK: - Dependencies
 
     /// Volume service for CoreAudio calls.
-    /// nonisolated(unsafe) since it's a let set once in init and never changes,
-    /// and setDeviceVolumeScalar is nonisolated.
-    nonisolated(unsafe) let volumeService: VolumeControlling
+    /// Sendable, so the volume-forward queue may call it off the main actor.
+    nonisolated let volumeService: VolumeControlling
     private let logger = Logger(subsystem: "com.obtentio.equmaczer", category: "VolumeManager")
 
     /// Serial queue for volume forwarding (isolated from main thread).

@@ -8,7 +8,8 @@ import os.log
 /// Volume and mute control for audio devices.
 /// Handles both virtual master volume and device-level volume/mute.
 @MainActor
-final class DeviceVolumeService: VolumeControlling {
+// Listener maps are touched only on listenerQueue; CoreAudio property calls are thread-safe.
+final class DeviceVolumeService: VolumeControlling, @unchecked Sendable {
     
     // MARK: - Private Properties
     
