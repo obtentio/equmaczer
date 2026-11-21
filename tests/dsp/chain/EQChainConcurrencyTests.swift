@@ -21,7 +21,9 @@ final class EQChainConcurrencyTests: XCTestCase {
     /// (staging completes before applying reads), which matches the real app's
     /// main-thread-serial execution model.
     func testLockFreeCoefficientUpdatePath() {
-        let chain = EQChain(maxFrameCount: maxFrameCount)
+        // Shared with the two worker queues on purpose: this test races them.
+        nonisolated(unsafe) let chain = EQChain(maxFrameCount: maxFrameCount)
+        let frameCount = self.frameCount
 
         // Pre-compute coefficient sets
         let coefficients: [BiquadCoefficients] = (0..<10).map { i in
@@ -87,14 +89,14 @@ final class EQChainConcurrencyTests: XCTestCase {
 
         // Thread B: Apply updates and process (simulates audio thread — serial)
         DispatchQueue.global(qos: .userInteractive).async {
-            var buffer: [Float] = [Float](repeating: 0.5, count: Int(self.frameCount))
+            var buffer: [Float] = [Float](repeating: 0.5, count: Int(frameCount))
             for i in 0..<iterations {
                 // Wait for staging to complete
                 processingSemaphore.wait()
 
                 buffer.withUnsafeMutableBufferPointer { bufPtr in
                     chain.applyPendingUpdates()
-                    chain.process(buffer: bufPtr.baseAddress!, frameCount: self.frameCount)
+                    chain.process(buffer: bufPtr.baseAddress!, frameCount: frameCount)
                 }
 
                 // Verify output is finite
@@ -107,7 +109,7 @@ final class EQChainConcurrencyTests: XCTestCase {
                 stagingSemaphore.signal()
 
                 // Reset buffer
-                for j in 0..<Int(self.frameCount) {
+                for j in 0..<Int(frameCount) {
                     buffer[j] = 0.5
                 }
             }
