@@ -1,0 +1,1 @@
+PASS: 20000 replacements, 1502764 callback accesses, 1024789 nonblocking skips

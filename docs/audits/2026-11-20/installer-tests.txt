@@ -1,0 +1,23 @@
+warning: ~/Library/org.swift.swiftpm/configuration is not accessible or not writable, disabling user-level cache features.
+warning: ~/Library/org.swift.swiftpm/security is not accessible or not writable, disabling user-level cache features.
+Building for debugging...
+[1 / 1]
+[2 / 7] equmaczerTests-product
+[4 / 9] equmaczerTests-product
+[10 / 14] equmaczerTests-product
+Build complete! (1.75 sec)
+Test Suite 'Selected tests' started at 2026-11-20 19:35:59.490.
+Test Suite 'equmaczerTests.xctest' started at 2026-11-20 19:35:59.490.
+Test Suite 'DriverInstallScriptTests' started at 2026-11-20 19:35:59.491.
+Test Case '-[equmaczerTests.DriverInstallScriptTests testAppleScriptLiteralRoundTripsTheCompleteOperation]' started.
+Test Case '-[equmaczerTests.DriverInstallScriptTests testAppleScriptLiteralRoundTripsTheCompleteOperation]' passed (0.147 seconds).
+Test Case '-[equmaczerTests.DriverInstallScriptTests testMissingSourcePreservesInstalledDriverAndCleansStaging]' started.
+Test Case '-[equmaczerTests.DriverInstallScriptTests testMissingSourcePreservesInstalledDriverAndCleansStaging]' passed (0.069 seconds).
+Test Case '-[equmaczerTests.DriverInstallScriptTests testShellPathRoundTripWithoutExpansion]' started.
+Test Case '-[equmaczerTests.DriverInstallScriptTests testShellPathRoundTripWithoutExpansion]' passed (0.068 seconds).
+Test Suite 'DriverInstallScriptTests' passed at 2026-11-20 19:35:59.776.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.285 (0.285) seconds
+Test Suite 'equmaczerTests.xctest' passed at 2026-11-20 19:35:59.776.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.285 (0.285) seconds
+Test Suite 'Selected tests' passed at 2026-11-20 19:35:59.776.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.285 (0.286) seconds

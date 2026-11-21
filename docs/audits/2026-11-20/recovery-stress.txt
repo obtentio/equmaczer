@@ -1,0 +1,1 @@
+Stereo × 4 layers × 64 bands, limiter + loudness/spectrum + ring transport, 64 frames @ 96 kHz: p50 96.62 µs, p99 147.33 µs, deadline 666.67 µs. Excludes HAL scheduling/device latency.

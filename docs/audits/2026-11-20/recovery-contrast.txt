@@ -1,0 +1,13 @@
+Recovery neutral inks; independent APCA equation check, not upstream-package/font certification.
+#B8B8B8 on #090909: WCAG 10.04:1; APCA reverse Lc -63.9
+#B8B8B8 on #0F0F0F: WCAG 9.66:1; APCA reverse Lc -63.7
+#B8B8B8 on #181818: WCAG 8.95:1; APCA reverse Lc -62.9
+#B8B8B8 on #262626: WCAG 7.63:1; APCA reverse Lc -60.9
+#D4D4D4 on #090909: WCAG 13.43:1; APCA reverse Lc -80.4
+#D4D4D4 on #0F0F0F: WCAG 12.93:1; APCA reverse Lc -80.1
+#D4D4D4 on #181818: WCAG 11.98:1; APCA reverse Lc -79.4
+#D4D4D4 on #262626: WCAG 10.21:1; APCA reverse Lc -77.4
+#E4E4E4 on #090909: WCAG 15.66:1; APCA reverse Lc -90.3
+#E4E4E4 on #0F0F0F: WCAG 15.08:1; APCA reverse Lc -90.0
+#E4E4E4 on #181818: WCAG 13.97:1; APCA reverse Lc -89.3
+#E4E4E4 on #262626: WCAG 11.90:1; APCA reverse Lc -87.3

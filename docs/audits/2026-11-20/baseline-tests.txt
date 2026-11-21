@@ -1,0 +1,1634 @@
+warning: ~/Library/org.swift.swiftpm/configuration is not accessible or not writable, disabling user-level cache features.
+warning: ~/Library/org.swift.swiftpm/security is not accessible or not writable, disabling user-level cache features.
+Building for debugging...
+[Pre-planning 1 / 155]
+[Planning deferred tasks]
+[1 / 16] Atomics
+[3 / 22] Atomics
+[13 / 35]
+[15 / 35]
+[17 / 35] Atomics
+[23 / 33] equmaczer-product
+[34 / 110] equmaczer-product
+[37 / 112]
+[43 / 112]
+[48 / 112]
+[50 / 112]
+[51 / 112]
+[56 / 112]
+[58 / 112]
+[60 / 112]
+[63 / 112]
+[68 / 112]
+[71 / 112]
+[73 / 112]
+[74 / 112]
+[86 / 112]
+[89 / 112]
+[95 / 112]
+[100 / 112]
+[101 / 112]
+[102 / 112]
+[104 / 112] equmaczer-product
+[111 / 118] equmaczer
+[113 / 118] equmaczerTests-product
+[119 / 124]
+[120 / 124]
+[121 / 124] equmaczerTests-product
+Build complete! (9.84 sec)
+Test Suite 'All tests' started at 2026-11-20 16:50:02.028.
+Test Suite 'equmaczerTests.xctest' started at 2026-11-20 16:50:02.031.
+Test Suite 'AtomicGainStorageTests' started at 2026-11-20 16:50:02.031.
+Test Case '-[equmaczerTests.AtomicGainStorageTests testFloatBitPattern_preservesLargeValues]' started.
+Test Case '-[equmaczerTests.AtomicGainStorageTests testFloatBitPattern_preservesLargeValues]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.AtomicGainStorageTests testFloatBitPattern_preservesSmallValues]' started.
+Test Case '-[equmaczerTests.AtomicGainStorageTests testFloatBitPattern_preservesSmallValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AtomicGainStorageTests testFloatBitPattern_preservesUnity]' started.
+Test Case '-[equmaczerTests.AtomicGainStorageTests testFloatBitPattern_preservesUnity]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AtomicGainStorageTests testFloatBitPattern_roundTrip]' started.
+Test Case '-[equmaczerTests.AtomicGainStorageTests testFloatBitPattern_roundTrip]' passed (0.000 seconds).
+Test Suite 'AtomicGainStorageTests' passed at 2026-11-20 16:50:02.033.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'AudioMathTests' started at 2026-11-20 16:50:02.033.
+Test Case '-[equmaczerTests.AudioMathTests testDbToLinear_referenceValues]' started.
+Test Case '-[equmaczerTests.AudioMathTests testDbToLinear_referenceValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioMathTests testLinearToDB_referenceValues]' started.
+Test Case '-[equmaczerTests.AudioMathTests testLinearToDB_referenceValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioMathTests testLinearToDB_silence]' started.
+Test Case '-[equmaczerTests.AudioMathTests testLinearToDB_silence]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioMathTests testRoundTrip]' started.
+Test Case '-[equmaczerTests.AudioMathTests testRoundTrip]' passed (0.000 seconds).
+Test Suite 'AudioMathTests' passed at 2026-11-20 16:50:02.033.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'AudioRingBufferTests' started at 2026-11-20 16:50:02.033.
+Test Case '-[equmaczerTests.AudioRingBufferTests testAvailableToRead_afterOperations]' started.
+Test Case '-[equmaczerTests.AudioRingBufferTests testAvailableToRead_afterOperations]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioRingBufferTests testInit_roundsUpToPowerOfTwo]' started.
+Test Case '-[equmaczerTests.AudioRingBufferTests testInit_roundsUpToPowerOfTwo]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioRingBufferTests testInit_startsEmpty]' started.
+Test Case '-[equmaczerTests.AudioRingBufferTests testInit_startsEmpty]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioRingBufferTests testOverflowCount_increments]' started.
+Test Case '-[equmaczerTests.AudioRingBufferTests testOverflowCount_increments]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioRingBufferTests testRead_emptyBuffer_zeroFills]' started.
+Test Case '-[equmaczerTests.AudioRingBufferTests testRead_emptyBuffer_zeroFills]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioRingBufferTests testRead_underrun_zeroFills]' started.
+Test Case '-[equmaczerTests.AudioRingBufferTests testRead_underrun_zeroFills]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioRingBufferTests testReset_clearsBuffer]' started.
+Test Case '-[equmaczerTests.AudioRingBufferTests testReset_clearsBuffer]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioRingBufferTests testUnderrunCount_increments]' started.
+Test Case '-[equmaczerTests.AudioRingBufferTests testUnderrunCount_increments]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioRingBufferTests testUnderrunCount_incrementsOnPartialRead]' started.
+Test Case '-[equmaczerTests.AudioRingBufferTests testUnderrunCount_incrementsOnPartialRead]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioRingBufferTests testWrite_fullBuffer_returnsZero]' started.
+Test Case '-[equmaczerTests.AudioRingBufferTests testWrite_fullBuffer_returnsZero]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioRingBufferTests testWrite_overflow_partialWrite]' started.
+Test Case '-[equmaczerTests.AudioRingBufferTests testWrite_overflow_partialWrite]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioRingBufferTests testWriteRead_exactCapacity]' started.
+Test Case '-[equmaczerTests.AudioRingBufferTests testWriteRead_exactCapacity]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioRingBufferTests testWriteRead_simpleData]' started.
+Test Case '-[equmaczerTests.AudioRingBufferTests testWriteRead_simpleData]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AudioRingBufferTests testWriteRead_wrapAround]' started.
+Test Case '-[equmaczerTests.AudioRingBufferTests testWriteRead_wrapAround]' passed (0.000 seconds).
+Test Suite 'AudioRingBufferTests' passed at 2026-11-20 16:50:02.035.
+	 Executed 14 tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'AutoEqImporterTests' started at 2026-11-20 16:50:02.035.
+Test Case '-[equmaczerTests.AutoEqImporterTests testParsesPreampBandsAndShelfTypes]' started.
+Test Case '-[equmaczerTests.AutoEqImporterTests testParsesPreampBandsAndShelfTypes]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AutoEqImporterTests testRejectsTextWithoutFilters]' started.
+Test Case '-[equmaczerTests.AutoEqImporterTests testRejectsTextWithoutFilters]' passed (0.000 seconds).
+Test Suite 'AutoEqImporterTests' passed at 2026-11-20 16:50:02.036.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'AutoPauseEngineTests' started at 2026-11-20 16:50:02.036.
+Test Case '-[equmaczerTests.AutoPauseEngineTests testBlipUnderEngageDelayDoesNothing]' started.
+Test Case '-[equmaczerTests.AutoPauseEngineTests testBlipUnderEngageDelayDoesNothing]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AutoPauseEngineTests testEngageAfterHoldNotBefore]' started.
+Test Case '-[equmaczerTests.AutoPauseEngineTests testEngageAfterHoldNotBefore]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AutoPauseEngineTests testResumeAfterLongerClearDelay]' started.
+Test Case '-[equmaczerTests.AutoPauseEngineTests testResumeAfterLongerClearDelay]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.AutoPauseEngineTests testStageReturningDuringClearDelayCancelsResume]' started.
+Test Case '-[equmaczerTests.AutoPauseEngineTests testStageReturningDuringClearDelayCancelsResume]' passed (0.000 seconds).
+Test Suite 'AutoPauseEngineTests' passed at 2026-11-20 16:50:02.036.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'AutoPauseStateTests' started at 2026-11-20 16:50:02.036.
+Test Case '-[equmaczerTests.AutoPauseStateTests testAutoPauseDefaultsOffAndRoundTrips]' started.
+Test Case '-[equmaczerTests.AutoPauseStateTests testAutoPauseDefaultsOffAndRoundTrips]' passed (0.001 seconds).
+Test Suite 'AutoPauseStateTests' passed at 2026-11-20 16:50:02.038.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'BandwidthConverterTests' started at 2026-11-20 16:50:02.038.
+Test Case '-[equmaczerTests.BandwidthConverterTests testBandwidthToQ_referenceValues]' started.
+Test Case '-[equmaczerTests.BandwidthConverterTests testBandwidthToQ_referenceValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BandwidthConverterTests testBandwidthToQ_zeroAndNegative]' started.
+Test Case '-[equmaczerTests.BandwidthConverterTests testBandwidthToQ_zeroAndNegative]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BandwidthConverterTests testClampBandwidth_boundaries]' started.
+Test Case '-[equmaczerTests.BandwidthConverterTests testClampBandwidth_boundaries]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BandwidthConverterTests testClampQ_boundaries]' started.
+Test Case '-[equmaczerTests.BandwidthConverterTests testClampQ_boundaries]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BandwidthConverterTests testQToBandwidth_referenceValues]' started.
+Test Case '-[equmaczerTests.BandwidthConverterTests testQToBandwidth_referenceValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BandwidthConverterTests testQToBandwidth_zeroAndNegative]' started.
+Test Case '-[equmaczerTests.BandwidthConverterTests testQToBandwidth_zeroAndNegative]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BandwidthConverterTests testReferenceTable_consistency]' started.
+Test Case '-[equmaczerTests.BandwidthConverterTests testReferenceTable_consistency]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BandwidthConverterTests testReferenceTable_containsExpectedValues]' started.
+Test Case '-[equmaczerTests.BandwidthConverterTests testReferenceTable_containsExpectedValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BandwidthConverterTests testRoundTrip_bandwidthToQToBandwidth]' started.
+Test Case '-[equmaczerTests.BandwidthConverterTests testRoundTrip_bandwidthToQToBandwidth]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BandwidthConverterTests testRoundTrip_qToBandwidthToQ]' started.
+Test Case '-[equmaczerTests.BandwidthConverterTests testRoundTrip_qToBandwidthToQ]' passed (0.000 seconds).
+Test Suite 'BandwidthConverterTests' passed at 2026-11-20 16:50:02.039.
+	 Executed 10 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'BiquadFilterTests' started at 2026-11-20 16:50:02.039.
+Test Case '-[equmaczerTests.BiquadFilterTests testCoefficientUpdate]' started.
+Test Case '-[equmaczerTests.BiquadFilterTests testCoefficientUpdate]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadFilterTests testHighPassAttenuatesLows]' started.
+Test Case '-[equmaczerTests.BiquadFilterTests testHighPassAttenuatesLows]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadFilterTests testIdentityPassthrough]' started.
+Test Case '-[equmaczerTests.BiquadFilterTests testIdentityPassthrough]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadFilterTests testIncrementalUpdate_preservesDelayState]' started.
+Test Case '-[equmaczerTests.BiquadFilterTests testIncrementalUpdate_preservesDelayState]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadFilterTests testInPlaceProcessing]' started.
+Test Case '-[equmaczerTests.BiquadFilterTests testInPlaceProcessing]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadFilterTests testLowPassAttenuatesHighs]' started.
+Test Case '-[equmaczerTests.BiquadFilterTests testLowPassAttenuatesHighs]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadFilterTests testParametricImpulseResponse]' started.
+Test Case '-[equmaczerTests.BiquadFilterTests testParametricImpulseResponse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadFilterTests testPassthroughBeforeSetup]' started.
+Test Case '-[equmaczerTests.BiquadFilterTests testPassthroughBeforeSetup]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadFilterTests testPreBuiltSetupProducesCorrectOutput]' started.
+Test Case '-[equmaczerTests.BiquadFilterTests testPreBuiltSetupProducesCorrectOutput]' passed (0.000 seconds).
+Test Suite 'BiquadFilterTests' passed at 2026-11-20 16:50:02.041.
+	 Executed 9 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'BiquadMathTests' started at 2026-11-20 16:50:02.041.
+Test Case '-[equmaczerTests.BiquadMathTests testAllFilterTypesProduceValidCoefficients]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testAllFilterTypesProduceValidCoefficients]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testBandPass]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testBandPass]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testHighFrequency]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testHighFrequency]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testHighPass]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testHighPass]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testHighPassButterworthQ]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testHighPassButterworthQ]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testHighShelfBoost]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testHighShelfBoost]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testIdentityCoefficients]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testIdentityCoefficients]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testLowFrequency]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testLowFrequency]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testLowPass]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testLowPass]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testLowPassButterworthQ]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testLowPassButterworthQ]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testLowShelf0DBGain]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testLowShelf0DBGain]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testLowShelfBoost]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testLowShelfBoost]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testNarrowBandwidth]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testNarrowBandwidth]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testNormalisationPreservesTransferFunction]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testNormalisationPreservesTransferFunction]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testNotch]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testNotch]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testParametric0DBGain]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testParametric0DBGain]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testParametricBoost]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testParametricBoost]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testParametricCut]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testParametricCut]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadMathTests testWideBandwidth]' started.
+Test Case '-[equmaczerTests.BiquadMathTests testWideBandwidth]' passed (0.000 seconds).
+Test Suite 'BiquadMathTests' passed at 2026-11-20 16:50:02.043.
+	 Executed 19 tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'BiquadStabilityTests' started at 2026-11-20 16:50:02.043.
+Test Case '-[equmaczerTests.BiquadStabilityTests testExtremeGainValues]' started.
+Test Case '-[equmaczerTests.BiquadStabilityTests testExtremeGainValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadStabilityTests testExtremeQForLowAndHighPass]' started.
+Test Case '-[equmaczerTests.BiquadStabilityTests testExtremeQForLowAndHighPass]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadStabilityTests testExtremeQValues]' started.
+Test Case '-[equmaczerTests.BiquadStabilityTests testExtremeQValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadStabilityTests testFrequencyNearNyquist]' started.
+Test Case '-[equmaczerTests.BiquadStabilityTests testFrequencyNearNyquist]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadStabilityTests testIdentityCoefficientsAreStable]' started.
+Test Case '-[equmaczerTests.BiquadStabilityTests testIdentityCoefficientsAreStable]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadStabilityTests testImpulseResponseDecays]' started.
+Test Case '-[equmaczerTests.BiquadStabilityTests testImpulseResponseDecays]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadStabilityTests testPolesInsideUnitCircleForAllFilterTypes]' started.
+Test Case '-[equmaczerTests.BiquadStabilityTests testPolesInsideUnitCircleForAllFilterTypes]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadStabilityTests testValidatorAcceptsValidParameters]' started.
+Test Case '-[equmaczerTests.BiquadStabilityTests testValidatorAcceptsValidParameters]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadStabilityTests testValidatorRejectsFrequencyAtNyquist]' started.
+Test Case '-[equmaczerTests.BiquadStabilityTests testValidatorRejectsFrequencyAtNyquist]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadStabilityTests testValidatorRejectsNegativeQ]' started.
+Test Case '-[equmaczerTests.BiquadStabilityTests testValidatorRejectsNegativeQ]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BiquadStabilityTests testValidatorRejectsZeroQ]' started.
+Test Case '-[equmaczerTests.BiquadStabilityTests testValidatorRejectsZeroQ]' passed (0.000 seconds).
+Test Suite 'BiquadStabilityTests' passed at 2026-11-20 16:50:02.044.
+	 Executed 11 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'BlindABTests' started at 2026-11-20 16:50:02.044.
+Test Case '-[equmaczerTests.BlindABTests testBlindTrimClampsAndComposes]' started.
+Test Case '-[equmaczerTests.BlindABTests testBlindTrimClampsAndComposes]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.BlindABTests testPickImpossibleUntilBothSidesHeard]' started.
+Test Case '-[equmaczerTests.BlindABTests testPickImpossibleUntilBothSidesHeard]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BlindABTests testPickMapsLetterToCandidateWhenCandidateIsA]' started.
+Test Case '-[equmaczerTests.BlindABTests testPickMapsLetterToCandidateWhenCandidateIsA]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BlindABTests testPickMapsLetterToCandidateWhenCandidateIsB]' started.
+Test Case '-[equmaczerTests.BlindABTests testPickMapsLetterToCandidateWhenCandidateIsB]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BlindABTests testShowingAfterRevealDoesNothing]' started.
+Test Case '-[equmaczerTests.BlindABTests testShowingAfterRevealDoesNothing]' passed (0.000 seconds).
+Test Suite 'BlindABTests' passed at 2026-11-20 16:50:02.046.
+	 Executed 5 tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'BypassDeltaRestageTests' started at 2026-11-20 16:50:02.046.
+Test Case '-[equmaczerTests.BypassDeltaRestageTests testFreshPairsRefineTheSeed]' started.
+Test Case '-[equmaczerTests.BypassDeltaRestageTests testFreshPairsRefineTheSeed]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BypassDeltaRestageTests testRestageClearsThePairedHistory]' started.
+Test Case '-[equmaczerTests.BypassDeltaRestageTests testRestageClearsThePairedHistory]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BypassDeltaRestageTests testRestageShiftsTheHeldDeltaByThePreampChange]' started.
+Test Case '-[equmaczerTests.BypassDeltaRestageTests testRestageShiftsTheHeldDeltaByThePreampChange]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BypassDeltaRestageTests testSeedIsClamped]' started.
+Test Case '-[equmaczerTests.BypassDeltaRestageTests testSeedIsClamped]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BypassDeltaRestageTests testUnconvergedRestageSeedsFromThePreamp]' started.
+Test Case '-[equmaczerTests.BypassDeltaRestageTests testUnconvergedRestageSeedsFromThePreamp]' passed (0.000 seconds).
+Test Suite 'BypassDeltaRestageTests' passed at 2026-11-20 16:50:02.046.
+	 Executed 5 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'BypassDeltaTests' started at 2026-11-20 16:50:02.046.
+Test Case '-[equmaczerTests.BypassDeltaTests testDeltaFromProbes]' started.
+Test Case '-[equmaczerTests.BypassDeltaTests testDeltaFromProbes]' passed (0.143 seconds).
+Test Case '-[equmaczerTests.BypassDeltaTests testDeltaIgnoresQuietPairs]' started.
+Test Case '-[equmaczerTests.BypassDeltaTests testDeltaIgnoresQuietPairs]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BypassDeltaTests testDeltaIsThePairedLoudnessDifference]' started.
+Test Case '-[equmaczerTests.BypassDeltaTests testDeltaIsThePairedLoudnessDifference]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.BypassDeltaTests testDeltaNeedsEnoughProgramme]' started.
+Test Case '-[equmaczerTests.BypassDeltaTests testDeltaNeedsEnoughProgramme]' passed (0.000 seconds).
+Test Suite 'BypassDeltaTests' passed at 2026-11-20 16:50:02.190.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.144 (0.144) seconds
+Test Suite 'CallCliffTests' started at 2026-11-20 16:50:02.190.
+Test Case '-[equmaczerTests.CallCliffTests testBluetoothAndCurrentDefaultExcluded]' started.
+Test Case '-[equmaczerTests.CallCliffTests testBluetoothAndCurrentDefaultExcluded]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CallCliffTests testBuiltInMicrophonePreferred]' started.
+Test Case '-[equmaczerTests.CallCliffTests testBuiltInMicrophonePreferred]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CallCliffTests testCliffNeedsAllThreeFacts]' started.
+Test Case '-[equmaczerTests.CallCliffTests testCliffNeedsAllThreeFacts]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CallCliffTests testFallsBackToAnyRealMicrophone]' started.
+Test Case '-[equmaczerTests.CallCliffTests testFallsBackToAnyRealMicrophone]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CallCliffTests testVirtualDevicesExcluded]' started.
+Test Case '-[equmaczerTests.CallCliffTests testVirtualDevicesExcluded]' passed (0.000 seconds).
+Test Suite 'CallCliffTests' passed at 2026-11-20 16:50:02.191.
+	 Executed 5 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'CaptureModePolicyTests' started at 2026-11-20 16:50:02.191.
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_automaticMode_halInput_noSharedMemory_usesHALInput]' started.
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_automaticMode_halInput_noSharedMemory_usesHALInput]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_automaticMode_sharedMemory_available_usesSharedMemory]' started.
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_automaticMode_sharedMemory_available_usesSharedMemory]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_halInputPreference_ignoresCapability]' started.
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_halInputPreference_ignoresCapability]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_halInputPreference_usesHALInput]' started.
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_halInputPreference_usesHALInput]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_manualMode_alwaysUsesHALInput]' started.
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_manualMode_alwaysUsesHALInput]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_manualMode_ignoresPreferenceAndCapability]' started.
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_manualMode_ignoresPreferenceAndCapability]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_sharedMemoryPreference_withCapability_usesSharedMemory]' started.
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_sharedMemoryPreference_withCapability_usesSharedMemory]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_sharedMemoryPreference_withoutCapability_fallsBackToHAL]' started.
+Test Case '-[equmaczerTests.CaptureModePolicyTests test_sharedMemoryPreference_withoutCapability_fallsBackToHAL]' passed (0.000 seconds).
+Test Suite 'CaptureModePolicyTests' passed at 2026-11-20 16:50:02.192.
+	 Executed 8 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'CaptureRoutePlannerTests' started at 2026-11-20 16:50:02.192.
+Test Case '-[equmaczerTests.CaptureRoutePlannerTests testIncapableSharedMemoryPreferenceResolvesToHAL]' started.
+Test Case '-[equmaczerTests.CaptureRoutePlannerTests testIncapableSharedMemoryPreferenceResolvesToHAL]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CaptureRoutePlannerTests testManualModeOnlyEverHALInput]' started.
+Test Case '-[equmaczerTests.CaptureRoutePlannerTests testManualModeOnlyEverHALInput]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CaptureRoutePlannerTests testNextCandidateSkipsFailedAndExhausts]' started.
+Test Case '-[equmaczerTests.CaptureRoutePlannerTests testNextCandidateSkipsFailedAndExhausts]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CaptureRoutePlannerTests testPlannerFirstCandidateMatchesPolicyEverywhere]' started.
+Test Case '-[equmaczerTests.CaptureRoutePlannerTests testPlannerFirstCandidateMatchesPolicyEverywhere]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CaptureRoutePlannerTests testTapIsPreferenceOnlyNeverAFallback]' started.
+Test Case '-[equmaczerTests.CaptureRoutePlannerTests testTapIsPreferenceOnlyNeverAFallback]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CaptureRoutePlannerTests testTapPreferenceLeadsThenFallsBack]' started.
+Test Case '-[equmaczerTests.CaptureRoutePlannerTests testTapPreferenceLeadsThenFallsBack]' passed (0.000 seconds).
+Test Suite 'CaptureRoutePlannerTests' passed at 2026-11-20 16:50:02.193.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'CascadePreampTests' started at 2026-11-20 16:50:02.193.
+Test Case '-[equmaczerTests.CascadePreampTests testAutoPreampOffKeepsTheStandaloneCorrectionPreamp]' started.
+Test Case '-[equmaczerTests.CascadePreampTests testAutoPreampOffKeepsTheStandaloneCorrectionPreamp]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CascadePreampTests testCutSideKeepsTheManualPreampByDesign]' started.
+Test Case '-[equmaczerTests.CascadePreampTests testCutSideKeepsTheManualPreampByDesign]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CascadePreampTests testDisjointPeaksDoNotSum]' started.
+Test Case '-[equmaczerTests.CascadePreampTests testDisjointPeaksDoNotSum]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CascadePreampTests testOpposingBoostRecoversTheOverlap]' started.
+Test Case '-[equmaczerTests.CascadePreampTests testOpposingBoostRecoversTheOverlap]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CascadePreampTests testProfileDeclaredPreampRemainsAFloor]' started.
+Test Case '-[equmaczerTests.CascadePreampTests testProfileDeclaredPreampRemainsAFloor]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CascadePreampTests testSampleRateMismatchFallsBackToStandalone]' started.
+Test Case '-[equmaczerTests.CascadePreampTests testSampleRateMismatchFallsBackToStandalone]' passed (0.000 seconds).
+Test Suite 'CascadePreampTests' passed at 2026-11-20 16:50:02.195.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'ChannelResolverTests' started at 2026-11-20 16:50:02.195.
+Test Case '-[equmaczerTests.ChannelResolverTests testActivePickHonoursPinThenPriority]' started.
+Test Case '-[equmaczerTests.ChannelResolverTests testActivePickHonoursPinThenPriority]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.ChannelResolverTests testBuiltInAssignmentsResolve]' started.
+Test Case '-[equmaczerTests.ChannelResolverTests testBuiltInAssignmentsResolve]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.ChannelResolverTests testBuiltInTableHasNoBrowserAndNoLauncher]' started.
+Test Case '-[equmaczerTests.ChannelResolverTests testBuiltInTableHasNoBrowserAndNoLauncher]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.ChannelResolverTests testUserAssignmentBeatsBuiltIn]' started.
+Test Case '-[equmaczerTests.ChannelResolverTests testUserAssignmentBeatsBuiltIn]' passed (0.000 seconds).
+Test Suite 'ChannelResolverTests' passed at 2026-11-20 16:50:02.196.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'ChannelStoreTests' started at 2026-11-20 16:50:02.196.
+Test Case '-[equmaczerTests.ChannelStoreTests testDialogueSetRoundTrips]' started.
+Test Case '-[equmaczerTests.ChannelStoreTests testDialogueSetRoundTrips]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.ChannelStoreTests testRoundTrip]' started.
+Test Case '-[equmaczerTests.ChannelStoreTests testRoundTrip]' passed (0.001 seconds).
+Test Suite 'ChannelStoreTests' passed at 2026-11-20 16:50:02.198.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.003 (0.003) seconds
+Test Suite 'CompositeCurveTests' started at 2026-11-20 16:50:02.198.
+Test Case '-[equmaczerTests.CompositeCurveTests testBypassedBandContributesNothing]' started.
+Test Case '-[equmaczerTests.CompositeCurveTests testBypassedBandContributesNothing]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.CompositeCurveTests testFlatEQReadsZeroEverywhere]' started.
+Test Case '-[equmaczerTests.CompositeCurveTests testFlatEQReadsZeroEverywhere]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CompositeCurveTests testPeakingBandReadsItsGainAtCentre]' started.
+Test Case '-[equmaczerTests.CompositeCurveTests testPeakingBandReadsItsGainAtCentre]' passed (0.000 seconds).
+Test Suite 'CompositeCurveTests' passed at 2026-11-20 16:50:02.201.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.003 (0.003) seconds
+Test Suite 'CorrectionBlendTests' started at 2026-11-20 16:50:02.201.
+Test Case '-[equmaczerTests.CorrectionBlendTests testBlendFactorClamps]' started.
+Test Case '-[equmaczerTests.CorrectionBlendTests testBlendFactorClamps]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CorrectionBlendTests testBlendFullIsIdentityAndZeroSilencesTheCorrection]' started.
+Test Case '-[equmaczerTests.CorrectionBlendTests testBlendFullIsIdentityAndZeroSilencesTheCorrection]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CorrectionBlendTests testBlendHalvesProfileGainsButNotTrims]' started.
+Test Case '-[equmaczerTests.CorrectionBlendTests testBlendHalvesProfileGainsButNotTrims]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CorrectionBlendTests testProfileWithoutBlendFieldDecodesAsFull]' started.
+Test Case '-[equmaczerTests.CorrectionBlendTests testProfileWithoutBlendFieldDecodesAsFull]' passed (0.000 seconds).
+Test Suite 'CorrectionBlendTests' passed at 2026-11-20 16:50:02.202.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'CorrectionComposerTests' started at 2026-11-20 16:50:02.202.
+Test Case '-[equmaczerTests.CorrectionComposerTests testBassTrimAtPreferenceRangeTopComposesFullShelf]' started.
+Test Case '-[equmaczerTests.CorrectionComposerTests testBassTrimAtPreferenceRangeTopComposesFullShelf]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CorrectionComposerTests testLoudnessOnlyAtFullVolumeComposesNothing]' started.
+Test Case '-[equmaczerTests.CorrectionComposerTests testLoudnessOnlyAtFullVolumeComposesNothing]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CorrectionComposerTests testLoudnessShelvesAtLowVolume]' started.
+Test Case '-[equmaczerTests.CorrectionComposerTests testLoudnessShelvesAtLowVolume]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CorrectionComposerTests testProfileBandsAndTrimsComposeInOrder]' started.
+Test Case '-[equmaczerTests.CorrectionComposerTests testProfileBandsAndTrimsComposeInOrder]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CorrectionComposerTests testTrebleTrimAtRangeBottomComposesFullShelf]' started.
+Test Case '-[equmaczerTests.CorrectionComposerTests testTrebleTrimAtRangeBottomComposesFullShelf]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.CorrectionComposerTests testTrimsNeedAProfile]' started.
+Test Case '-[equmaczerTests.CorrectionComposerTests testTrimsNeedAProfile]' passed (0.000 seconds).
+Test Suite 'CorrectionComposerTests' passed at 2026-11-20 16:50:02.203.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'CorrectionProvenanceStoreTests' started at 2026-11-20 16:50:02.203.
+Test Case '-[equmaczerTests.CorrectionProvenanceStoreTests testProvenanceRoundTrip]' started.
+Test Case '-[equmaczerTests.CorrectionProvenanceStoreTests testProvenanceRoundTrip]' passed (0.001 seconds).
+Test Suite 'CorrectionProvenanceStoreTests' passed at 2026-11-20 16:50:02.204.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'DeepDSPVerificationTests' started at 2026-11-20 16:50:02.204.
+Test Case '-[equmaczerTests.DeepDSPVerificationTests testAllFiveFalsifiableCriteriaPass]' started.
+Test Case '-[equmaczerTests.DeepDSPVerificationTests testAllFiveFalsifiableCriteriaPass]' passed (0.063 seconds).
+Test Case '-[equmaczerTests.DeepDSPVerificationTests testBiquadSVFBijectiveIsomorphism]' started.
+Test Case '-[equmaczerTests.DeepDSPVerificationTests testBiquadSVFBijectiveIsomorphism]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeepDSPVerificationTests testHeadroomAnalyzerDetectsExactResonantPeakAndRecommendsPreamp]' started.
+Test Case '-[equmaczerTests.DeepDSPVerificationTests testHeadroomAnalyzerDetectsExactResonantPeakAndRecommendsPreamp]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeepDSPVerificationTests testProcessTapAggregateDescriptionSlavesClockToOutputDevice]' started.
+Test Case '-[equmaczerTests.DeepDSPVerificationTests testProcessTapAggregateDescriptionSlavesClockToOutputDevice]' passed (0.001 seconds).
+Test Suite 'DeepDSPVerificationTests' passed at 2026-11-20 16:50:02.268.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.064 (0.065) seconds
+Test Suite 'DeviceChangeDetectorTests' started at 2026-11-20 16:50:02.268.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDeviceExists_deviceNotPresent_returnsFalse]' started.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDeviceExists_deviceNotPresent_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDeviceExists_devicePresent_returnsTrue]' started.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDeviceExists_devicePresent_returnsTrue]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDeviceExists_emptyDevices_returnsFalse]' started.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDeviceExists_emptyDevices_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDeviceExists_nilUID_returnsFalse]' started.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDeviceExists_nilUID_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDiffBuiltInDevices_detectsMultipleAdditions]' started.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDiffBuiltInDevices_detectsMultipleAdditions]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDiffBuiltInDevices_detectsRemoval]' started.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDiffBuiltInDevices_detectsRemoval]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDiffBuiltInDevices_detectsRemovalAndAddition]' started.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDiffBuiltInDevices_detectsRemovalAndAddition]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDiffBuiltInDevices_detectsSingleAddition]' started.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDiffBuiltInDevices_detectsSingleAddition]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDiffBuiltInDevices_emptyCurrentDetectsAllRemoved]' started.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDiffBuiltInDevices_emptyCurrentDetectsAllRemoved]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDiffBuiltInDevices_emptyPreviousDetectsAllBuiltIn]' started.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDiffBuiltInDevices_emptyPreviousDetectsAllBuiltIn]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDiffBuiltInDevices_ignoresNonBuiltInDevices]' started.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testDiffBuiltInDevices_ignoresNonBuiltInDevices]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testShouldTriggerHeadphoneSwitch_emptyList_returnsNil]' started.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testShouldTriggerHeadphoneSwitch_emptyList_returnsNil]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testShouldTriggerHeadphoneSwitch_multipleBuiltIns_returnsNil]' started.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testShouldTriggerHeadphoneSwitch_multipleBuiltIns_returnsNil]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testShouldTriggerHeadphoneSwitch_nonBuiltIn_returnsNil]' started.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testShouldTriggerHeadphoneSwitch_nonBuiltIn_returnsNil]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testShouldTriggerHeadphoneSwitch_singleBuiltIn_returnsDevice]' started.
+Test Case '-[equmaczerTests.DeviceChangeDetectorTests testShouldTriggerHeadphoneSwitch_singleBuiltIn_returnsDevice]' passed (0.000 seconds).
+Test Suite 'DeviceChangeDetectorTests' passed at 2026-11-20 16:50:02.270.
+	 Executed 15 tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'DeviceCorrectionStoreTests' started at 2026-11-20 16:50:02.270.
+Test Case '-[equmaczerTests.DeviceCorrectionStoreTests testSaveLoadRemoveRoundTrip]' started.
+Test Case '-[equmaczerTests.DeviceCorrectionStoreTests testSaveLoadRemoveRoundTrip]' passed (0.001 seconds).
+Test Suite 'DeviceCorrectionStoreTests' passed at 2026-11-20 16:50:02.271.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'DeviceManagerTests' started at 2026-11-20 16:50:02.271.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsAggregate_builtInSpeakers_returnsFalse]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsAggregate_builtInSpeakers_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsAggregate_nameContainsAggregate_transportTypeZero_returnsFalse]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsAggregate_nameContainsAggregate_transportTypeZero_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsAggregate_regularDevice_returnsFalse]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsAggregate_regularDevice_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsAggregate_transportTypeAggregate_returnsTrue]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsAggregate_transportTypeAggregate_returnsTrue]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsRealDevice_acceptsBTDevice]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsRealDevice_acceptsBTDevice]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsRealDevice_acceptsPhysicalDevice]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsRealDevice_acceptsPhysicalDevice]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsRealDevice_acceptsUSBDevice]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsRealDevice_acceptsUSBDevice]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsRealDevice_excludesAggregate]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsRealDevice_excludesAggregate]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsRealDevice_excludesDriver]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsRealDevice_excludesDriver]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsRealDevice_excludesDriverEvenWithPhysicalTransport]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsRealDevice_excludesDriverEvenWithPhysicalTransport]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsRealDevice_excludesVirtual]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsRealDevice_excludesVirtual]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsValidForSelection_excludesOnlyDriver]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsValidForSelection_excludesOnlyDriver]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_blackHoleUIDPrefix_fallbackWhenTransportUnknown_returnsTrue]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_blackHoleUIDPrefix_fallbackWhenTransportUnknown_returnsTrue]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_driverUID_fallbackWhenTransportUnknown_returnsTrue]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_driverUID_fallbackWhenTransportUnknown_returnsTrue]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_driverUIDPrefix_fallbackWhenTransportUnknown_returnsTrue]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_driverUIDPrefix_fallbackWhenTransportUnknown_returnsTrue]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_externalAudioInterface_returnsFalse]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_externalAudioInterface_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_physicalDevice_returnsFalse]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_physicalDevice_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_transportTypeBuiltIn_returnsFalse]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_transportTypeBuiltIn_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_transportTypeUSB_returnsFalse]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_transportTypeUSB_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_transportTypeVirtual_returnsTrue]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testIsVirtual_transportTypeVirtual_returnsTrue]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testShouldIncludeDevice_regularDevice_included]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testShouldIncludeDevice_regularDevice_included]' passed (0.010 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testShouldIncludeDevice_systemAggregate_excluded]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testShouldIncludeDevice_systemAggregate_excluded]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testShouldIncludeDevice_userAggregate_included]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testShouldIncludeDevice_userAggregate_included]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DeviceManagerTests testShouldIncludeDevice_userAggregateWithDefaultInName_included]' started.
+Test Case '-[equmaczerTests.DeviceManagerTests testShouldIncludeDevice_userAggregateWithDefaultInName_included]' passed (0.000 seconds).
+Test Suite 'DeviceManagerTests' passed at 2026-11-20 16:50:02.284.
+	 Executed 24 tests, with 0 failures (0 unexpected) in 0.011 (0.012) seconds
+Test Suite 'DialogueClarityTests' started at 2026-11-20 16:50:02.284.
+Test Case '-[equmaczerTests.DialogueClarityTests testClarityBandShape]' started.
+Test Case '-[equmaczerTests.DialogueClarityTests testClarityBandShape]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DialogueClarityTests testCompositionAppendsClarityAfterTreatment]' started.
+Test Case '-[equmaczerTests.DialogueClarityTests testCompositionAppendsClarityAfterTreatment]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DialogueClarityTests testDialogueEligibility]' started.
+Test Case '-[equmaczerTests.DialogueClarityTests testDialogueEligibility]' passed (0.000 seconds).
+Test Suite 'DialogueClarityTests' passed at 2026-11-20 16:50:02.284.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'DoseMathTests' started at 2026-11-20 16:50:02.284.
+Test Case '-[equmaczerTests.DoseMathTests testAnchorAndVolume]' started.
+Test Case '-[equmaczerTests.DoseMathTests testAnchorAndVolume]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DoseMathTests testExchangeRate]' started.
+Test Case '-[equmaczerTests.DoseMathTests testExchangeRate]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DoseMathTests testReferencePoint]' started.
+Test Case '-[equmaczerTests.DoseMathTests testReferencePoint]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DoseMathTests testZeroDurationSpendsNothing]' started.
+Test Case '-[equmaczerTests.DoseMathTests testZeroDurationSpendsNothing]' passed (0.000 seconds).
+Test Suite 'DoseMathTests' passed at 2026-11-20 16:50:02.285.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'DoseStoreTests' started at 2026-11-20 16:50:02.285.
+Test Case '-[equmaczerTests.DoseStoreTests testRoundTripAndPruning]' started.
+Test Case '-[equmaczerTests.DoseStoreTests testRoundTripAndPruning]' passed (0.001 seconds).
+Test Suite 'DoseStoreTests' passed at 2026-11-20 16:50:02.286.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'DriverStatusTests' started at 2026-11-20 16:50:02.286.
+Test Case '-[equmaczerTests.DriverStatusTests testCurrentDriverIsInstalled]' started.
+Test Case '-[equmaczerTests.DriverStatusTests testCurrentDriverIsInstalled]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DriverStatusTests testIdentityMismatchAtEqualVersionNeedsUpdate]' started.
+Test Case '-[equmaczerTests.DriverStatusTests testIdentityMismatchAtEqualVersionNeedsUpdate]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DriverStatusTests testMissingBundleIsNotInstalled]' started.
+Test Case '-[equmaczerTests.DriverStatusTests testMissingBundleIsNotInstalled]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DriverStatusTests testOlderVersionNeedsUpdate]' started.
+Test Case '-[equmaczerTests.DriverStatusTests testOlderVersionNeedsUpdate]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DriverStatusTests testUnreadableVersionWithMatchingIdentityStaysInstalledUnknown]' started.
+Test Case '-[equmaczerTests.DriverStatusTests testUnreadableVersionWithMatchingIdentityStaysInstalledUnknown]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.DriverStatusTests testVersionComparisonIsNumericAware]' started.
+Test Case '-[equmaczerTests.DriverStatusTests testVersionComparisonIsNumericAware]' passed (0.000 seconds).
+Test Suite 'DriverStatusTests' passed at 2026-11-20 16:50:02.287.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'EQChainConcurrencyTests' started at 2026-11-20 16:50:02.287.
+Test Case '-[equmaczerTests.EQChainConcurrencyTests testLockFreeCoefficientUpdatePath]' started.
+Test Case '-[equmaczerTests.EQChainConcurrencyTests testLockFreeCoefficientUpdatePath]' passed (0.244 seconds).
+Test Case '-[equmaczerTests.EQChainConcurrencyTests testRapidStagingThenApply]' started.
+Test Case '-[equmaczerTests.EQChainConcurrencyTests testRapidStagingThenApply]' passed (0.001 seconds).
+Test Suite 'EQChainConcurrencyTests' passed at 2026-11-20 16:50:02.531.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.244 (0.244) seconds
+Test Suite 'EQChainTests' started at 2026-11-20 16:50:02.531.
+Test Case '-[equmaczerTests.EQChainTests testBandBypass]' started.
+Test Case '-[equmaczerTests.EQChainTests testBandBypass]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQChainTests testFullUpdate]' started.
+Test Case '-[equmaczerTests.EQChainTests testFullUpdate]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQChainTests testInitialization]' started.
+Test Case '-[equmaczerTests.EQChainTests testInitialization]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQChainTests testLayerBypass]' started.
+Test Case '-[equmaczerTests.EQChainTests testLayerBypass]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQChainTests testMultipleBandsInSeries]' started.
+Test Case '-[equmaczerTests.EQChainTests testMultipleBandsInSeries]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQChainTests testNoAllocationDuringProcess]' started.
+Test Case '-[equmaczerTests.EQChainTests testNoAllocationDuringProcess]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQChainTests testSingleBandUpdate]' started.
+Test Case '-[equmaczerTests.EQChainTests testSingleBandUpdate]' passed (0.000 seconds).
+Test Suite 'EQChainTests' passed at 2026-11-20 16:50:02.533.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'EQConfigurationTests' started at 2026-11-20 16:50:02.533.
+Test Case '-[equmaczerTests.EQConfigurationTests testBands_linkedMode_returnsLeftChannel]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testBands_linkedMode_returnsLeftChannel]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testBands_stereoMode_returnsEditedChannel]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testBands_stereoMode_returnsEditedChannel]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testChannelFocus_defaultIsLeft]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testChannelFocus_defaultIsLeft]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testChannelMode_channelSpecificUpdate]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testChannelMode_channelSpecificUpdate]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testChannelMode_defaultIsLinked]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testChannelMode_defaultIsLinked]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testChannelMode_linkedModeIgnoresChannelParameter]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testChannelMode_linkedModeIgnoresChannelParameter]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testChannelMode_linkedModeUpdatesBothChannels]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testChannelMode_linkedModeUpdatesBothChannels]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testChannelMode_stereoModeUpdatesOnlyEditedChannel]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testChannelMode_stereoModeUpdatesOnlyEditedChannel]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testChannelMode_switchToStereoCopiesLeftToRight]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testChannelMode_switchToStereoCopiesLeftToRight]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testClampBandCount_boundaries]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testClampBandCount_boundaries]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testClampBandCount_defaultBandCountConstant]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testClampBandCount_defaultBandCountConstant]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testClampBandCount_invalidValues]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testClampBandCount_invalidValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testClampBandCount_maxBandCountConstant]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testClampBandCount_maxBandCountConstant]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testDefaultQ]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testDefaultQ]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testFrequenciesForBandCount_32bands]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testFrequenciesForBandCount_32bands]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testFrequenciesForBandCount_64bands]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testFrequenciesForBandCount_64bands]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testFrequenciesForBandCount_allWithinRange]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testFrequenciesForBandCount_allWithinRange]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testFrequenciesForBandCount_logarithmicSpacing]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testFrequenciesForBandCount_logarithmicSpacing]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testFrequenciesForBandCount_singleBand]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testFrequenciesForBandCount_singleBand]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testFrequenciesForBandCount_twoBands]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testFrequenciesForBandCount_twoBands]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testGlobalBypass]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testGlobalBypass]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testInit_clampsInvalidBandCount]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testInit_clampsInvalidBandCount]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testInit_withCustomBandCount]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testInit_withCustomBandCount]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testInit_withDefaultBandCount]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testInit_withDefaultBandCount]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testInputOutputGain]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testInputOutputGain]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testSetActiveBandCount_clampsValue]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testSetActiveBandCount_clampsValue]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testSetActiveBandCount_decreasingBandCount]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testSetActiveBandCount_decreasingBandCount]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testSetActiveBandCount_preservesConfiguredBands]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testSetActiveBandCount_preservesConfiguredBands]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testSetActiveBandCount_withoutPreserveRespreadsFrequencies]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testSetActiveBandCount_withoutPreserveRespreadsFrequencies]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testSnapshot_roundtripPreservesState]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testSnapshot_roundtripPreservesState]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testSnapshot_stereoModePreservesBothChannels]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testSnapshot_stereoModePreservesBothChannels]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testUpdateBandBypass]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testUpdateBandBypass]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testUpdateBandFilterType]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testUpdateBandFilterType]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testUpdateBandFrequency]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testUpdateBandFrequency]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testUpdateBandGain]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testUpdateBandGain]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EQConfigurationTests testUpdateBandQ]' started.
+Test Case '-[equmaczerTests.EQConfigurationTests testUpdateBandQ]' passed (0.000 seconds).
+Test Suite 'EQConfigurationTests' passed at 2026-11-20 16:50:02.539.
+	 Executed 36 tests, with 0 failures (0 unexpected) in 0.004 (0.006) seconds
+Test Suite 'EasyEffectsImportExportTests' started at 2026-11-20 16:50:02.539.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_bypassToMute]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_bypassToMute]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_filterTypeMapping]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_filterTypeMapping]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_inputOutputGain]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_inputOutputGain]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_linkedMode_setsSplitChannelsFalse]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_linkedMode_setsSplitChannelsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_producesValidJSON]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_producesValidJSON]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_qPreserved]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_qPreserved]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_stereoMode_setsSplitChannelsTrue]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_stereoMode_setsSplitChannelsTrue]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_stereoRoundTrip_preservesDifferentChannels]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExport_stereoRoundTrip_preservesDifferentChannels]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExporter_fileExtension]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExporter_fileExtension]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExporter_filename]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExporter_filename]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExporter_filename_sanitizesSpecialCharacters]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExporter_filename_sanitizesSpecialCharacters]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExportImport_roundTrip_qValues]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExportImport_roundTrip_qValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExportImport_roundTrip]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testExportImport_roundTrip]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_basicPreset]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_basicPreset]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_filterTypeMapping]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_filterTypeMapping]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_inputOutputGain]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_inputOutputGain]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_invalidJSON_throws]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_invalidJSON_throws]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_missingEqualizerSection_throws]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_missingEqualizerSection_throws]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_multipleBands]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_multipleBands]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_muteToBypass]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_muteToBypass]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_noSplitChannelsKey_importsAsLinked]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_noSplitChannelsKey_importsAsLinked]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_qConversion]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_qConversion]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_splitChannelsFalse_importsAsLinked]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_splitChannelsFalse_importsAsLinked]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_splitChannelsTrue_importsAsStereo]' started.
+Test Case '-[equmaczerTests.EasyEffectsImportExportTests testImport_splitChannelsTrue_importsAsStereo]' passed (0.000 seconds).
+Test Suite 'EasyEffectsImportExportTests' passed at 2026-11-20 16:50:02.546.
+	 Executed 24 tests, with 0 failures (0 unexpected) in 0.005 (0.006) seconds
+Test Suite 'EqumaczerStoreTests' started at 2026-11-20 16:50:02.546.
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_macDefaultNotInAvailableList_needsFallback]' started.
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_macDefaultNotInAvailableList_needsFallback]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_needsFallback_whenDriverIsMacDefault]' started.
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_needsFallback_whenDriverIsMacDefault]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_needsFallback_whenNoValidDevices]' started.
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_needsFallback_whenNoValidDevices]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_noCurrent_noMacDefault_needsFallback]' started.
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_noCurrent_noMacDefault_needsFallback]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_preservesCurrent_overMacDefault]' started.
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_preservesCurrent_overMacDefault]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_preservesValidDevice_notInAvailableList_usesMacDefault]' started.
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_preservesValidDevice_notInAvailableList_usesMacDefault]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_preservesValidSelection]' started.
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_preservesValidSelection]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_preservesValidSelection_whenDriverIsMacDefault]' started.
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_preservesValidSelection_whenDriverIsMacDefault]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_usesMacDefault_whenCurrentIsDriver]' started.
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_usesMacDefault_whenCurrentIsDriver]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_usesMacDefault_whenNoValidSelection]' started.
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_usesMacDefault_whenNoValidSelection]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_virtualDeviceSelected_usesMacDefault]' started.
+Test Case '-[equmaczerTests.EqumaczerStoreTests testDetermineAutomaticOutputDevice_virtualDeviceSelected_usesMacDefault]' passed (0.000 seconds).
+Test Suite 'EqumaczerStoreTests' passed at 2026-11-20 16:50:02.547.
+	 Executed 11 tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'ExclusionStoreTests' started at 2026-11-20 16:50:02.547.
+Test Case '-[equmaczerTests.ExclusionStoreTests testExcludeIncludeRoundTrip]' started.
+Test Case '-[equmaczerTests.ExclusionStoreTests testExcludeIncludeRoundTrip]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.ExclusionStoreTests testExcludeIsIdempotent]' started.
+Test Case '-[equmaczerTests.ExclusionStoreTests testExcludeIsIdempotent]' passed (0.001 seconds).
+Test Suite 'ExclusionStoreTests' passed at 2026-11-20 16:50:02.551.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.003 (0.004) seconds
+Test Suite 'FactoryPresetEvidenceTests' started at 2026-11-20 16:50:02.551.
+Test Case '-[equmaczerTests.FactoryPresetEvidenceTests testLibraryHasTheFifteenEvidencePresets]' started.
+Test Case '-[equmaczerTests.FactoryPresetEvidenceTests testLibraryHasTheFifteenEvidencePresets]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FactoryPresetEvidenceTests testNoGenreNamesSurvive]' started.
+Test Case '-[equmaczerTests.FactoryPresetEvidenceTests testNoGenreNamesSurvive]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FactoryPresetEvidenceTests testPreampCoversTheLargestBoost]' started.
+Test Case '-[equmaczerTests.FactoryPresetEvidenceTests testPreampCoversTheLargestBoost]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FactoryPresetEvidenceTests testPresetsKeepAFullBandLayout]' started.
+Test Case '-[equmaczerTests.FactoryPresetEvidenceTests testPresetsKeepAFullBandLayout]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FactoryPresetEvidenceTests testReferenceSpeakersMatchesTheStudyValues]' started.
+Test Case '-[equmaczerTests.FactoryPresetEvidenceTests testReferenceSpeakersMatchesTheStudyValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FactoryPresetEvidenceTests testShapingStaysBroadAndInRange]' started.
+Test Case '-[equmaczerTests.FactoryPresetEvidenceTests testShapingStaysBroadAndInRange]' passed (0.000 seconds).
+Test Suite 'FactoryPresetEvidenceTests' passed at 2026-11-20 16:50:02.552.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'FilterTypeTests' started at 2026-11-20 16:50:02.552.
+Test Case '-[equmaczerTests.FilterTypeTests testAbbreviations]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testAbbreviations]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FilterTypeTests testAllCasesCount]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testAllCasesCount]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FilterTypeTests testDecodeFromRawValue]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testDecodeFromRawValue]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.FilterTypeTests testDecodeInvalidRawValue]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testDecodeInvalidRawValue]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FilterTypeTests testDisplayNames]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testDisplayNames]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FilterTypeTests testEncodeDecode]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testEncodeDecode]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FilterTypeTests testFromCodingKey_migratesLegacyAbbreviations]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testFromCodingKey_migratesLegacyAbbreviations]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FilterTypeTests testFromCodingKey_standardAbbreviations]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testFromCodingKey_standardAbbreviations]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FilterTypeTests testFromCodingKey_unknownKey_defaultsToParametric]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testFromCodingKey_unknownKey_defaultsToParametric]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FilterTypeTests testRawValues]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testRawValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FilterTypeTests testSendable]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testSendable]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FilterTypeTests testUIOrderContainsAllTypes]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testUIOrderContainsAllTypes]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FilterTypeTests testUIOrderCount]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testUIOrderCount]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FilterTypeTests testUIOrderStartsWithParametric]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testUIOrderStartsWithParametric]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FilterTypeTests testValidatedRawValue]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testValidatedRawValue]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.FilterTypeTests testValidatedRawValue_migratesLegacyResonantTypes]' started.
+Test Case '-[equmaczerTests.FilterTypeTests testValidatedRawValue_migratesLegacyResonantTypes]' passed (0.000 seconds).
+Test Suite 'FilterTypeTests' passed at 2026-11-20 16:50:02.556.
+	 Executed 16 tests, with 0 failures (0 unexpected) in 0.003 (0.004) seconds
+Test Suite 'FlattenUndoTests' started at 2026-11-20 16:50:02.556.
+Test Case '-[equmaczerTests.FlattenUndoTests testFlattenThenUndoRestoresGains]' started.
+2026-11-20 16:50:02.569 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.FlattenUndoTests testFlattenThenUndoRestoresGains]' passed (0.020 seconds).
+Test Case '-[equmaczerTests.FlattenUndoTests testUndoWithoutFlattenIsANoOp]' started.
+2026-11-20 16:50:02.579 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.FlattenUndoTests testUndoWithoutFlattenIsANoOp]' passed (0.004 seconds).
+Test Suite 'FlattenUndoTests' passed at 2026-11-20 16:50:02.580.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.024 (0.025) seconds
+Test Suite 'HeadphoneSwitchPolicyTests' started at 2026-11-20 16:50:02.580.
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_allConditionsMet_returnsTrue]' started.
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_allConditionsMet_returnsTrue]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_currentIsBluetooth_returnsFalse]' started.
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_currentIsBluetooth_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_currentIsBuiltIn_returnsTrue]' started.
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_currentIsBuiltIn_returnsTrue]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_currentIsBuiltInHeadphones_returnsTrue]' started.
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_currentIsBuiltInHeadphones_returnsTrue]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_currentIsHDMI_returnsFalse]' started.
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_currentIsHDMI_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_currentIsNil_returnsFalse]' started.
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_currentIsNil_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_currentIsUSB_returnsFalse]' started.
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_currentIsUSB_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_manualMode_returnsFalse]' started.
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_manualMode_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_manualModeAndReconfiguring_returnsFalse]' started.
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_manualModeAndReconfiguring_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_manualModeAndUSBCurrent_returnsFalse]' started.
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_manualModeAndUSBCurrent_returnsFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_reconfiguring_returnsFalse]' started.
+Test Case '-[equmaczerTests.HeadphoneSwitchPolicyTests testShouldSwitch_reconfiguring_returnsFalse]' passed (0.000 seconds).
+Test Suite 'HeadphoneSwitchPolicyTests' passed at 2026-11-20 16:50:02.582.
+	 Executed 11 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'HearingCompositionTests' started at 2026-11-20 16:50:02.582.
+Test Case '-[equmaczerTests.HearingCompositionTests testDisabledComposesEmptyForBothEars]' started.
+Test Case '-[equmaczerTests.HearingCompositionTests testDisabledComposesEmptyForBothEars]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HearingCompositionTests testPerEarShelvesAtSharedConstants]' started.
+Test Case '-[equmaczerTests.HearingCompositionTests testPerEarShelvesAtSharedConstants]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HearingCompositionTests testResetZeroesAllSliders]' started.
+Test Case '-[equmaczerTests.HearingCompositionTests testResetZeroesAllSliders]' passed (0.000 seconds).
+Test Suite 'HearingCompositionTests' passed at 2026-11-20 16:50:02.582.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'HearingRitualTests' started at 2026-11-20 16:50:02.582.
+Test Case '-[equmaczerTests.HearingRitualTests testFullRunsTwoPasses]' started.
+Test Case '-[equmaczerTests.HearingRitualTests testFullRunsTwoPasses]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HearingRitualTests testPreflightBlocksOnEachMissingFact]' started.
+Test Case '-[equmaczerTests.HearingRitualTests testPreflightBlocksOnEachMissingFact]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HearingRitualTests testQuickFinishesAfterOnePass]' started.
+Test Case '-[equmaczerTests.HearingRitualTests testQuickFinishesAfterOnePass]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HearingRitualTests testShelfOrderFollowsScope]' started.
+Test Case '-[equmaczerTests.HearingRitualTests testShelfOrderFollowsScope]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HearingRitualTests testSignalRequiresRouting]' started.
+Test Case '-[equmaczerTests.HearingRitualTests testSignalRequiresRouting]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.HearingRitualTests testStepsAreJumpable]' started.
+Test Case '-[equmaczerTests.HearingRitualTests testStepsAreJumpable]' passed (0.000 seconds).
+Test Suite 'HearingRitualTests' passed at 2026-11-20 16:50:02.583.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'HearingStoreTests' started at 2026-11-20 16:50:02.583.
+Test Case '-[equmaczerTests.HearingStoreTests testRoundTrip]' started.
+Test Case '-[equmaczerTests.HearingStoreTests testRoundTrip]' passed (0.001 seconds).
+Test Suite 'HearingStoreTests' passed at 2026-11-20 16:50:02.584.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'IdentityMigrationServiceTests' started at 2026-11-20 16:50:02.584.
+Test Case '-[equmaczerTests.IdentityMigrationServiceTests testEmptySourceDoesNotClaimCompletion]' started.
+Test Case '-[equmaczerTests.IdentityMigrationServiceTests testEmptySourceDoesNotClaimCompletion]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.IdentityMigrationServiceTests testLegacyDomainParsing]' started.
+Test Case '-[equmaczerTests.IdentityMigrationServiceTests testLegacyDomainParsing]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.IdentityMigrationServiceTests testMigratesApplicationKeysAndSetsSentinel]' started.
+Test Case '-[equmaczerTests.IdentityMigrationServiceTests testMigratesApplicationKeysAndSetsSentinel]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.IdentityMigrationServiceTests testNoArgumentMeansNoMigration]' started.
+Test Case '-[equmaczerTests.IdentityMigrationServiceTests testNoArgumentMeansNoMigration]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.IdentityMigrationServiceTests testSecondRunIsNoOp]' started.
+Test Case '-[equmaczerTests.IdentityMigrationServiceTests testSecondRunIsNoOp]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.IdentityMigrationServiceTests testSystemKeyDetection]' started.
+Test Case '-[equmaczerTests.IdentityMigrationServiceTests testSystemKeyDetection]' passed (0.000 seconds).
+Test Suite 'IdentityMigrationServiceTests' passed at 2026-11-20 16:50:02.591.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 0.007 (0.007) seconds
+Test Suite 'InputFrameCounterTests' started at 2026-11-20 16:50:02.591.
+Test Case '-[equmaczerTests.InputFrameCounterTests testCounterAccumulatesRealFramesOnly]' started.
+Test Case '-[equmaczerTests.InputFrameCounterTests testCounterAccumulatesRealFramesOnly]' passed (0.005 seconds).
+Test Suite 'InputFrameCounterTests' passed at 2026-11-20 16:50:02.596.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.005 (0.005) seconds
+Test Suite 'KWeightingTests' started at 2026-11-20 16:50:02.596.
+Test Case '-[equmaczerTests.KWeightingTests testCoefficientsAt48kMatchThePublishedStandard]' started.
+Test Case '-[equmaczerTests.KWeightingTests testCoefficientsAt48kMatchThePublishedStandard]' passed (0.000 seconds).
+Test Suite 'KWeightingTests' passed at 2026-11-20 16:50:02.596.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'LoudnessCompensationTests' started at 2026-11-20 16:50:02.596.
+Test Case '-[equmaczerTests.LoudnessCompensationTests testCompensationAt40Phon]' started.
+Test Case '-[equmaczerTests.LoudnessCompensationTests testCompensationAt40Phon]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.LoudnessCompensationTests testCompensationIsZeroAtReference]' started.
+Test Case '-[equmaczerTests.LoudnessCompensationTests testCompensationIsZeroAtReference]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.LoudnessCompensationTests testCompensationScalesWithStrengthAndFallsWithLevel]' started.
+Test Case '-[equmaczerTests.LoudnessCompensationTests testCompensationScalesWithStrengthAndFallsWithLevel]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.LoudnessCompensationTests testEstimatedPhonMapping]' started.
+Test Case '-[equmaczerTests.LoudnessCompensationTests testEstimatedPhonMapping]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.LoudnessCompensationTests testSPLAnchorsMatchTheStandard]' started.
+Test Case '-[equmaczerTests.LoudnessCompensationTests testSPLAnchorsMatchTheStandard]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.LoudnessCompensationTests testSPLAt1kHzEqualsPhonByDefinition]' started.
+Test Case '-[equmaczerTests.LoudnessCompensationTests testSPLAt1kHzEqualsPhonByDefinition]' passed (0.000 seconds).
+Test Suite 'LoudnessCompensationTests' passed at 2026-11-20 16:50:02.597.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'LoudnessGatingTests' started at 2026-11-20 16:50:02.597.
+Test Case '-[equmaczerTests.LoudnessGatingTests testAbsoluteGateDropsNearSilence]' started.
+Test Case '-[equmaczerTests.LoudnessGatingTests testAbsoluteGateDropsNearSilence]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.LoudnessGatingTests testEmptyAndZeroEnergyGiveNoReading]' started.
+Test Case '-[equmaczerTests.LoudnessGatingTests testEmptyAndZeroEnergyGiveNoReading]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.LoudnessGatingTests testRelativeGateDropsQuietPassages]' started.
+Test Case '-[equmaczerTests.LoudnessGatingTests testRelativeGateDropsQuietPassages]' passed (0.000 seconds).
+Test Suite 'LoudnessGatingTests' passed at 2026-11-20 16:50:02.597.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'LoudnessProbeTests' started at 2026-11-20 16:50:02.597.
+Test Case '-[equmaczerTests.LoudnessProbeTests testFullScale1kHzSineMeasuresZeroLUFS]' started.
+Test Case '-[equmaczerTests.LoudnessProbeTests testFullScale1kHzSineMeasuresZeroLUFS]' passed (0.228 seconds).
+Test Case '-[equmaczerTests.LoudnessProbeTests testSilenceProducesNoReading]' started.
+Test Case '-[equmaczerTests.LoudnessProbeTests testSilenceProducesNoReading]' passed (0.069 seconds).
+Test Case '-[equmaczerTests.LoudnessProbeTests testSineLoudnessAnchors]' started.
+Test Case '-[equmaczerTests.LoudnessProbeTests testSineLoudnessAnchors]' passed (0.652 seconds).
+Test Suite 'LoudnessProbeTests' passed at 2026-11-20 16:50:03.546.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.949 (0.949) seconds
+Test Suite 'MeasurementHarnessTests' started at 2026-11-20 16:50:03.546.
+Test Case '-[equmaczerTests.MeasurementHarnessTests testDecrampedPeakingTracksAnalogueWhereRBJCramps]' started.
+Test Case '-[equmaczerTests.MeasurementHarnessTests testDecrampedPeakingTracksAnalogueWhereRBJCramps]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeasurementHarnessTests testRBJGoldenVectors]' started.
+Test Case '-[equmaczerTests.MeasurementHarnessTests testRBJGoldenVectors]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeasurementHarnessTests testTruePeakLimiterHonoursCeiling]' started.
+Test Case '-[equmaczerTests.MeasurementHarnessTests testTruePeakLimiterHonoursCeiling]' passed (0.005 seconds).
+Test Suite 'MeasurementHarnessTests' passed at 2026-11-20 16:50:03.551.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.005 (0.005) seconds
+Test Suite 'MeterCalculationTests' started at 2026-11-20 16:50:03.551.
+Test Case '-[equmaczerTests.MeterCalculationTests testGamma_value]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testGamma_value]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_calculatePeak_mixed]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_calculatePeak_mixed]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_calculatePeak_negative]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_calculatePeak_negative]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_calculatePeak_positive]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_calculatePeak_positive]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_calculatePeak_silence]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_calculatePeak_silence]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_calculateRMS_dcSignal]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_calculateRMS_dcSignal]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_calculateRMS_silence]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_calculateRMS_silence]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_dbToLinear_referenceValues]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_dbToLinear_referenceValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_delegatesToAudioMath]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_delegatesToAudioMath]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_linearToDB_referenceValues]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_linearToDB_referenceValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_linearToDB_silence]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_linearToDB_silence]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_smoothMeter_attack]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_smoothMeter_attack]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_smoothMeter_bounds]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_smoothMeter_bounds]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_smoothMeter_release]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterMath_smoothMeter_release]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterRange_values]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testMeterRange_values]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testNormalizedPosition_boundaries]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testNormalizedPosition_boundaries]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testNormalizedPosition_midRange]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testNormalizedPosition_midRange]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testNormalizedPosition_monotonicallyIncreasing]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testNormalizedPosition_monotonicallyIncreasing]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testNormalizedPosition_outOfRange]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testNormalizedPosition_outOfRange]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testPeakDetection_maxAbsValue]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testPeakDetection_maxAbsValue]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testPeakDetection_negativeOnly]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testPeakDetection_negativeOnly]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testPeakDetection_silence]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testPeakDetection_silence]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testRmsCalculation_dcSignal]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testRmsCalculation_dcSignal]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testRmsCalculation_silence]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testRmsCalculation_silence]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testRmsCalculation_sineWave]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testRmsCalculation_sineWave]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testRmsCalculation_squareWave]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testRmsCalculation_squareWave]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterCalculationTests testStandardTickValues]' started.
+Test Case '-[equmaczerTests.MeterCalculationTests testStandardTickValues]' passed (0.000 seconds).
+Test Suite 'MeterCalculationTests' passed at 2026-11-20 16:50:03.554.
+	 Executed 27 tests, with 0 failures (0 unexpected) in 0.002 (0.003) seconds
+Test Suite 'MeterStoreTests' started at 2026-11-20 16:50:03.554.
+Test Case '-[equmaczerTests.MeterStoreTests testAddObserver_receivesUpdates]' started.
+Test Case '-[equmaczerTests.MeterStoreTests testAddObserver_receivesUpdates]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterStoreTests testInit_defaultValues_metersEnabledTrue]' started.
+Test Case '-[equmaczerTests.MeterStoreTests testInit_defaultValues_metersEnabledTrue]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterStoreTests testInit_withMetersEnabledFalse]' started.
+Test Case '-[equmaczerTests.MeterStoreTests testInit_withMetersEnabledFalse]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterStoreTests testMetersEnabled_whenDisabled_notifiesAllObserversSilent]' started.
+Test Case '-[equmaczerTests.MeterStoreTests testMetersEnabled_whenDisabled_notifiesAllObserversSilent]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterStoreTests testMetersEnabled_whenEnabled_startsUpdates]' started.
+Test Case '-[equmaczerTests.MeterStoreTests testMetersEnabled_whenEnabled_startsUpdates]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterStoreTests testMultipleObserversForDifferentTypes]' started.
+Test Case '-[equmaczerTests.MeterStoreTests testMultipleObserversForDifferentTypes]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterStoreTests testRemoveObserver_stopsReceivingUpdates]' started.
+Test Case '-[equmaczerTests.MeterStoreTests testRemoveObserver_stopsReceivingUpdates]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterStoreTests testStartMeterUpdates_withoutPipeline_noCrash]' started.
+Test Case '-[equmaczerTests.MeterStoreTests testStartMeterUpdates_withoutPipeline_noCrash]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.MeterStoreTests testStopMeterUpdates_notifiesAllObserversSilent]' started.
+Test Case '-[equmaczerTests.MeterStoreTests testStopMeterUpdates_notifiesAllObserversSilent]' passed (0.000 seconds).
+Test Suite 'MeterStoreTests' passed at 2026-11-20 16:50:03.556.
+	 Executed 9 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'OpraImporterTests' started at 2026-11-20 16:50:03.556.
+Test Case '-[equmaczerTests.OpraImporterTests testCatalogAssemblyFromRealData]' started.
+Test Case '-[equmaczerTests.OpraImporterTests testCatalogAssemblyFromRealData]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.OpraImporterTests testMakeProfileCarriesProvenance]' started.
+Test Case '-[equmaczerTests.OpraImporterTests testMakeProfileCarriesProvenance]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.OpraImporterTests testUnsupportedBandsAndPositivePreampAreReported]' started.
+Test Case '-[equmaczerTests.OpraImporterTests testUnsupportedBandsAndPositivePreampAreReported]' passed (0.000 seconds).
+Test Suite 'OpraImporterTests' passed at 2026-11-20 16:50:03.557.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'OutputDeviceHistoryTests' started at 2026-11-20 16:50:03.557.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testAdd_addsDeviceToFront]' started.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testAdd_addsDeviceToFront]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testAdd_afterClear]' started.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testAdd_afterClear]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testAdd_limitsHistoryTo10]' started.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testAdd_limitsHistoryTo10]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testAdd_preservesOrderAfterDuplicate]' started.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testAdd_preservesOrderAfterDuplicate]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testAdd_removesDuplicateAndMovesToFront]' started.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testAdd_removesDuplicateAndMovesToFront]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testAdd_sameDeviceMultipleTimes]' started.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testAdd_sameDeviceMultipleTimes]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testClear_removesAllDevices]' started.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testClear_removesAllDevices]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testDeviceStillExists_returnsFalseWhenEmptyDevices]' started.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testDeviceStillExists_returnsFalseWhenEmptyDevices]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testDeviceStillExists_returnsFalseWhenNil]' started.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testDeviceStillExists_returnsFalseWhenNil]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testDeviceStillExists_returnsFalseWhenNotPresent]' started.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testDeviceStillExists_returnsFalseWhenNotPresent]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testDeviceStillExists_returnsTrueWhenPresent]' started.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testDeviceStillExists_returnsTrueWhenPresent]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testDeviceStillExists_withMultipleMatches]' started.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testDeviceStillExists_withMultipleMatches]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testFindReplacementDevice_removesUsedDeviceFromHistory]' started.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testFindReplacementDevice_removesUsedDeviceFromHistory]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testFindReplacementDevice_returnsNilWhenCurrentStillValid]' started.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testFindReplacementDevice_returnsNilWhenCurrentStillValid]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testFindReplacementDevice_usesHistoryFirst]' started.
+Test Case '-[equmaczerTests.OutputDeviceHistoryTests testFindReplacementDevice_usesHistoryFirst]' passed (0.000 seconds).
+Test Suite 'OutputDeviceHistoryTests' passed at 2026-11-20 16:50:03.559.
+	 Executed 15 tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'PaletteIndexTests' started at 2026-11-20 16:50:03.559.
+Test Case '-[equmaczerTests.PaletteIndexTests testCommandFoundByKeyword]' started.
+Test Case '-[equmaczerTests.PaletteIndexTests testCommandFoundByKeyword]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PaletteIndexTests testCompositeAppliesAllThreeInOrder]' started.
+Test Case '-[equmaczerTests.PaletteIndexTests testCompositeAppliesAllThreeInOrder]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PaletteIndexTests testCompositeWithPlusSeparators]' started.
+Test Case '-[equmaczerTests.PaletteIndexTests testCompositeWithPlusSeparators]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PaletteIndexTests testEmptyQueryShowsCatalogueCapped]' started.
+Test Case '-[equmaczerTests.PaletteIndexTests testEmptyQueryShowsCatalogueCapped]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PaletteIndexTests testSingleFacetSearch]' started.
+Test Case '-[equmaczerTests.PaletteIndexTests testSingleFacetSearch]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PaletteIndexTests testTwoFacetsAlsoCompose]' started.
+Test Case '-[equmaczerTests.PaletteIndexTests testTwoFacetsAlsoCompose]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PaletteIndexTests testUnconsumedTokenBlocksComposite]' started.
+Test Case '-[equmaczerTests.PaletteIndexTests testUnconsumedTokenBlocksComposite]' passed (0.000 seconds).
+Test Suite 'PaletteIndexTests' passed at 2026-11-20 16:50:03.561.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'PipelineHealthTests' started at 2026-11-20 16:50:03.561.
+Test Case '-[equmaczerTests.PipelineHealthTests testFallbacksSurface]' started.
+Test Case '-[equmaczerTests.PipelineHealthTests testFallbacksSurface]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PipelineHealthTests testHighCPUIsNoted]' started.
+Test Case '-[equmaczerTests.PipelineHealthTests testHighCPUIsNoted]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PipelineHealthTests testInputRateMismatchWarnsOnDriverPath]' started.
+Test Case '-[equmaczerTests.PipelineHealthTests testInputRateMismatchWarnsOnDriverPath]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PipelineHealthTests testMatchedRatesAreHealthy]' started.
+Test Case '-[equmaczerTests.PipelineHealthTests testMatchedRatesAreHealthy]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PipelineHealthTests testMismatchOutranksStarvation]' started.
+Test Case '-[equmaczerTests.PipelineHealthTests testMismatchOutranksStarvation]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PipelineHealthTests testNotRoutingClaimsNothing]' started.
+Test Case '-[equmaczerTests.PipelineHealthTests testNotRoutingClaimsNothing]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PipelineHealthTests testProcessingRateMismatchWarns]' started.
+Test Case '-[equmaczerTests.PipelineHealthTests testProcessingRateMismatchWarns]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PipelineHealthTests testStarvedTransportWarns]' started.
+Test Case '-[equmaczerTests.PipelineHealthTests testStarvedTransportWarns]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PipelineHealthTests testTransportMath]' started.
+Test Case '-[equmaczerTests.PipelineHealthTests testTransportMath]' passed (0.000 seconds).
+Test Suite 'PipelineHealthTests' passed at 2026-11-20 16:50:03.562.
+	 Executed 9 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'PresetCodableTests' started at 2026-11-20 16:50:03.562.
+Test Case '-[equmaczerTests.PresetCodableTests testEQBandConfiguration_allFilterTypes]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testEQBandConfiguration_allFilterTypes]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testEQBandConfiguration_parametricFactory]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testEQBandConfiguration_parametricFactory]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testEQBandConfiguration_parametricFactory_customQ]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testEQBandConfiguration_parametricFactory_customQ]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testEQBandConfiguration_roundTrip]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testEQBandConfiguration_roundTrip]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testEQBandConfiguration_unknownFilterType]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testEQBandConfiguration_unknownFilterType]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_currentVersion]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_currentVersion]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_fileExtension]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_fileExtension]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_filename]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_filename]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_filename_sanitizesSpecialCharacters]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_filename_sanitizesSpecialCharacters]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_id]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_id]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_renamed]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_renamed]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_roundTrip_fullPreset]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_roundTrip_fullPreset]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_withUpdatedTimestamp]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPreset_withUpdatedTimestamp]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPresetBand_conversionFromEQBandConfiguration]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPresetBand_conversionFromEQBandConfiguration]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPresetBand_conversionToEQBandConfiguration]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPresetBand_conversionToEQBandConfiguration]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPresetBand_roundTrip]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPresetBand_roundTrip]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPresetBand_unknownFilterType]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPresetBand_unknownFilterType]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPresetMetadata_decodesMissingFactoryFlag]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPresetMetadata_decodesMissingFactoryFlag]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPresetMetadata_defaultTimestamps]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPresetMetadata_defaultTimestamps]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPresetMetadata_roundTrip]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPresetMetadata_roundTrip]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPresetSettings_defaultValues]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPresetSettings_defaultValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPresetSettings_globalBypassNotEncoded]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPresetSettings_globalBypassNotEncoded]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetCodableTests testPresetSettings_roundTrip]' started.
+Test Case '-[equmaczerTests.PresetCodableTests testPresetSettings_roundTrip]' passed (0.000 seconds).
+Test Suite 'PresetCodableTests' passed at 2026-11-20 16:50:03.565.
+	 Executed 23 tests, with 0 failures (0 unexpected) in 0.002 (0.003) seconds
+Test Suite 'PresetMigrationTests' started at 2026-11-20 16:50:03.565.
+Test Case '-[equmaczerTests.PresetMigrationTests testCurrentPreset_allFieldsRoundTrip]' started.
+Test Case '-[equmaczerTests.PresetMigrationTests testCurrentPreset_allFieldsRoundTrip]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetMigrationTests testCurrentPreset_globalBypassNotEncoded]' started.
+Test Case '-[equmaczerTests.PresetMigrationTests testCurrentPreset_globalBypassNotEncoded]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetMigrationTests testCurrentPreset_linkedRoundTrip]' started.
+Test Case '-[equmaczerTests.PresetMigrationTests testCurrentPreset_linkedRoundTrip]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetMigrationTests testCurrentPreset_stereoRoundTrip]' started.
+Test Case '-[equmaczerTests.PresetMigrationTests testCurrentPreset_stereoRoundTrip]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetMigrationTests testLegacyPreset_decodesWithoutChannelMode]' started.
+Test Case '-[equmaczerTests.PresetMigrationTests testLegacyPreset_decodesWithoutChannelMode]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetMigrationTests testLegacyPreset_decodesWithoutIsFactoryPreset]' started.
+Test Case '-[equmaczerTests.PresetMigrationTests testLegacyPreset_decodesWithoutIsFactoryPreset]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetMigrationTests testLegacyPreset_filterTypeRawValues]' started.
+Test Case '-[equmaczerTests.PresetMigrationTests testLegacyPreset_filterTypeRawValues]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetMigrationTests testLegacyPreset_unknownFilterTypeFallsBackToParametric]' started.
+Test Case '-[equmaczerTests.PresetMigrationTests testLegacyPreset_unknownFilterTypeFallsBackToParametric]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PresetMigrationTests testNewPreset_requiresBothChannels]' started.
+Test Case '-[equmaczerTests.PresetMigrationTests testNewPreset_requiresBothChannels]' passed (0.000 seconds).
+Test Suite 'PresetMigrationTests' passed at 2026-11-20 16:50:03.566.
+	 Executed 9 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'PresetViewModelTests' started at 2026-11-20 16:50:03.566.
+Test Case '-[equmaczerTests.PresetViewModelTests testBandwidthDisplayMode_canBeSet]' started.
+2026-11-20 16:50:03.568 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.PresetViewModelTests testBandwidthDisplayMode_canBeSet]' passed (0.004 seconds).
+Test Case '-[equmaczerTests.PresetViewModelTests testBandwidthDisplayMode_default_isQFactor]' started.
+2026-11-20 16:50:03.571 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.PresetViewModelTests testBandwidthDisplayMode_default_isQFactor]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.PresetViewModelTests testCanUpdateCurrent_withPreset_returnsTrue]' started.
+2026-11-20 16:50:03.574 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.PresetViewModelTests testCanUpdateCurrent_withPreset_returnsTrue]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.PresetViewModelTests testCreateNew_setsPresetNameToNil]' started.
+2026-11-20 16:50:03.577 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.PresetViewModelTests testCreateNew_setsPresetNameToNil]' passed (0.004 seconds).
+Test Case '-[equmaczerTests.PresetViewModelTests testCurrentPresetName_withPreset_returnsPresetName]' started.
+2026-11-20 16:50:03.582 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.PresetViewModelTests testCurrentPresetName_withPreset_returnsPresetName]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.PresetViewModelTests testHasPresets_withFactoryPresets_returnsTrue]' started.
+2026-11-20 16:50:03.584 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.PresetViewModelTests testHasPresets_withFactoryPresets_returnsTrue]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.PresetViewModelTests testIsModified_initialState_returnsFalse]' started.
+2026-11-20 16:50:03.587 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.PresetViewModelTests testIsModified_initialState_returnsFalse]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.PresetViewModelTests testPresetNames_hasFactoryPresets_returnsNonEmpty]' started.
+2026-11-20 16:50:03.590 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.PresetViewModelTests testPresetNames_hasFactoryPresets_returnsNonEmpty]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.PresetViewModelTests testSelectedPresetName_withPreset_returnsPresetName]' started.
+2026-11-20 16:50:03.592 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.PresetViewModelTests testSelectedPresetName_withPreset_returnsPresetName]' passed (0.002 seconds).
+Test Suite 'PresetViewModelTests' passed at 2026-11-20 16:50:03.593.
+	 Executed 9 tests, with 0 failures (0 unexpected) in 0.027 (0.027) seconds
+Test Suite 'PreviewMatchTrackerTests' started at 2026-11-20 16:50:03.593.
+Test Case '-[equmaczerTests.PreviewMatchTrackerTests testMatchedPreampSpendsHeadroomButNeverGoesPositive]' started.
+Test Case '-[equmaczerTests.PreviewMatchTrackerTests testMatchedPreampSpendsHeadroomButNeverGoesPositive]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PreviewMatchTrackerTests testOffsetClampsToMatchedBypassRange]' started.
+Test Case '-[equmaczerTests.PreviewMatchTrackerTests testOffsetClampsToMatchedBypassRange]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PreviewMatchTrackerTests testOffsetIsReferenceMinusCurrent]' started.
+Test Case '-[equmaczerTests.PreviewMatchTrackerTests testOffsetIsReferenceMinusCurrent]' passed (0.000 seconds).
+Test Suite 'PreviewMatchTrackerTests' passed at 2026-11-20 16:50:03.594.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'ProcessingProofTests' started at 2026-11-20 16:50:03.594.
+Test Case '-[equmaczerTests.ProcessingProofTests testBypassedIsAStateFact]' started.
+Test Case '-[equmaczerTests.ProcessingProofTests testBypassedIsAStateFact]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.ProcessingProofTests testBypassedLineNamesTheVolumeException]' started.
+Test Case '-[equmaczerTests.ProcessingProofTests testBypassedLineNamesTheVolumeException]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.ProcessingProofTests testComparingFlatBeatsTheDeltaVerdicts]' started.
+Test Case '-[equmaczerTests.ProcessingProofTests testComparingFlatBeatsTheDeltaVerdicts]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.ProcessingProofTests testComparingFlatBeforeAnyMeasurement]' started.
+Test Case '-[equmaczerTests.ProcessingProofTests testComparingFlatBeforeAnyMeasurement]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.ProcessingProofTests testComparingFlatWithoutMatch]' started.
+Test Case '-[equmaczerTests.ProcessingProofTests testComparingFlatWithoutMatch]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.ProcessingProofTests testNotRoutingWinsOverEverything]' started.
+Test Case '-[equmaczerTests.ProcessingProofTests testNotRoutingWinsOverEverything]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.ProcessingProofTests testRealDeltaIsProcessing]' started.
+Test Case '-[equmaczerTests.ProcessingProofTests testRealDeltaIsProcessing]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.ProcessingProofTests testSignalWithoutDeltaYetIsMeasuring]' started.
+Test Case '-[equmaczerTests.ProcessingProofTests testSignalWithoutDeltaYetIsMeasuring]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.ProcessingProofTests testSilentInputWaitsForSignal]' started.
+Test Case '-[equmaczerTests.ProcessingProofTests testSilentInputWaitsForSignal]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.ProcessingProofTests testZeroDeltaNeverClaimsNotProcessing]' started.
+Test Case '-[equmaczerTests.ProcessingProofTests testZeroDeltaNeverClaimsNotProcessing]' passed (0.000 seconds).
+Test Suite 'ProcessingProofTests' passed at 2026-11-20 16:50:03.595.
+	 Executed 10 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'QLFLatticeTests' started at 2026-11-20 16:50:03.595.
+Test Case '-[equmaczerTests.QLFLatticeTests testBarOccupancyExtremes]' started.
+Test Case '-[equmaczerTests.QLFLatticeTests testBarOccupancyExtremes]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.QLFLatticeTests testBarOccupancyFrontier]' started.
+Test Case '-[equmaczerTests.QLFLatticeTests testBarOccupancyFrontier]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.QLFLatticeTests testLitCountClampsOutOfRangeOccupancy]' started.
+Test Case '-[equmaczerTests.QLFLatticeTests testLitCountClampsOutOfRangeOccupancy]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.QLFLatticeTests testLitCountFollowsTheBayerThresholds]' started.
+Test Case '-[equmaczerTests.QLFLatticeTests testLitCountFollowsTheBayerThresholds]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.QLFLatticeTests testLitRectsOffsetByTheCellOrigin]' started.
+Test Case '-[equmaczerTests.QLFLatticeTests testLitRectsOffsetByTheCellOrigin]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.QLFLatticeTests testNormalisedDB]' started.
+Test Case '-[equmaczerTests.QLFLatticeTests testNormalisedDB]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.QLFLatticeTests testSecondLitDotIsTheDiagonal]' started.
+Test Case '-[equmaczerTests.QLFLatticeTests testSecondLitDotIsTheDiagonal]' passed (0.000 seconds).
+Test Suite 'QLFLatticeTests' passed at 2026-11-20 16:50:03.596.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'REWImporterTests' started at 2026-11-20 16:50:03.596.
+Test Case '-[equmaczerTests.REWImporterTests testImport_basicFilterWithQ]' started.
+Test Case '-[equmaczerTests.REWImporterTests testImport_basicFilterWithQ]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.REWImporterTests testImport_defaultQ]' started.
+Test Case '-[equmaczerTests.REWImporterTests testImport_defaultQ]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.REWImporterTests testImport_emptyFile_throwsError]' started.
+Test Case '-[equmaczerTests.REWImporterTests testImport_emptyFile_throwsError]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.REWImporterTests testImport_filterTypeMapping]' started.
+Test Case '-[equmaczerTests.REWImporterTests testImport_filterTypeMapping]' passed (0.014 seconds).
+Test Case '-[equmaczerTests.REWImporterTests testImport_filterWithBW60]' started.
+Test Case '-[equmaczerTests.REWImporterTests testImport_filterWithBW60]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.REWImporterTests testImport_frequencyClamping]' started.
+Test Case '-[equmaczerTests.REWImporterTests testImport_frequencyClamping]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.REWImporterTests testImport_gainClamping]' started.
+Test Case '-[equmaczerTests.REWImporterTests testImport_gainClamping]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.REWImporterTests testImport_multipleFilters]' started.
+Test Case '-[equmaczerTests.REWImporterTests testImport_multipleFilters]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.REWImporterTests testImport_negativeGain]' started.
+Test Case '-[equmaczerTests.REWImporterTests testImport_negativeGain]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.REWImporterTests testImport_noFilters_throwsError]' started.
+Test Case '-[equmaczerTests.REWImporterTests testImport_noFilters_throwsError]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.REWImporterTests testImport_noneFilter_isSkipped]' started.
+Test Case '-[equmaczerTests.REWImporterTests testImport_noneFilter_isSkipped]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.REWImporterTests testImport_offFilter_setsBypassTrue]' started.
+Test Case '-[equmaczerTests.REWImporterTests testImport_offFilter_setsBypassTrue]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.REWImporterTests testImport_qClamping]' started.
+Test Case '-[equmaczerTests.REWImporterTests testImport_qClamping]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.REWImporterTests testImport_realWorldREWFormat]' started.
+Test Case '-[equmaczerTests.REWImporterTests testImport_realWorldREWFormat]' passed (0.001 seconds).
+Test Suite 'REWImporterTests' passed at 2026-11-20 16:50:03.625.
+	 Executed 14 tests, with 0 failures (0 unexpected) in 0.029 (0.029) seconds
+Test Suite 'RenderPipelineTests' started at 2026-11-20 16:50:03.625.
+Test Case '-[equmaczerTests.RenderPipelineTests testBoostGain_compensatesVolumeAttenuation]' started.
+Test Case '-[equmaczerTests.RenderPipelineTests testBoostGain_compensatesVolumeAttenuation]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.RenderPipelineTests testBoostGain_unityWhenDriverAt100Percent]' started.
+Test Case '-[equmaczerTests.RenderPipelineTests testBoostGain_unityWhenDriverAt100Percent]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.RenderPipelineTests testGainLinear_fromNegativeDB]' started.
+Test Case '-[equmaczerTests.RenderPipelineTests testGainLinear_fromNegativeDB]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.RenderPipelineTests testGainLinear_fromPositiveDB]' started.
+Test Case '-[equmaczerTests.RenderPipelineTests testGainLinear_fromPositiveDB]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.RenderPipelineTests testGainLinear_fromZeroDB]' started.
+Test Case '-[equmaczerTests.RenderPipelineTests testGainLinear_fromZeroDB]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.RenderPipelineTests testGainLinear_silenceThreshold]' started.
+Test Case '-[equmaczerTests.RenderPipelineTests testGainLinear_silenceThreshold]' passed (0.000 seconds).
+Test Suite 'RenderPipelineTests' passed at 2026-11-20 16:50:03.626.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'RoutingViewModelTests' started at 2026-11-20 16:50:03.626.
+Test Case '-[equmaczerTests.RoutingViewModelTests testCanToggleRouting_automaticMode_returnsTrue]' started.
+2026-11-20 16:50:03.628 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testCanToggleRouting_automaticMode_returnsTrue]' passed (0.004 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testCanToggleRouting_manualModeWithDevices_returnsTrue]' started.
+2026-11-20 16:50:03.632 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testCanToggleRouting_manualModeWithDevices_returnsTrue]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testCanToggleRouting_manualModeWithoutBothDevices_returnsFalse]' started.
+2026-11-20 16:50:03.634 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testCanToggleRouting_manualModeWithoutBothDevices_returnsFalse]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testCanToggleRouting_manualModeWithoutInputDevice_returnsFalse]' started.
+2026-11-20 16:50:03.637 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testCanToggleRouting_manualModeWithoutInputDevice_returnsFalse]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testCanToggleRouting_manualModeWithoutOutputDevice_returnsFalse]' started.
+2026-11-20 16:50:03.639 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testCanToggleRouting_manualModeWithoutOutputDevice_returnsFalse]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusColor_activeBypassed_isYellow]' started.
+2026-11-20 16:50:03.642 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusColor_activeBypassed_isYellow]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusColor_activeNotBypassed_isPrimary]' started.
+2026-11-20 16:50:03.645 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusColor_activeNotBypassed_isPrimary]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusColor_error_isRed]' started.
+2026-11-20 16:50:03.648 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusColor_error_isRed]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusColor_idle_isSecondary]' started.
+2026-11-20 16:50:03.651 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusColor_idle_isSecondary]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusText_active_returnsWithEQ]' started.
+2026-11-20 16:50:03.653 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusText_active_returnsWithEQ]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusText_activeBypassed_returnsWithoutEQ]' started.
+2026-11-20 16:50:03.656 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusText_activeBypassed_returnsWithoutEQ]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusText_driverNotInstalled_returnsInstallPrompt]' started.
+2026-11-20 16:50:03.659 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusText_driverNotInstalled_returnsInstallPrompt]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusText_error_returnsMessage]' started.
+2026-11-20 16:50:03.662 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusText_error_returnsMessage]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusText_idle_returnsStopped]' started.
+2026-11-20 16:50:03.665 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusText_idle_returnsStopped]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusText_starting_returnsStarting]' started.
+2026-11-20 16:50:03.668 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testDetailedStatusText_starting_returnsStarting]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testInputDeviceName_noSelection_returnsNone]' started.
+2026-11-20 16:50:03.670 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testInputDeviceName_noSelection_returnsNone]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testInputDevices_emptyInitially_returnsEmpty]' started.
+2026-11-20 16:50:03.673 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testInputDevices_emptyInitially_returnsEmpty]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testIsActive_initialState_returnsFalse]' started.
+2026-11-20 16:50:03.676 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testIsActive_initialState_returnsFalse]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testIsActive_whenActive_returnsTrue]' started.
+2026-11-20 16:50:03.679 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testIsActive_whenActive_returnsTrue]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testIsBypassed_affectsSimplifiedStatusText]' started.
+2026-11-20 16:50:03.682 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testIsBypassed_affectsSimplifiedStatusText]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testIsBypassed_affectsStatusColor]' started.
+2026-11-20 16:50:03.684 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testIsBypassed_affectsStatusColor]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testIsBypassed_initialState_returnsFalse]' started.
+2026-11-20 16:50:03.687 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testIsBypassed_initialState_returnsFalse]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testIsBypassed_whenSet_returnsTrue]' started.
+2026-11-20 16:50:03.690 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testIsBypassed_whenSet_returnsTrue]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testManualModeEnabled_initialState_returnsFalse]' started.
+2026-11-20 16:50:03.692 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testManualModeEnabled_initialState_returnsFalse]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testManualModeEnabled_whenSet_returnsTrue]' started.
+2026-11-20 16:50:03.695 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testManualModeEnabled_whenSet_returnsTrue]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testOutputDeviceName_noSelection_returnsNone]' started.
+2026-11-20 16:50:03.698 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testOutputDeviceName_noSelection_returnsNone]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testOutputDevices_emptyInitially_returnsEmpty]' started.
+2026-11-20 16:50:03.701 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testOutputDevices_emptyInitially_returnsEmpty]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testShowsProgressIndicator_active_isFalse]' started.
+2026-11-20 16:50:03.704 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testShowsProgressIndicator_active_isFalse]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testShowsProgressIndicator_idle_isFalse]' started.
+2026-11-20 16:50:03.707 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testShowsProgressIndicator_idle_isFalse]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testShowsProgressIndicator_starting_isTrue]' started.
+2026-11-20 16:50:03.709 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testShowsProgressIndicator_starting_isTrue]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testSimplifiedStatusText_active_returnsActive]' started.
+2026-11-20 16:50:03.712 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testSimplifiedStatusText_active_returnsActive]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testSimplifiedStatusText_activeBypassed_returnsBypassed]' started.
+2026-11-20 16:50:03.715 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testSimplifiedStatusText_activeBypassed_returnsBypassed]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testSimplifiedStatusText_driverNotInstalled_returnsNotInstalled]' started.
+2026-11-20 16:50:03.718 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testSimplifiedStatusText_driverNotInstalled_returnsNotInstalled]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testSimplifiedStatusText_error_returnsError]' started.
+2026-11-20 16:50:03.721 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testSimplifiedStatusText_error_returnsError]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testSimplifiedStatusText_idle_returnsIdle]' started.
+2026-11-20 16:50:03.723 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testSimplifiedStatusText_idle_returnsIdle]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testSimplifiedStatusText_starting_returnsStarting]' started.
+2026-11-20 16:50:03.726 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testSimplifiedStatusText_starting_returnsStarting]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatus_returnsRoutingStatus]' started.
+2026-11-20 16:50:03.729 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatus_returnsRoutingStatus]' passed (0.004 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusBackgroundColor_active_isGreenOpacity]' started.
+2026-11-20 16:50:03.733 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusBackgroundColor_active_isGreenOpacity]' passed (0.005 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusBackgroundColor_activeBypassed_isYellowOpacity]' started.
+2026-11-20 16:50:03.737 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusBackgroundColor_activeBypassed_isYellowOpacity]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusBackgroundColor_driverNotInstalled_isOrangeOpacity]' started.
+2026-11-20 16:50:03.740 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusBackgroundColor_driverNotInstalled_isOrangeOpacity]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusBackgroundColor_error_isRedOpacity]' started.
+2026-11-20 16:50:03.743 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusBackgroundColor_error_isRedOpacity]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusBackgroundColor_idle_isSecondaryOpacity]' started.
+2026-11-20 16:50:03.746 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusBackgroundColor_idle_isSecondaryOpacity]' passed (0.004 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusBackgroundColor_starting_isSecondaryOpacity]' started.
+2026-11-20 16:50:03.749 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusBackgroundColor_starting_isSecondaryOpacity]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusColor_active_isGreen]' started.
+2026-11-20 16:50:03.752 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusColor_active_isGreen]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusColor_activeBypassed_isYellow]' started.
+2026-11-20 16:50:03.755 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusColor_activeBypassed_isYellow]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusColor_driverNotInstalled_isOrange]' started.
+2026-11-20 16:50:03.758 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusColor_driverNotInstalled_isOrange]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusColor_error_isRed]' started.
+2026-11-20 16:50:03.760 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusColor_error_isRed]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusColor_idle_isSecondary]' started.
+2026-11-20 16:50:03.763 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusColor_idle_isSecondary]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusColor_starting_isSecondary]' started.
+2026-11-20 16:50:03.766 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusColor_starting_isSecondary]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconColor_activeBypassed_matchesStatusBaseColor]' started.
+2026-11-20 16:50:03.769 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconColor_activeBypassed_matchesStatusBaseColor]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconColor_matchesStatusBaseColor]' started.
+2026-11-20 16:50:03.772 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconColor_matchesStatusBaseColor]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconName_active_returnsWaveform]' started.
+2026-11-20 16:50:03.774 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconName_active_returnsWaveform]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconName_activeBypassed_returnsPauseCircle]' started.
+2026-11-20 16:50:03.777 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconName_activeBypassed_returnsPauseCircle]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconName_driverNotInstalled_returnsSpeakerWave]' started.
+2026-11-20 16:50:03.780 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconName_driverNotInstalled_returnsSpeakerWave]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconName_error_returnsExclamation]' started.
+2026-11-20 16:50:03.783 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconName_error_returnsExclamation]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconName_idle_returnsStopCircle]' started.
+2026-11-20 16:50:03.786 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconName_idle_returnsStopCircle]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconName_starting_returnsNil]' started.
+2026-11-20 16:50:03.788 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusIconName_starting_returnsNil]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusTextIsMedium_activeBypassed_isFalse]' started.
+2026-11-20 16:50:03.791 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusTextIsMedium_activeBypassed_isFalse]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusTextIsMedium_activeNotBypassed_isTrue]' started.
+2026-11-20 16:50:03.794 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusTextIsMedium_activeNotBypassed_isTrue]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusTextIsMedium_error_isFalse]' started.
+2026-11-20 16:50:03.797 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusTextIsMedium_error_isFalse]' passed (0.004 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusTextIsMedium_idle_isFalse]' started.
+2026-11-20 16:50:03.800 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusTextIsMedium_idle_isFalse]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusTextLineLimit_active_returnsNil]' started.
+2026-11-20 16:50:03.803 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusTextLineLimit_active_returnsNil]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusTextLineLimit_error_returns2]' started.
+2026-11-20 16:50:03.805 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusTextLineLimit_error_returns2]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusTextLineLimit_idle_returnsNil]' started.
+2026-11-20 16:50:03.808 xctest[25505:18568216] IOPMScheduleUserActivityLevelNotification returned 0
+Test Case '-[equmaczerTests.RoutingViewModelTests testStatusTextLineLimit_idle_returnsNil]' passed (0.003 seconds).
+Test Suite 'RoutingViewModelTests' passed at 2026-11-20 16:50:03.810.
+	 Executed 64 tests, with 0 failures (0 unexpected) in 0.180 (0.183) seconds
+Test Suite 'ShelfFidelityTests' started at 2026-11-20 16:50:03.810.
+Test Case '-[equmaczerTests.ShelfFidelityTests testCrinacleLowShelfAgrees]' started.
+Test Case '-[equmaczerTests.ShelfFidelityTests testCrinacleLowShelfAgrees]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.ShelfFidelityTests testOratoryHighShelfAgrees]' started.
+Test Case '-[equmaczerTests.ShelfFidelityTests testOratoryHighShelfAgrees]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.ShelfFidelityTests testOratoryLowShelfAgrees]' started.
+Test Case '-[equmaczerTests.ShelfFidelityTests testOratoryLowShelfAgrees]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.ShelfFidelityTests testPeakingControlAgrees]' started.
+Test Case '-[equmaczerTests.ShelfFidelityTests testPeakingControlAgrees]' passed (0.000 seconds).
+Test Suite 'ShelfFidelityTests' passed at 2026-11-20 16:50:03.810.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'SketchFitterTests' started at 2026-11-20 16:50:03.810.
+Test Case '-[equmaczerTests.SketchFitterTests testBassPlateauBecomesAShelfNotPeaks]' started.
+Test Case '-[equmaczerTests.SketchFitterTests testBassPlateauBecomesAShelfNotPeaks]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.SketchFitterTests testFlatStrokeProposesNothing]' started.
+Test Case '-[equmaczerTests.SketchFitterTests testFlatStrokeProposesNothing]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.SketchFitterTests testPartialSpanStrokeStaysInItsSpan]' started.
+Test Case '-[equmaczerTests.SketchFitterTests testPartialSpanStrokeStaysInItsSpan]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.SketchFitterTests testShelfPlusPeakYieldsBoth]' started.
+Test Case '-[equmaczerTests.SketchFitterTests testShelfPlusPeakYieldsBoth]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.SketchFitterTests testSinglePeakRecovered]' started.
+Test Case '-[equmaczerTests.SketchFitterTests testSinglePeakRecovered]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.SketchFitterTests testTwoPeaksRecovered]' started.
+Test Case '-[equmaczerTests.SketchFitterTests testTwoPeaksRecovered]' passed (0.000 seconds).
+Test Suite 'SketchFitterTests' passed at 2026-11-20 16:50:03.813.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'SpeakerGuardTests' started at 2026-11-20 16:50:03.813.
+Test Case '-[equmaczerTests.SpeakerGuardTests testGuardIsCutsOnly]' started.
+Test Case '-[equmaczerTests.SpeakerGuardTests testGuardIsCutsOnly]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.SpeakerGuardTests testGuardShapeRemovesDeepLowsAndLeavesMids]' started.
+Test Case '-[equmaczerTests.SpeakerGuardTests testGuardShapeRemovesDeepLowsAndLeavesMids]' passed (0.000 seconds).
+Test Suite 'SpeakerGuardTests' passed at 2026-11-20 16:50:03.813.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'SpectrumAnalyzerTests' started at 2026-11-20 16:50:03.813.
+Test Case '-[equmaczerTests.SpectrumAnalyzerTests testBassSinePeaksBelowTrebleSine]' started.
+Test Case '-[equmaczerTests.SpectrumAnalyzerTests testBassSinePeaksBelowTrebleSine]' passed (0.013 seconds).
+Test Case '-[equmaczerTests.SpectrumAnalyzerTests testOneKilohertzSinePeaksInItsBand]' started.
+Test Case '-[equmaczerTests.SpectrumAnalyzerTests testOneKilohertzSinePeaksInItsBand]' passed (0.005 seconds).
+Test Case '-[equmaczerTests.SpectrumAnalyzerTests testSilenceStaysAtTheFloor]' started.
+Test Case '-[equmaczerTests.SpectrumAnalyzerTests testSilenceStaysAtTheFloor]' passed (0.005 seconds).
+Test Suite 'SpectrumAnalyzerTests' passed at 2026-11-20 16:50:03.836.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.023 (0.023) seconds
+Test Suite 'SpectrumFrameTests' started at 2026-11-20 16:50:03.836.
+Test Case '-[equmaczerTests.SpectrumFrameTests testInvisibleChangesAndSilenceDoNotInvalidateFrame]' started.
+Test Case '-[equmaczerTests.SpectrumFrameTests testInvisibleChangesAndSilenceDoNotInvalidateFrame]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.SpectrumFrameTests testSignatureMatchesEveryRenderedCell]' started.
+Test Case '-[equmaczerTests.SpectrumFrameTests testSignatureMatchesEveryRenderedCell]' passed (0.518 seconds).
+Test Suite 'SpectrumFrameTests' passed at 2026-11-20 16:50:04.354.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.518 (0.518) seconds
+Test Suite 'StagerMeasurementTests' started at 2026-11-20 16:50:04.355.
+Test Case '-[equmaczerTests.StagerMeasurementTests testAutoPreampReactsToStackedBoosts]' started.
+Test Case '-[equmaczerTests.StagerMeasurementTests testAutoPreampReactsToStackedBoosts]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.StagerMeasurementTests testStagerDesignsBothChannelsIdenticallyWithDecrampedDesigner]' started.
+Test Case '-[equmaczerTests.StagerMeasurementTests testStagerDesignsBothChannelsIdenticallyWithDecrampedDesigner]' passed (0.000 seconds).
+Test Suite 'StagerMeasurementTests' passed at 2026-11-20 16:50:04.356.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'TapDeafnessTests' started at 2026-11-20 16:50:04.356.
+Test Case '-[equmaczerTests.TapDeafnessTests testDeafWhenAliveSilentAndOthersPlaying]' started.
+Test Case '-[equmaczerTests.TapDeafnessTests testDeafWhenAliveSilentAndOthersPlaying]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.TapDeafnessTests testDefaultCaptureModeIsTheTap]' started.
+Test Case '-[equmaczerTests.TapDeafnessTests testDefaultCaptureModeIsTheTap]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.TapDeafnessTests testNotDeafWhenAnySampleBreaksTheFloor]' started.
+Test Case '-[equmaczerTests.TapDeafnessTests testNotDeafWhenAnySampleBreaksTheFloor]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.TapDeafnessTests testNotDeafWhenFramesNeverAdvanced]' started.
+Test Case '-[equmaczerTests.TapDeafnessTests testNotDeafWhenFramesNeverAdvanced]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.TapDeafnessTests testNotDeafWhenNothingElseIsPlaying]' started.
+Test Case '-[equmaczerTests.TapDeafnessTests testNotDeafWhenNothingElseIsPlaying]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.TapDeafnessTests testNotDeafWithoutSamples]' started.
+Test Case '-[equmaczerTests.TapDeafnessTests testNotDeafWithoutSamples]' passed (0.000 seconds).
+Test Suite 'TapDeafnessTests' passed at 2026-11-20 16:50:04.357.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'TransitionFuzzTests' started at 2026-11-20 16:50:04.357.
+Test Case '-[equmaczerTests.TransitionFuzzTests testFiveHundredTransitionWalksNeverEndSilent]' started.
+Test Case '-[equmaczerTests.TransitionFuzzTests testFiveHundredTransitionWalksNeverEndSilent]' passed (0.006 seconds).
+Test Suite 'TransitionFuzzTests' passed at 2026-11-20 16:50:04.362.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.006 (0.006) seconds
+Test Suite 'TranslationCheckTests' started at 2026-11-20 16:50:04.362.
+Test Case '-[equmaczerTests.TranslationCheckTests testAllTargetsSoftenTheTop]' started.
+Test Case '-[equmaczerTests.TranslationCheckTests testAllTargetsSoftenTheTop]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.TranslationCheckTests testCarIsTheOnlyBassBoost]' started.
+Test Case '-[equmaczerTests.TranslationCheckTests testCarIsTheOnlyBassBoost]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.TranslationCheckTests testEveryTargetIsThreeBands]' started.
+Test Case '-[equmaczerTests.TranslationCheckTests testEveryTargetIsThreeBands]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.TranslationCheckTests testPhoneCutsLowsHardest]' started.
+Test Case '-[equmaczerTests.TranslationCheckTests testPhoneCutsLowsHardest]' passed (0.000 seconds).
+Test Suite 'TranslationCheckTests' passed at 2026-11-20 16:50:04.363.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'TruePeakLimiterTests' started at 2026-11-20 16:50:04.363.
+Test Case '-[equmaczerTests.TruePeakLimiterTests testAttackRampsAcrossTheLookahead]' started.
+Test Case '-[equmaczerTests.TruePeakLimiterTests testAttackRampsAcrossTheLookahead]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.TruePeakLimiterTests testCeilingHoldsOnFsQuarterCosine]' started.
+Test Case '-[equmaczerTests.TruePeakLimiterTests testCeilingHoldsOnFsQuarterCosine]' passed (0.002 seconds).
+Test Case '-[equmaczerTests.TruePeakLimiterTests testDoublePulseRetriggerStaysUnderCeiling]' started.
+Test Case '-[equmaczerTests.TruePeakLimiterTests testDoublePulseRetriggerStaysUnderCeiling]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.TruePeakLimiterTests testGainReductionIsZeroBelowTheCeiling]' started.
+Test Case '-[equmaczerTests.TruePeakLimiterTests testGainReductionIsZeroBelowTheCeiling]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.TruePeakLimiterTests testGainReductionReportsThePeakCutAndClears]' started.
+Test Case '-[equmaczerTests.TruePeakLimiterTests testGainReductionReportsThePeakCutAndClears]' passed (0.003 seconds).
+Test Case '-[equmaczerTests.TruePeakLimiterTests testIndependentLimitersDoNotShareGain]' started.
+Test Case '-[equmaczerTests.TruePeakLimiterTests testIndependentLimitersDoNotShareGain]' passed (0.006 seconds).
+Test Case '-[equmaczerTests.TruePeakLimiterTests testLinkedPairReportsOnTheDrivingLimiter]' started.
+Test Case '-[equmaczerTests.TruePeakLimiterTests testLinkedPairReportsOnTheDrivingLimiter]' passed (0.004 seconds).
+Test Case '-[equmaczerTests.TruePeakLimiterTests testLinkedPairSharesOneGainTrajectory]' started.
+Test Case '-[equmaczerTests.TruePeakLimiterTests testLinkedPairSharesOneGainTrajectory]' passed (0.005 seconds).
+Test Case '-[equmaczerTests.TruePeakLimiterTests testReleaseScalesWithSampleRate]' started.
+Test Case '-[equmaczerTests.TruePeakLimiterTests testReleaseScalesWithSampleRate]' passed (0.086 seconds).
+Test Case '-[equmaczerTests.TruePeakLimiterTests testSustainedBassTHD]' started.
+Test Case '-[equmaczerTests.TruePeakLimiterTests testSustainedBassTHD]' passed (0.211 seconds).
+Test Suite 'TruePeakLimiterTests' passed at 2026-11-20 16:50:04.684.
+	 Executed 10 tests, with 0 failures (0 unexpected) in 0.320 (0.321) seconds
+Test Suite 'UpdateCheckServiceTests' started at 2026-11-20 16:50:04.684.
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_EqualWithFewerComponents]' started.
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_EqualWithFewerComponents]' passed (0.001 seconds).
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_NewerMajor]' started.
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_NewerMajor]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_NewerMinor]' started.
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_NewerMinor]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_NewerPatch]' started.
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_NewerPatch]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_NewerWithFewerComponents]' started.
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_NewerWithFewerComponents]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_OlderMinor]' started.
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_OlderMinor]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_OlderPatch]' started.
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_OlderPatch]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_OlderWithFewerComponents]' started.
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_OlderWithFewerComponents]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_SameVersion]' started.
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testIsVersion_SameVersion]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testParseReleaseResponse_EmptyTagName]' started.
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testParseReleaseResponse_EmptyTagName]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testParseReleaseResponse_InvalidJSON]' started.
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testParseReleaseResponse_InvalidJSON]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testParseReleaseResponse_MissingTagName]' started.
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testParseReleaseResponse_MissingTagName]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testParseReleaseResponse_ValidTagWithVPrefix]' started.
+Test Case '-[equmaczerTests.UpdateCheckServiceTests testParseReleaseResponse_ValidTagWithVPrefix]' passed (0.000 seconds).
+Test Suite 'UpdateCheckServiceTests' passed at 2026-11-20 16:50:04.686.
+	 Executed 13 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'WindowActivationControllerTests' started at 2026-11-20 16:50:04.686.
+Test Case '-[equmaczerTests.WindowActivationControllerTests testLaunchAsMenuBarApp_keepsRegularWhenWindowIsVisible]' started.
+Test Case '-[equmaczerTests.WindowActivationControllerTests testLaunchAsMenuBarApp_keepsRegularWhenWindowIsVisible]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.WindowActivationControllerTests testLaunchAsMenuBarApp_requestsAccessoryActivation]' started.
+Test Case '-[equmaczerTests.WindowActivationControllerTests testLaunchAsMenuBarApp_requestsAccessoryActivation]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.WindowActivationControllerTests testPrepareToShowWindow_requestsRegularActivation]' started.
+Test Case '-[equmaczerTests.WindowActivationControllerTests testPrepareToShowWindow_requestsRegularActivation]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.WindowActivationControllerTests testWindowBecameHidden_keepsRegularWhenAnotherWindowIsVisible]' started.
+Test Case '-[equmaczerTests.WindowActivationControllerTests testWindowBecameHidden_keepsRegularWhenAnotherWindowIsVisible]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.WindowActivationControllerTests testWindowBecameHidden_requestsAccessoryWhenLastWindowCloses]' started.
+Test Case '-[equmaczerTests.WindowActivationControllerTests testWindowBecameHidden_requestsAccessoryWhenLastWindowCloses]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.WindowActivationControllerTests testWindowBecameVisible_requestsRegularActivation]' started.
+Test Case '-[equmaczerTests.WindowActivationControllerTests testWindowBecameVisible_requestsRegularActivation]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.WindowActivationControllerTests testWindowVisibilityChanges_areIdempotent]' started.
+Test Case '-[equmaczerTests.WindowActivationControllerTests testWindowVisibilityChanges_areIdempotent]' passed (0.000 seconds).
+Test Suite 'WindowActivationControllerTests' passed at 2026-11-20 16:50:04.687.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'ZipperNoiseTests' started at 2026-11-20 16:50:04.687.
+Test Case '-[equmaczerTests.ZipperNoiseTests testCoefficientSwingMidStreamHasNoDiscontinuity]' started.
+Test Case '-[equmaczerTests.ZipperNoiseTests testCoefficientSwingMidStreamHasNoDiscontinuity]' passed (0.003 seconds).
+Test Suite 'ZipperNoiseTests' passed at 2026-11-20 16:50:04.691.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.003 (0.003) seconds
+Test Suite 'equmaczerTests.xctest' passed at 2026-11-20 16:50:04.691.
+	 Executed 621 tests, with 0 failures (0 unexpected) in 2.631 (2.660) seconds
+Test Suite 'All tests' passed at 2026-11-20 16:50:04.691.
+	 Executed 621 tests, with 0 failures (0 unexpected) in 2.631 (2.663) seconds
+
+================================================================================
+EQUMACZER DEEP DSP & REAL-TIME VERIFICATION REPORT
+================================================================================
+1. NYQUIST MAGNITUDE ACCURACY (12 kHz, Q=0.7071, +6.0 dB Peaking @ fs=44.1 kHz)
+   - Continuous s-Domain Prototype @ 18 kHz : +4.4107 dB
+   - Legacy RBJ Cookbook Biquad @ 18 kHz    : +1.4226 dB (Error: 2.9881 dB)
+   - Decramped Float64 TPT SVF @ 18 kHz     : +4.4107 dB (Error: 0.0000 dB) [< 0.05 dB]
+   - Max Passband Error (20 Hz - 20 kHz)    : Legacy = 3.2835 dB | New = 0.1543 dB
+
+2. LOW-FREQUENCY QUANTIZATION NOISE FLOOR (20 Hz Tone, 10x Q=15 Sub-Bass Cascade)
+   - Legacy Float32 vDSP_biquad Noise Floor : -19.71 dBFS
+   - New Float64 TPT SVF Noise Floor        : -191.56 dBFS
+   - Noise Floor Reduction                  : +171.85 dB [> 30 dB required]
+
+3. DYNAMIC PARAMETER SWEEP ZIPPER TRANSIENTS (fc: 100 Hz -> 10 kHz Live Drag)
+   - Legacy Unsmoothed Biquad Step Spike    : -63.51 dBFS
+   - New Per-Sample Smoothed TPT SVF Spike  : -116.97 dBFS [< -110 dBFS required]
+
+4. ITU-R BS.1770-4 4x OVERSAMPLED TRUE-PEAK & HEADROOM PROTECTION
+   - Naive Sample Peak Meter on ISP Vector  : +0.00 dBFS (misses inter-sample over)
+   - 4x Polyphase True-Peak Detector        : +3.58 dBTP (captures exact ISP)
+   - Post-TruePeakLimiter Output Peak       : -0.15 dBTP [<= -0.10 dBTP required]
+
+5. REAL-TIME RENDER CALLBACK EXECUTION (64 frames @ 96 kHz, Deadline = 666.7 us)
+   - p50 Latency                            : 7.96 us
+   - p99 Latency                            : 10.04 us
+   - p99.9 Latency                          : 14.38 us [< 66.7 us (10% deadline) required]
+--------------------------------------------------------------------------------
+OVERALL VERIFICATION STATUS: PASS (ALL 5 FALSIFIABLE CRITERIA MET)
+================================================================================
+D5 zipper: yardstick max step 0.032631546, swung max step 0.032631546
+◇ Test run started.
+↳ Testing Library Version: 2403
+↳ Target Platform: arm64e-apple-macos14.0
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.

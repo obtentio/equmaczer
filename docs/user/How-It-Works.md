@@ -1,0 +1,406 @@
+# How It Works
+
+A detailed explanation of how equmaczer processes audio on your Mac.
+
+---
+
+## Overview
+
+equmaczer provides **system-wide audio equalisation** for your Mac. This means every app — Spotify, Safari, Games, FaceTime — has its audio processed through the equaliser before reaching your speakers or headphones.
+
+Achieving system-wide EQ on macOS requires a special approach. Unlike individual apps that only process their own audio, equmaczer needs to intercept **all** audio playing on your system. This is accomplished using a **virtual audio driver**.
+
+---
+
+## The Audio Pipeline
+
+When equmaczer is running, audio flows through this pipeline:
+
+```
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│  Your Apps      │     │  equmaczer       │     │  equmaczer      │     │  Output Device  │
+│  (Spotify, etc.)│ ──▶ │  Driver          │ ──▶ │  App (EQ)       │ ──▶ │  (Speakers/     │
+│                 │     │  (Virtual Device)│     │  (Processing)   │     │   Headphones)   │
+└─────────────────┘     └──────────────────┘     └─────────────────┘     └─────────────────┘
+```
+
+| Stage | What Happens |
+|-------|--------------|
+| **Your Apps** | Any app playing audio on your Mac |
+| **equmaczer Driver** | A virtual device that captures system audio before it reaches hardware |
+| **equmaczer App** | Applies EQ processing, gain adjustments, and effects |
+| **Output Device** | Your actual speakers, headphones, or external audio interface |
+
+### How macOS Sees It
+
+macOS treats the equmaczer Driver as a real audio device. When you set it as your system default output:
+
+1. All apps send their audio to the driver
+2. The driver passes audio to equmaczer for processing
+3. equmaczer sends the processed audio to your chosen output
+
+---
+
+## The Virtual Audio Driver
+
+### What Is It?
+
+The **equmaczer Driver** is a virtual audio device that installs into macOS's audio system. It appears alongside your real audio devices (built-in speakers, headphones, etc.) but has no physical hardware — it exists purely to capture audio for processing. It's a virtual audio driver customised with dynamic device naming and shared memory capture for seamless integration with equmaczer.
+
+### Why Is It Needed?
+
+macOS doesn't allow apps to intercept each other's audio. Each app can only access its own audio stream. The virtual driver solves this by becoming the system-wide output device, creating a common point where all audio converges.
+
+### Installation
+
+The driver requires **admin privileges** to install. When you first enable equmaczer:
+
+1. macOS prompts for your password
+2. The driver installs to `/Library/Audio/Plug-Ins/HAL/equmaczer.driver`
+3. equmaczer appears as an available audio device
+
+**Uninstallation**: The driver can be removed from Settings → Driver → Uninstall Driver. This requires admin privileges again.
+
+### Automatic Updates
+
+equmaczer checks the bundled driver version against the installed version. If a newer version is included with the app, you'll be prompted to update.
+
+---
+
+## Audio Routing Modes
+
+equmaczer offers two modes for handling audio devices.
+
+### Automatic Mode (Recommended)
+
+The simplest way to use equmaczer. Set it once and forget about it.
+
+| Feature | Behaviour |
+|---------|-----------|
+| **Output Selection** | Follows your macOS Sound settings automatically |
+| **Driver Naming** | Shows the output device name (e.g., "Speakers (equmaczer)") |
+| **Device Changes** | Instantly follows when you change macOS default output |
+| **Headphones** | Auto-switches to headphones when plugged in |
+
+**How it works:**
+
+1. Set the equmaczer Driver as your default output device (equmaczer does this automatically)
+2. Change your output device in macOS Sound settings
+3. equmaczer detects the change and routes audio accordingly
+
+### Manual Mode
+
+For advanced users who want complete control over device selection.
+
+| Feature | Behaviour |
+|---------|-----------|
+| **Input Device** | Choose any audio input (virtual or real) |
+| **Output Device** | Choose any audio output device |
+| **Flexibility** | Works with third-party virtual drivers (BlackHole, etc.) |
+| **Permission** | Requires microphone permission |
+
+**Use Manual Mode when:**
+
+- You want to use a different virtual audio driver as input
+- You need to route audio from a specific application
+- You're doing advanced audio routing with multiple virtual devices
+
+---
+
+## Capture Methods
+
+equmaczer supports two methods for capturing audio from the driver.
+
+### Shared Memory (Default)
+
+The default and recommended capture method.
+
+| Aspect | Details |
+|--------|---------|
+| **Method** | Lock-free ring buffer via memory mapping |
+| **Microphone Permission** | **Not required** |
+| **Control Center Indicator** | No orange microphone indicator |
+| **Compatibility** | Only works with the equmaczer Driver |
+
+The driver writes audio to shared memory, and equmaczer reads it. No microphone permission needed, no system indicators.
+
+### HAL Input
+
+An alternative capture method for specific use cases.
+
+| Aspect | Details |
+|--------|---------|
+| **Method** | macOS CoreAudio HAL input stream |
+| **Microphone Permission** | **Required** |
+| **Control Center Indicator** | Orange microphone indicator shown |
+| **Compatibility** | Works with any input device |
+
+**When to use HAL Input:**
+
+- Using Manual Mode with a third-party virtual driver
+- Capturing from a real input device
+- Advanced audio routing setups
+
+<details>
+<summary>⚙️ Technical Details: How Shared Memory Capture Works</summary>
+
+The shared memory capture reads audio directly from the driver's memory-mapped buffer:
+
+1. The driver writes audio samples to a memory-mapped ring buffer
+2. equmaczer reads from this buffer synchronously during its output callback
+3. Audio goes directly to EQ processing — no intermediate buffering needed
+4. Atomic operations ensure thread safety without locks
+5. No memory allocation happens on the audio thread
+
+**Why this matters:**
+- **Real-time safety**: Audio processing must never block or allocate memory
+- **Low latency**: Direct memory access without system calls or extra copies
+- **Privacy**: macOS doesn't consider this "microphone access"
+
+If the driver produces audio faster than equmaczer can process it (e.g. during system load spikes), overflow detection resets the read position to prevent corrupted audio, causing a brief dropout rather than garbled sound.
+
+In HAL input mode (the alternative capture method), the input and output callbacks run on separate threads, so an intermediate ring buffer is needed to bridge them and handle clock drift.
+
+</details>
+
+<details>
+<summary>⚙️ Technical Details: HAL Input Capture</summary>
+
+HAL Input uses macOS's standard audio input mechanism:
+
+1. equmaczer opens an input stream on the selected device
+2. macOS calls a callback with audio buffers
+3. `AudioUnitRender` pulls audio data from the hardware layer
+
+**Why this requires permission:**
+macOS treats any input stream as "microphone access" for privacy. Even virtual drivers trigger this requirement.
+
+**The orange indicator:**
+macOS shows an orange microphone icon in Control Center whenever an app has an open input stream. This is system behaviour and cannot be disabled.
+
+</details>
+
+---
+
+## The equmaczer Engine
+
+equmaczer uses a **custom biquad DSP engine** for audio processing. This provides native performance through Apple's vDSP framework, supporting up to 64 bands of parametric EQ with low latency and real-time safety.
+
+The engine is built on the industry-standard [RBJ Audio EQ Cookbook](https://webaudio.github.io/Audio-EQ-Cookbook/Audio-EQ-Cookbook.txt) and implements 7 filter types: parametric, low-pass, high-pass, low shelf, high shelf, band-pass, and notch. The Q parameter controls resonance for low/high-pass filters and slope for shelf filters.
+
+**Key features:**
+
+- **Real-time safe** — No allocations or locks on the audio thread
+- **Native performance** — SIMD-optimised via Apple's Accelerate framework
+- **Independent stereo** — Left and right channels can have completely different EQ curves
+- **Up to 64 bands** — Far beyond typical 10-band equalisers
+
+For a detailed explanation of how the biquad engine works, see [The EQ Engine](./The-EQ-Engine.md).
+
+### Parametric EQ
+
+equmaczer provides **up to 64 bands** of parametric equalisation. Each band gives you precise control over:
+
+| Control | What It Does |
+|---------|--------------|
+| **Frequency** | The centre frequency to adjust (20 Hz – 20 kHz for standard bands) |
+| **Gain** | How much to boost or cut (-36 dB to +36 dB) |
+| **Bandwidth** | How wide or narrow the adjustment is |
+| **Filter Type** | Parametric, Low Shelf, High Shelf, and more |
+
+### Standard Band Frequencies
+
+The default 10-band configuration uses logarithmically-spaced frequencies:
+
+| Band | Frequency | Range Covers |
+|------|-----------|--------------|
+| 1 | 32 Hz | Sub-bass |
+| 2 | 64 Hz | Deep bass |
+| 3 | 128 Hz | Upper bass |
+| 4 | 256 Hz | Lower mids |
+| 5 | 512 Hz | Mids |
+| 6 | 1000 Hz (1 kHz) | Upper mids |
+| 7 | 2000 Hz (2 kHz) | Presence |
+| 8 | 4000 Hz (4 kHz) | Presence / Brilliance |
+| 9 | 8000 Hz (8 kHz) | Highs |
+| 10 | 16000 Hz (16 kHz) | Air |
+
+### Gain Controls
+
+In addition to per-band adjustments, equmaczer provides overall gain controls:
+
+| Control | Position | Range | Purpose |
+|---------|----------|-------|---------|
+| **Input Gain** | Before EQ | -36 dB to +36 dB | Adjust level before processing |
+| **Output Gain** | After EQ | -36 dB to +36 dB | Compensate for EQ changes |
+
+### Processing Chain
+
+Audio passes through this sequence:
+
+```
+[Input Audio] → [Input Gain] → [EQ Bands] → [Output Gain] → [Output Audio]
+```
+
+When **bypassed** (EQ toggle off), the EQ bands and input/output gains are skipped.
+
+### Compare Mode
+
+Compare Mode lets you A/B test your EQ settings against a flat response:
+
+| Mode | What You Hear |
+|------|---------------|
+| **Normal** | Your EQ curve |
+| **Compare** | Flat response with matched volume |
+
+The volume matching ensures fair comparison — EQ boosts naturally sound louder, which can bias perception.
+
+---
+
+## Presets
+
+### Factory Presets
+
+equmaczer includes 11 carefully crafted presets for common use cases:
+
+| Preset | Best For |
+|--------|----------|
+| Flat | Reference, testing |
+| Bass Boost | Hip-hop, EDM, action movies |
+| Treble Boost | Classical, acoustic, podcasts |
+| Vocal Presence | Podcasts, voice calls, audiobooks |
+| Loudness | Low-volume listening |
+| Acoustic | Acoustic music, singer-songwriter |
+| Rock | Rock, metal, alternative |
+| Electronic | EDM, techno, house |
+| Jazz | Jazz, blues, soul |
+| Podcast | Speech content |
+| Classical | Orchestral, chamber music |
+
+See the [EQ Presets Guide](./EQ-Presets-Guide.md) for detailed explanations of each preset.
+
+### Custom Presets
+
+Create your own presets:
+
+1. Adjust your EQ settings
+2. Click the preset menu → Save As...
+3. Name your preset
+
+Custom presets are saved to:
+```
+~/Library/Application Support/equmaczer/Presets/
+```
+
+### Import and Export
+
+- **Export**: Share presets as `.eqpreset` files
+- **Import**: Load presets from `.eqpreset` files
+- **EasyEffects**: Import presets from Linux EasyEffects (compatible format)
+- **REW**: Import filter settings from Room EQ Wizard
+
+---
+
+## Device Management
+
+### Headphone Auto-Switch
+
+When headphones are connected, equmaczer automatically switches output:
+
+| Condition | Behaviour |
+|-----------|-----------|
+| Current output is built-in speakers | Switches to headphones |
+| Current output is external device | Keeps current output |
+
+This matches macOS behaviour and prevents audio from unexpectedly playing through speakers.
+
+When headphones are unplugged, equmaczer restores the previous output device from history.
+
+### Device History
+
+equmaczer remembers your output device choices:
+
+- When a device becomes unavailable, equmaczer finds a replacement
+- When the device returns, equmaczer can restore your preference
+- History is limited to prevent stale device references
+
+<details>
+<summary>⚙️ Technical Details: Device Selection Logic</summary>
+
+equmaczer uses a prioritised selection algorithm:
+
+1. **Preserve current**: If your saved device is still available, keep it
+2. **Use macOS default**: If your saved device is gone, use macOS's default
+3. **Find fallback**: If no valid devices exist, use built-in speakers
+
+</details>
+
+---
+
+## Privacy & Permissions
+
+### What equmaczer Does NOT Do
+
+| Not Done | Meaning |
+|----------|---------|
+| ❌ Record audio | No audio is ever recorded |
+| ❌ Store audio | No audio is ever saved or stored |
+| ❌ Transmit audio | No audio is ever transmitted anywhere |
+| ❌ Collect analytics | No usage tracking |
+
+All audio processing happens **locally on your Mac**. equmaczer only uses the network to check the latest version released on GitHub.
+
+### Microphone Permission
+
+macOS requests microphone permission when equmaczer launches for audio routing.
+
+**Why the permission dialog appears:**
+
+equmaczer uses macOS's HAL (Hardware Abstraction Layer) audio system to route audio between devices. The audio component required for device routing (`HALOutput`) can be used for both input capture and output playback. macOS treats it as a potential microphone access point and requires permission — even when equmaczer is only using it for audio output.
+
+| Mode | Permission Dialog? | Can Deny? | Effect if Denied |
+|------|---------------------|-----------|------------------|
+| **Automatic + Shared Memory** | Yes | Yes | App works correctly |
+| **Automatic + HAL Input** | Yes | No | Audio routing fails |
+| **Manual Mode** | Yes | No | Audio routing fails |
+
+**Technical explanation:** The audio pipeline creates a `HALOutput` AudioUnit for routing audio to your speakers or headphones. Because this component can also be used for input capture, macOS checks microphone permission when it's created — before knowing whether input will actually be used.
+
+**Best practice:** Grant permission for full functionality, or deny if you only use Automatic mode with Shared Memory capture.
+
+---
+
+## Troubleshooting
+
+### No Sound After Enabling
+
+1. Check that equmaczer Driver is set as default output in macOS Sound settings
+2. In Automatic Mode, verify an output device is selected
+3. Try toggling EQ off and on
+
+### Orange Microphone Indicator Appears
+
+This happens when using HAL Input capture or Manual Mode. To avoid it:
+
+1. Go to Settings → Driver
+2. Select "Shared Memory" as capture mode
+3. Ensure you're in Automatic Mode
+
+### Driver Installation Fails
+
+Driver installation requires admin privileges. If installation fails:
+
+1. Ensure you entered your password correctly
+2. Check that no other audio apps are blocking the installation
+3. Try restarting your Mac and installing again
+
+### Audio Sounds Distorted
+
+Distortion usually indicates:
+
+1. **Input gain too high**: Reduce Input Gain
+2. **Output gain too high**: Reduce Output Gain
+3. **Excessive band boost**: Reduce individual band gains
+
+Watch the level meters for clipping indicators (red peaks).
+

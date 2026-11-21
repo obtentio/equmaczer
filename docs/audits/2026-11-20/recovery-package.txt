@@ -1,0 +1,9 @@
+Building Swift app...
+Creating app bundle at <checkout>/release/equmaczer.app
+Driver bundled with app
+Icon copied to app bundle
+Menu bar icon copied to app bundle
+Licence copied to app bundle
+<checkout>/release/equmaczer.app: replacing existing signature
+Bundle created: <checkout>/release/equmaczer.app
+You can now copy it to /Applications to run equmaczer normally.

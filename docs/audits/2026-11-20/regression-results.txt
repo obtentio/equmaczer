@@ -1,0 +1,45 @@
+warning: ~/Library/org.swift.swiftpm/configuration is not accessible or not writable, disabling user-level cache features.
+warning: ~/Library/org.swift.swiftpm/security is not accessible or not writable, disabling user-level cache features.
+Building for debugging...
+[Planning 1 / 155]
+[Planning deferred tasks]
+[1 / 3] equmaczer-product
+[6 / 17] equmaczerTests-product
+[8 / 19] equmaczerTests-product
+[15 / 19] equmaczerTests-product
+Build complete! (1.95 sec)
+Test Suite 'Selected tests' started at 2026-11-20 16:52:55.660.
+Test Suite 'equmaczerTests.xctest' started at 2026-11-20 16:52:55.660.
+Test Suite 'RevampAuditEvidenceTests' started at 2026-11-20 16:52:55.660.
+Test Case '-[equmaczerTests.RevampAuditEvidenceTests testFoldedFramesDoNotOverlap]' started.
+<checkout>/tests/RevampAuditEvidenceTests.swift:17: error: -[equmaczerTests.RevampAuditEvidenceTests testFoldedFramesDoNotOverlap] : XCTAssertFalse failed
+Test Case '-[equmaczerTests.RevampAuditEvidenceTests testFoldedFramesDoNotOverlap]' failed (0.295 seconds).
+Test Case '-[equmaczerTests.RevampAuditEvidenceTests testPanicFlattenClearsBothStereoChannels]' started.
+2026-11-20 16:52:55.968 xctest[27849:18579965] IOPMScheduleUserActivityLevelNotification returned 0
+<checkout>/tests/RevampAuditEvidenceTests.swift:50: error: -[equmaczerTests.RevampAuditEvidenceTests testPanicFlattenClearsBothStereoChannels] : XCTAssertEqual failed: ("-3.0") is not equal to ("0.0")
+Test Case '-[equmaczerTests.RevampAuditEvidenceTests testPanicFlattenClearsBothStereoChannels]' failed (0.015 seconds).
+Test Case '-[equmaczerTests.RevampAuditEvidenceTests testPresetLoadWithRightFocusWritesLeftChannel]' started.
+<checkout>/tests/RevampAuditEvidenceTests.swift:60: error: -[equmaczerTests.RevampAuditEvidenceTests testPresetLoadWithRightFocusWritesLeftChannel] : XCTAssertEqual failed: ("0.0") is not equal to ("6.0")
+Test Case '-[equmaczerTests.RevampAuditEvidenceTests testPresetLoadWithRightFocusWritesLeftChannel]' failed (0.002 seconds).
+Test Case '-[equmaczerTests.RevampAuditEvidenceTests testPromotedLayerRemainsVisibleWhenFolded]' started.
+<checkout>/tests/RevampAuditEvidenceTests.swift:12: error: -[equmaczerTests.RevampAuditEvidenceTests testPromotedLayerRemainsVisibleWhenFolded] : XCTAssertFalse failed
+Test Case '-[equmaczerTests.RevampAuditEvidenceTests testPromotedLayerRemainsVisibleWhenFolded]' failed (0.000 seconds).
+Test Case '-[equmaczerTests.RevampAuditEvidenceTests testSelectingPresetsAfterSummoningMakesItVisible]' started.
+<checkout>/tests/RevampAuditEvidenceTests.swift:28: error: -[equmaczerTests.RevampAuditEvidenceTests testSelectingPresetsAfterSummoningMakesItVisible] : XCTAssertFalse failed
+Test Case '-[equmaczerTests.RevampAuditEvidenceTests testSelectingPresetsAfterSummoningMakesItVisible]' failed (0.000 seconds).
+Test Case '-[equmaczerTests.RevampAuditEvidenceTests testSummonedCorrectionCanBecomeMaster]' started.
+<checkout>/tests/RevampAuditEvidenceTests.swift:23: error: -[equmaczerTests.RevampAuditEvidenceTests testSummonedCorrectionCanBecomeMaster] : XCTAssertEqual failed: ("Optional((499.2, 285.5, 316.8, 84.49999999999999))") is not equal to ("Optional((16.0, 16.0, 475.2, 354.0))")
+Test Case '-[equmaczerTests.RevampAuditEvidenceTests testSummonedCorrectionCanBecomeMaster]' failed (0.000 seconds).
+Test Case '-[equmaczerTests.RevampAuditEvidenceTests testZeroBlendPreservesBandsAndBypass]' started.
+2026-11-20 16:52:55.977 xctest[27849:18579965] IOPMScheduleUserActivityLevelNotification returned 0
+<checkout>/tests/RevampAuditEvidenceTests.swift:38: error: -[equmaczerTests.RevampAuditEvidenceTests testZeroBlendPreservesBandsAndBypass] : XCTAssertEqual failed: ("3") is not equal to ("10")
+<checkout>/tests/RevampAuditEvidenceTests.swift:39: error: -[equmaczerTests.RevampAuditEvidenceTests testZeroBlendPreservesBandsAndBypass] : XCTAssertTrue failed
+Test Case '-[equmaczerTests.RevampAuditEvidenceTests testZeroBlendPreservesBandsAndBypass]' failed (0.004 seconds).
+Test Suite 'RevampAuditEvidenceTests' failed at 2026-11-20 16:52:55.979.
+	 Executed 7 tests, with 8 failures (0 unexpected) in 0.318 (0.319) seconds
+Test Suite 'equmaczerTests.xctest' failed at 2026-11-20 16:52:55.979.
+	 Executed 7 tests, with 8 failures (0 unexpected) in 0.318 (0.319) seconds
+Test Suite 'Selected tests' failed at 2026-11-20 16:52:55.979.
+	 Executed 7 tests, with 8 failures (0 unexpected) in 0.318 (0.320) seconds
+Note: Some test targets reported failures:
+  - equmaczerTests (XCTest)

@@ -1,0 +1,2996 @@
+{
+ "spdxVersion": "SPDX-2.3",
+ "dataLicense": "CC0-1.0",
+ "SPDXID": "SPDXRef-DOCUMENT",
+ "name": "equmaczer",
+ "documentNamespace": "urn:obtentio:equmaczer:sbom:2026-11-13",
+ "creationInfo": {
+  "created": "2026-11-13T00:00:00Z",
+  "creators": [
+   "Tool: gen_sbom.py (git census)"
+  ]
+ },
+ "packages": [
+  {
+   "name": "equmaczer",
+   "SPDXID": "SPDXRef-Package-equmaczer",
+   "downloadLocation": "NOASSERTION",
+   "copyrightText": "Copyright (C) 2026 obtentio; Copyright (C) Christophe Knage and contributors; Copyright (C) 2019 Existential Audio Inc.",
+   "licenseConcluded": "GPL-3.0-only",
+   "licenseDeclared": "GPL-3.0",
+   "hasFiles": [
+    "SPDXRef-File-12",
+    "SPDXRef-File-13",
+    "SPDXRef-File-14",
+    "SPDXRef-File-15",
+    "SPDXRef-File-16",
+    "SPDXRef-File-17",
+    "SPDXRef-File-18",
+    "SPDXRef-File-19",
+    "SPDXRef-File-20",
+    "SPDXRef-File-21",
+    "SPDXRef-File-22",
+    "SPDXRef-File-23",
+    "SPDXRef-File-24",
+    "SPDXRef-File-25",
+    "SPDXRef-File-26",
+    "SPDXRef-File-27",
+    "SPDXRef-File-28",
+    "SPDXRef-File-29",
+    "SPDXRef-File-30",
+    "SPDXRef-File-31",
+    "SPDXRef-File-32",
+    "SPDXRef-File-33",
+    "SPDXRef-File-34",
+    "SPDXRef-File-35",
+    "SPDXRef-File-36",
+    "SPDXRef-File-37",
+    "SPDXRef-File-38",
+    "SPDXRef-File-39",
+    "SPDXRef-File-40",
+    "SPDXRef-File-41",
+    "SPDXRef-File-42",
+    "SPDXRef-File-43",
+    "SPDXRef-File-44",
+    "SPDXRef-File-45",
+    "SPDXRef-File-46",
+    "SPDXRef-File-47",
+    "SPDXRef-File-48",
+    "SPDXRef-File-49",
+    "SPDXRef-File-50",
+    "SPDXRef-File-51",
+    "SPDXRef-File-52",
+    "SPDXRef-File-53",
+    "SPDXRef-File-54",
+    "SPDXRef-File-55",
+    "SPDXRef-File-56",
+    "SPDXRef-File-57",
+    "SPDXRef-File-58",
+    "SPDXRef-File-59",
+    "SPDXRef-File-60",
+    "SPDXRef-File-61",
+    "SPDXRef-File-62",
+    "SPDXRef-File-63",
+    "SPDXRef-File-64",
+    "SPDXRef-File-65",
+    "SPDXRef-File-66",
+    "SPDXRef-File-67",
+    "SPDXRef-File-68",
+    "SPDXRef-File-69",
+    "SPDXRef-File-70",
+    "SPDXRef-File-71",
+    "SPDXRef-File-72",
+    "SPDXRef-File-73",
+    "SPDXRef-File-74",
+    "SPDXRef-File-75",
+    "SPDXRef-File-76",
+    "SPDXRef-File-77",
+    "SPDXRef-File-78",
+    "SPDXRef-File-79",
+    "SPDXRef-File-80",
+    "SPDXRef-File-81",
+    "SPDXRef-File-82",
+    "SPDXRef-File-83",
+    "SPDXRef-File-84",
+    "SPDXRef-File-85",
+    "SPDXRef-File-86",
+    "SPDXRef-File-87",
+    "SPDXRef-File-88",
+    "SPDXRef-File-89",
+    "SPDXRef-File-90",
+    "SPDXRef-File-91",
+    "SPDXRef-File-92",
+    "SPDXRef-File-93",
+    "SPDXRef-File-94",
+    "SPDXRef-File-95",
+    "SPDXRef-File-96",
+    "SPDXRef-File-97",
+    "SPDXRef-File-98",
+    "SPDXRef-File-99",
+    "SPDXRef-File-100",
+    "SPDXRef-File-101",
+    "SPDXRef-File-102",
+    "SPDXRef-File-103",
+    "SPDXRef-File-104",
+    "SPDXRef-File-105",
+    "SPDXRef-File-106",
+    "SPDXRef-File-107",
+    "SPDXRef-File-108",
+    "SPDXRef-File-109",
+    "SPDXRef-File-110",
+    "SPDXRef-File-111",
+    "SPDXRef-File-112",
+    "SPDXRef-File-113",
+    "SPDXRef-File-114",
+    "SPDXRef-File-115",
+    "SPDXRef-File-116",
+    "SPDXRef-File-117",
+    "SPDXRef-File-118",
+    "SPDXRef-File-119",
+    "SPDXRef-File-120",
+    "SPDXRef-File-121",
+    "SPDXRef-File-122",
+    "SPDXRef-File-123",
+    "SPDXRef-File-124",
+    "SPDXRef-File-125",
+    "SPDXRef-File-126",
+    "SPDXRef-File-127",
+    "SPDXRef-File-128",
+    "SPDXRef-File-129",
+    "SPDXRef-File-130",
+    "SPDXRef-File-131",
+    "SPDXRef-File-132",
+    "SPDXRef-File-133",
+    "SPDXRef-File-134",
+    "SPDXRef-File-135",
+    "SPDXRef-File-136",
+    "SPDXRef-File-137",
+    "SPDXRef-File-138",
+    "SPDXRef-File-139",
+    "SPDXRef-File-140",
+    "SPDXRef-File-141",
+    "SPDXRef-File-142",
+    "SPDXRef-File-143",
+    "SPDXRef-File-144",
+    "SPDXRef-File-145",
+    "SPDXRef-File-146",
+    "SPDXRef-File-147",
+    "SPDXRef-File-148",
+    "SPDXRef-File-149",
+    "SPDXRef-File-150",
+    "SPDXRef-File-151",
+    "SPDXRef-File-152",
+    "SPDXRef-File-153",
+    "SPDXRef-File-154",
+    "SPDXRef-File-155",
+    "SPDXRef-File-156",
+    "SPDXRef-File-157",
+    "SPDXRef-File-158",
+    "SPDXRef-File-159",
+    "SPDXRef-File-160",
+    "SPDXRef-File-161",
+    "SPDXRef-File-162",
+    "SPDXRef-File-163",
+    "SPDXRef-File-164",
+    "SPDXRef-File-165",
+    "SPDXRef-File-166",
+    "SPDXRef-File-167",
+    "SPDXRef-File-168",
+    "SPDXRef-File-169",
+    "SPDXRef-File-170",
+    "SPDXRef-File-171",
+    "SPDXRef-File-172",
+    "SPDXRef-File-173",
+    "SPDXRef-File-174",
+    "SPDXRef-File-175",
+    "SPDXRef-File-176",
+    "SPDXRef-File-177",
+    "SPDXRef-File-178",
+    "SPDXRef-File-179",
+    "SPDXRef-File-180",
+    "SPDXRef-File-181",
+    "SPDXRef-File-182",
+    "SPDXRef-File-183",
+    "SPDXRef-File-184",
+    "SPDXRef-File-185",
+    "SPDXRef-File-186",
+    "SPDXRef-File-187",
+    "SPDXRef-File-188",
+    "SPDXRef-File-189",
+    "SPDXRef-File-190",
+    "SPDXRef-File-191",
+    "SPDXRef-File-192",
+    "SPDXRef-File-193",
+    "SPDXRef-File-194",
+    "SPDXRef-File-195",
+    "SPDXRef-File-196",
+    "SPDXRef-File-197",
+    "SPDXRef-File-198",
+    "SPDXRef-File-199",
+    "SPDXRef-File-200",
+    "SPDXRef-File-201",
+    "SPDXRef-File-202",
+    "SPDXRef-File-203",
+    "SPDXRef-File-204",
+    "SPDXRef-File-205",
+    "SPDXRef-File-206",
+    "SPDXRef-File-207",
+    "SPDXRef-File-208",
+    "SPDXRef-File-209",
+    "SPDXRef-File-210",
+    "SPDXRef-File-211",
+    "SPDXRef-File-212",
+    "SPDXRef-File-213",
+    "SPDXRef-File-214",
+    "SPDXRef-File-215",
+    "SPDXRef-File-216",
+    "SPDXRef-File-217",
+    "SPDXRef-File-218",
+    "SPDXRef-File-219",
+    "SPDXRef-File-220",
+    "SPDXRef-File-221",
+    "SPDXRef-File-222",
+    "SPDXRef-File-223"
+   ]
+  }
+ ],
+ "files": [
+  {
+   "fileName": "./.envrc",
+   "SPDXID": "SPDXRef-File-12",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "1d26c74fd25a4c3dbb09e029fc609588da499fd4af2a41c88f6316c7f8c54cf1"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./.gitignore",
+   "SPDXID": "SPDXRef-File-13",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "1f34dc1b8c3a68a7e459851d7c1cabdda29866d206df6516660f7bc8cb6d072a"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./.opencode/agents/refactor.md",
+   "SPDXID": "SPDXRef-File-14",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "db7a81de58fb7ca8c6f044c71d3ed8bef6d2249417c61983e2944285a65f5f3e"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./AGENTS.md",
+   "SPDXID": "SPDXRef-File-15",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "a33871b341c47b1e4ab471c5d5397813a2c7b67c5920f88fb71bdda1e17afd20"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./ARCHITECTURE.md",
+   "SPDXID": "SPDXRef-File-16",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "3ec7683da0f0bd0263b62721c8b72fe58a600af086bfac7715c0107c2af33461"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./CLAUDE.md",
+   "SPDXID": "SPDXRef-File-17",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "a33871b341c47b1e4ab471c5d5397813a2c7b67c5920f88fb71bdda1e17afd20"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./LICENSE",
+   "SPDXID": "SPDXRef-File-18",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./Package.resolved",
+   "SPDXID": "SPDXRef-File-19",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "ef0453a8765a42b2b06961b6f65d263e9583e726278cbf23591d647dc1ae7ef0"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./Package.swift",
+   "SPDXID": "SPDXRef-File-20",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9612bab2556f4e1a39238bfa4c616d1f31af7d559a08477ed19bb9530853cd22"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./README.md",
+   "SPDXID": "SPDXRef-File-21",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "20f703ead7467cefd162b1dced14f7507992db9afe11311fec2cec6d9b5d2479"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./ToDo.md",
+   "SPDXID": "SPDXRef-File-22",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "635656c1673a08c87e141e35def8900846bb852e4faac90dd1b3040ab4b3dbc2"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./bundle.sh",
+   "SPDXID": "SPDXRef-File-23",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "b237b8beae2e58954632db85d45e8d55efc790850ca0126a969ff63bfa42a232"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/dev/coreaudio.md",
+   "SPDXID": "SPDXRef-File-24",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9ab28b71dca4d8823db192b2518e6e67ab07f1548cfbd94f3a364b13e9b9e6ad"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/dev/known-issues.md",
+   "SPDXID": "SPDXRef-File-25",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "eff4e61c8cff40e07558d801a1cfe10c3462a1f5638ddd060ece983d0a571e12"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/dev/memory-safety.md",
+   "SPDXID": "SPDXRef-File-26",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "2ec4d0beda6573429d4d0fc3062396bf99e2c2b5219c7f2d8fb65955df257133"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/dev/project-patterns.md",
+   "SPDXID": "SPDXRef-File-27",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "fdc1f8852d90c7c68444bb60e78b07b98adce1faf32699d6caebfd984acd62a7"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/dev/realtime-safety.md",
+   "SPDXID": "SPDXRef-File-28",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "6720c77ca1bbce4282db9fa408f62b9fba89db64b8b899d9d93c36b16d2e3600"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/dev/swift-concurrency.md",
+   "SPDXID": "SPDXRef-File-29",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "46885bae85494573aab01d752b7dd44acd82a844b8653080a6ab0332c706ee20"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/plans/Code-Size-Analysis.md",
+   "SPDXID": "SPDXRef-File-30",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "3b276999eaaee8a9a3e6b69f9d785b1f1e970a2c3f044c640204af84136b5a9d"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/plans/TCC-Permission-Architecture.md",
+   "SPDXID": "SPDXRef-File-31",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "73ff937f5853121055328105d4b0a75887a0a7ff148ed2a3bd7804a784fd93cc"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/user/EQ-Presets-Guide.md",
+   "SPDXID": "SPDXRef-File-32",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "dda5464e216f80f2fd5e9233398afe9869b1eda7693aded335e96491412d5bae"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/user/How-It-Works.md",
+   "SPDXID": "SPDXRef-File-33",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "39bd295782acd41c1ef09c6f543901a49b0588d970c36f66a81b6de23f52dfd6"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/user/REW-Import.md",
+   "SPDXID": "SPDXRef-File-34",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "1f84abaca293feb5aa31ff57c1d1851590f7e9b55cc40257e49e547f3ccc866d"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/user/The-EQ-Engine.md",
+   "SPDXID": "SPDXRef-File-35",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "d5ae4b4356c660c4672262e76dc555de363b5b09100558d393dcbcfedf430e60"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/user/User-Guide.md",
+   "SPDXID": "SPDXRef-File-36",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "d0cd2561c45afdb57864aa3daa30d3c9c79e08d8567d7e4f60c847e69227da71"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/user/images/Equaliaer.pxd",
+   "SPDXID": "SPDXRef-File-37",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "02a3fba591c28ae1a1d2f17307e3bf6bf5650bc80f6711bd0a0f0fcdf42d1fef"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/user/images/equalisaer-main-window.png",
+   "SPDXID": "SPDXRef-File-38",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "755dde6d9914ca7cd04e516746e5108880848b3c1da71795b8d7f5ea4001308d"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./docs/user/images/equalisaer-menu-bar.png",
+   "SPDXID": "SPDXRef-File-39",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "db67897e644f586a2bc0bb670f4b2ef3155eeeef30f60c027c1ea88c80e9b53f"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./driver/EqualiserDriver.patch",
+   "SPDXID": "SPDXRef-File-40",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9921ab36e9dda06de64ccf0b3bff3613e1afba568d5d6c3992231c0e6691ea80"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./driver/README.md",
+   "SPDXID": "SPDXRef-File-41",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9119a2cb0218b845be8447b75f06d3bbdc5b21024589db25235ab20ec76c07ee"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./driver/driver.sh",
+   "SPDXID": "SPDXRef-File-42",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "eb428961d432cc9b830b4438bea6b3f354dae91778ff11f0076b4976bdafbb5d"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./driver/src/EqualiserDriver.c",
+   "SPDXID": "SPDXRef-File-43",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "dab8a053061b76d7aeb5343cb8e8a1214dbd4f33e6ffb034ba4b514186bae431"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2019 Existential Audio Inc.; Copyright (C) Christophe Knage; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: driver; upstream origin: ExistentialAudio/BlackHole@11efc147fef0ac537be1c24ea7e29e4b2a2d63c7"
+  },
+  {
+   "fileName": "./driver/src/Info.plist",
+   "SPDXID": "SPDXRef-File-44",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "d6ff2527e9a3eabe461b5365aa1f0145ecaa69234753c0713293bf5e0f40b5b9"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2019 Existential Audio Inc.; Copyright (C) Christophe Knage; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: driver; upstream origin: ExistentialAudio/BlackHole@11efc147fef0ac537be1c24ea7e29e4b2a2d63c7"
+  },
+  {
+   "fileName": "./flake.lock",
+   "SPDXID": "SPDXRef-File-45",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "5f32032b11d4a3133255f679548f92acdb98f9814bb6a7818216007158c900f5"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./flake.nix",
+   "SPDXID": "SPDXRef-File-46",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "27eb025354068d40a7677c4d2c0ef8295d4e35c135b34fb8c65bac88e3046964"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./make-icon.swift",
+   "SPDXID": "SPDXRef-File-47",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "ec0d4c86a1be6e803682bd5620c6ee16112fb521a8ae46cc0c96704eba63a6ad"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./release.sh",
+   "SPDXID": "SPDXRef-File-48",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "8c0f6d8404487827e344741b1ed06c588502834baf37a605c22885f22ce60516"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./resources/AppIcon-original.svg",
+   "SPDXID": "SPDXRef-File-49",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "98c82ce9f30fc0b25c9d91dfb4c5e936e4cf12aa3cc747f517d975e4e2807525"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./resources/AppIcon.svg",
+   "SPDXID": "SPDXRef-File-50",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "e3275192c5741fb3bbe8a539810ae81628d6170220cb6b7e73533843bfdbe1ff"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./resources/Equaliser.entitlements",
+   "SPDXID": "SPDXRef-File-51",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "6733888af822733b5cc917181510af2101f07fbc67cddf525d17fa4f31c076d3"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./resources/MenuBarIcon.png",
+   "SPDXID": "SPDXRef-File-52",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "b0dee5cefe879059e22d6b4b395db8dbe96fe6861ca9326e3d720ecdae3437d2"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./resources/MenuBarIcon@2x.png",
+   "SPDXID": "SPDXRef-File-53",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "b1bf43977bf40dd50cdc6faa564068164344291f8ba5e92b6e8905a87fcc418e"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/app/AppStateSnapshot.swift",
+   "SPDXID": "SPDXRef-File-54",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "13c995620aa753d81fc0771a557456b374e8f1142bf690252d033dc531892eab"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/app/EqualiserApp.swift",
+   "SPDXID": "SPDXRef-File-55",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "b0b287919228a257412b5bd0a00fa80d38118bc270e8132917f676b54eafaca9"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/app/EqualiserStore.swift",
+   "SPDXID": "SPDXRef-File-56",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "ae317850911c131dcd9fd84b580dbf5685365734a4a64ecd0fd73480e8661311"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/app/Info.plist",
+   "SPDXID": "SPDXRef-File-57",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "e06f0abc408ded254a712c7d9f70e2b9efa2c0a66a49babedf595fc420105b45"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/app/WindowActivationController.swift",
+   "SPDXID": "SPDXRef-File-58",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "d53c7896ee13d8a648a94602139f1183bef04865964006ffa4b63a8130ebce52"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/correction/CorrectionComposer.swift",
+   "SPDXID": "SPDXRef-File-59",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "ff6ecb46eebc9870b79243553669aab475a3b6f64ef01c782a128b9001c5e1dc"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/correction/CorrectionController.swift",
+   "SPDXID": "SPDXRef-File-60",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "8cbfd425ea726d8970cad8b72f4d990115fa2e93c44686543a4d6a98812b8a64"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/correction/DeviceCorrectionProfile.swift",
+   "SPDXID": "SPDXRef-File-61",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "856ab3486c69c7a7c8a42088a8179eba5ddc0f6d85c510e9581f356147985c9f"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/device/AudioPermissionService.swift",
+   "SPDXID": "SPDXRef-File-62",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "fb21b976c0e0649955903c8c6a69c142641ce608438cbad3d0d494d2576de49c"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/DeviceSampleRateService.swift",
+   "SPDXID": "SPDXRef-File-63",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "1542fe5315464ee3b38e2eed82b0a512326e073da81f297eefd7bcac3ffe963c"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/OutputDeviceSelection.swift",
+   "SPDXID": "SPDXRef-File-64",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "5376569393209792d7143e46305906a89523a641654bf4d525a05716eb7b4498"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/PermissionRequesting.swift",
+   "SPDXID": "SPDXRef-File-65",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "78125681d6acc12aa3844f8b69ed69652fcc6fb40adc8fd92d84297b74a98d1e"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/SampleRateObserving.swift",
+   "SPDXID": "SPDXRef-File-66",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "febc66ac4d1a04e38385f83f6e7ed7e8aff91d553774564e6501123120d6de6e"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/SystemDefaultObserver.swift",
+   "SPDXID": "SPDXRef-File-67",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "a5adaf13c5e2cd6a73223caa6af5dcc4be31425ec7814120c06f5e1938250922"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/SystemDefaultObserving.swift",
+   "SPDXID": "SPDXRef-File-68",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "72c8f700010f4b49effd768e21986e444219b5a77cd152ebbd047e352e1775b3"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/change/DeviceAliveMonitor.swift",
+   "SPDXID": "SPDXRef-File-69",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "c7f86bbbe917362f7ec986e4a3b1ee63db98140990ab31755d369c29ac0bcd69"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/change/DeviceAliveMonitoring.swift",
+   "SPDXID": "SPDXRef-File-70",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "4e2d4d2065c3f3f980c82ecffd04d6653e84662d7bd8503909d97ddb7dfa8312"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/change/DeviceChangeCoordinator.swift",
+   "SPDXID": "SPDXRef-File-71",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "a6631ee74838e2557490701744fd8bc44a802c384c8af5295cd52e4d124e9a70"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/change/DeviceChangeDetector.swift",
+   "SPDXID": "SPDXRef-File-72",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "2589f8a46e7ed3aa59d2bf790f82ad4f038e16ba30754a5dbbc1355e5fef263b"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/change/DeviceChangeEvent.swift",
+   "SPDXID": "SPDXRef-File-73",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "c86554cbb72b0c9ce66e62f54db936da491cee397d5bcb6b90bd277ecdd0ecdc"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/change/HeadphoneSwitchPolicy.swift",
+   "SPDXID": "SPDXRef-File-74",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "221ed3110347dfba540d3bb624f24c14c2e3124e58f74accba2df0a3a620e305"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/change/OutputDeviceHistory.swift",
+   "SPDXID": "SPDXRef-File-75",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "960bb6910faea6772acb88a77fc0e4fd743426b1a8de40e7bb41b566cefe0791"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/enumeration/AudioDevice.swift",
+   "SPDXID": "SPDXRef-File-76",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "f0ec552b9fd2d138037ceef7e0b44d05dea08c4aafed77cf531ea7e3d400e6e2"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/enumeration/CoreAudioHelpers.swift",
+   "SPDXID": "SPDXRef-File-77",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9f319b19bc55af3c76b626278665cd1838ab4511d8786a756c8d4d93e6d57b30"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/enumeration/DeviceConstants.swift",
+   "SPDXID": "SPDXRef-File-78",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "f7a622d49074e0d916e12988ee118bade5b38cc297bd2a644a67bc19e9702ef6"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/enumeration/DeviceEnumerationService.swift",
+   "SPDXID": "SPDXRef-File-79",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "bd9755a40622cb4175b2147d3bf64b518a670a0533abd6df1b4a097059ce4ebd"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/enumeration/DeviceManager.swift",
+   "SPDXID": "SPDXRef-File-80",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "07fc3df91424513607b40c2d3a04adce4aa01dcaefdcae153c13db58e1cfa76d"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/enumeration/protocols/DeviceProviding.swift",
+   "SPDXID": "SPDXRef-File-81",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "b1884f2f1eabbaf0388f2ca041fa06635557abaad6dec84a57b0c4d1ab7fcc31"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/enumeration/protocols/Enumerating.swift",
+   "SPDXID": "SPDXRef-File-82",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "dc19450529530cef3561473777aa834a3ad33a30a9edb77b1d21b5f95c0d87ff"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/volume/DeviceVolumeService.swift",
+   "SPDXID": "SPDXRef-File-83",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "f1636ec56e66210a3b760dfcd1e64dc3852fe2d1d31acf090dbe8d2cbbbe9877"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/volume/VolumeManager.swift",
+   "SPDXID": "SPDXRef-File-84",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "39e59c07925143d0d52329b891f93c32a3198bd068c87765963768b201bfb39b"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/device/volume/protocols/VolumeControlling.swift",
+   "SPDXID": "SPDXRef-File-85",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "748146d13eb9d2ed3bb24f19c90555151384a23227bc96cea9b43aabc08c1616"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/driver/DriverConstants.swift",
+   "SPDXID": "SPDXRef-File-86",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "8d524dc0e5842cadaf68109b87fc3c3b86b0bc21a9ac2e4f7b9bb7b9582c40c0"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/driver/DriverDeviceRegistry.swift",
+   "SPDXID": "SPDXRef-File-87",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "bde42c523dd3f08a74ca2d6447c409ed946459a5e6baead4c8d7cd6795008c8e"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/driver/DriverLifecycleService.swift",
+   "SPDXID": "SPDXRef-File-88",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "143bfaf279fe2b066c6275fea8537b6dc000971f91e7a8404ff83bac43109392"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/driver/DriverManager.swift",
+   "SPDXID": "SPDXRef-File-89",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "73369579dfb8404f0a8c432f666a53de3e8b04c0e7b173c00804c13760b81c37"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/driver/DriverPropertyService.swift",
+   "SPDXID": "SPDXRef-File-90",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "554f98fb5a6b2c1c5b78765f31c2d816950d6dd0464d8f72d98d2757d202404a"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/driver/DriverTypes.swift",
+   "SPDXID": "SPDXRef-File-91",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "f1b91485d70160562422047650f8035d7896a6c1ee0707fd3a7f5d9ba439cd7e"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/driver/protocols/DriverAccessing.swift",
+   "SPDXID": "SPDXRef-File-92",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "68be7ab383631b2fbf0e01095745158fdf6e6b251f87cc0519c61fb8c54a1980"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/driver/protocols/DriverDeviceDiscovering.swift",
+   "SPDXID": "SPDXRef-File-93",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "57ce517578f0c87e85be110070282ca1f91933eef728e37ed4e9a41ac25cbc73"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/driver/protocols/DriverLifecycleManaging.swift",
+   "SPDXID": "SPDXRef-File-94",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "f0b87392eae0c63e9ff9718a90199f5178d0496972a2486fcdedb65cefd720d4"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/driver/protocols/DriverPropertyAccessing.swift",
+   "SPDXID": "SPDXRef-File-95",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9d89e1af7542384aee5c717d226e6259afe945b368d1983cc926e38645b0de07"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/EQCoefficientStager.swift",
+   "SPDXID": "SPDXRef-File-96",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "57ff7a278a4c757284d3b04aa887ba31a2f1a2b26bdf6600cfe3d649523e3651"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/HeadroomAnalyzer.swift",
+   "SPDXID": "SPDXRef-File-97",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "31245de432f219fcb8574eb28f6838cfb01c66a5fdf4edd5858a7217ded95c8b"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/dsp/LoudnessCompensation.swift",
+   "SPDXID": "SPDXRef-File-98",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "cf677b8140d21deae888b3ceba108f7385018a14e486579ad8fc980f23083d89"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/dsp/benchmark/DSPBenchmarkSuite.swift",
+   "SPDXID": "SPDXRef-File-99",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "0c11b330020f80a840e2509419000ff1da7d062d9bdc0c0d0dd7a745ba5a17cd"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/dsp/biquad/BiquadCoefficients.swift",
+   "SPDXID": "SPDXRef-File-100",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "b53fd7984333baa9c6b5edef7e5ba8ad570b73c6189166651d64475646e5308c"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/biquad/BiquadFilter.swift",
+   "SPDXID": "SPDXRef-File-101",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "d74cae1b6973fdfc17ef41893b2db5a21ac82054ffba75a5afe564a884eca6b5"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/biquad/BiquadMath.swift",
+   "SPDXID": "SPDXRef-File-102",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "92fc9c6b0d1f94323d4455de3e573518c0c8c3186cc0fcbd2a84ed2b5abb057c"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/biquad/BiquadValidator.swift",
+   "SPDXID": "SPDXRef-File-103",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "cb87b600416cd19849b98ffa77084679aefdc49dfec0512a49dbb0d69010104b"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/biquad/LegacyBiquadFilter.swift",
+   "SPDXID": "SPDXRef-File-104",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "540b9ba85845a7215c67e5893419ab03dc3d793474e1c7f52d812132811ccea0"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/dsp/chain/ChannelEQState.swift",
+   "SPDXID": "SPDXRef-File-105",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "41d3879e0fc464687b7f05cd7bc9fe976f6ecf983a82312fb4bfc3e5cd160afa"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/chain/EQChain.swift",
+   "SPDXID": "SPDXRef-File-106",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "d9cf2191b59d91aab867911949fc8f3ae032674c0b1dc08f303c24f7288f420c"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/chain/EQChannelTarget.swift",
+   "SPDXID": "SPDXRef-File-107",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "3f39a019e50c3689f0d7d187807e53e85451fd02909eb89c4b66d5394ee8fdc2"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/chain/EQLayerState.swift",
+   "SPDXID": "SPDXRef-File-108",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "79b986bf84ba2a0f43d78582711bf9d21a5f8a98e4ef1bb046b742e526966254"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/config/BandwidthConverter.swift",
+   "SPDXID": "SPDXRef-File-109",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "941936601c2f4b10854a97c18949cfa1ac0d1765ba7437d75678eca56b0a44da"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/config/ChannelMode.swift",
+   "SPDXID": "SPDXRef-File-110",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9aea002c9af115448476556d34f2889e2a2db8fc6cbe73b65c829924dbcefec3"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/config/CompareMode.swift",
+   "SPDXID": "SPDXRef-File-111",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "3de72463f251eba84809d85b2980b78faaf9b7cc2b9ba764adf293c12696993a"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/config/CompareModeTimer.swift",
+   "SPDXID": "SPDXRef-File-112",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "062f5f3aed2c8b6ce6ad7b55df8b4989956070b56778c2376e947e27b92f3bd6"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/config/CompareModeTimerControlling.swift",
+   "SPDXID": "SPDXRef-File-113",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "e6e2f83c48518e5b9e945fb3ccc079f71d1b2b23c2464b1a4abb80eb02c61cd0"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/config/EQConfiguration.swift",
+   "SPDXID": "SPDXRef-File-114",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "8fe2790c9c5e5b7da107e8df1c0f92044a48a05d98da1e5b0478c4a0d385f523"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/config/EQLayerConstants.swift",
+   "SPDXID": "SPDXRef-File-115",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "8cfeb54e1b09ccf572cd0fb6dec9a695773ae4aea246e70297dd3e1a860a0152"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/config/FilterType.swift",
+   "SPDXID": "SPDXRef-File-116",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "cbe76c995bccc0cae540fa3fc7b8ca97d86b5476b62986ad8c6b850e269cee97"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/dsp/svf/SVFCoefficients.swift",
+   "SPDXID": "SPDXRef-File-117",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9032e1f521f17ac1491348890f86e609a81f632b66346caf50b9157d2340855d"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/dsp/svf/SVFMath.swift",
+   "SPDXID": "SPDXRef-File-118",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "b74e28db7d9926c479ea5b9b3e2bc3e11c1970c44171fcc9263d02cdec8cf41c"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/dsp/svf/TPTFilter.swift",
+   "SPDXID": "SPDXRef-File-119",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "327ea430f76598b6fce4481fc41110c89ccf51b0936d9c7681ca3c562cc5b616"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/meters/LoudnessMeter.swift",
+   "SPDXID": "SPDXRef-File-120",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "12157788d3832fdcb5377b8b6235210fad751c7be06804880d4b210ab3cd3690"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/meters/LoudnessProbe.swift",
+   "SPDXID": "SPDXRef-File-121",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "44b272e006d354611aa63acd469ad290a1bbf1472cc117d73ba2eb21eed367f1"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/meters/MeterConstants.swift",
+   "SPDXID": "SPDXRef-File-122",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "41fb600046485397cecfa3b9e2db00ffce03796596dda4a2f7c92f2d7ebab114"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/meters/MeterMath.swift",
+   "SPDXID": "SPDXRef-File-123",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "deb075577cf53b7d58e3635c99f13b8beea4c09b64de4845d4e4318adb1c5a49"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/meters/MeterObserver.swift",
+   "SPDXID": "SPDXRef-File-124",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "def1a89332bc4420fd61ca075a3f3018ca0a60892c9a63cb0b610c78beda97de"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/meters/MeterStore.swift",
+   "SPDXID": "SPDXRef-File-125",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "f2fb059d313a34fb65a1095131560545bb9e280e8b4aed35f5e6c228be9e826f"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/meters/SpectrumAnalyzer.swift",
+   "SPDXID": "SPDXRef-File-126",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "5aead05ab8abc6576223fc26d75008a44337c3f07850547784e381289aa0744b"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/meters/TruePeakMeter.swift",
+   "SPDXID": "SPDXRef-File-127",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "44f04ae96b7cdc7054ae57546f7bcf736d13df520a87f31e0962850bb1409ebc"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/pipeline/AudioConstants.swift",
+   "SPDXID": "SPDXRef-File-128",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "d195db28d44ef6fc8cc43efd08e3c233948bd3be68437852873962dea6609777"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/pipeline/AudioMath.swift",
+   "SPDXID": "SPDXRef-File-129",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "a02c24ce9f9245d6d78da899e9d1e6e91a3fadbd13ced4f4fd532e02e62dceeb"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/pipeline/AudioRingBuffer.swift",
+   "SPDXID": "SPDXRef-File-130",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "82fc50ba0c3c0e74baa12f6631cb6ed1c7d31e304dcaad95fe2c8fd5117b7be6"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/pipeline/PipelineManager.swift",
+   "SPDXID": "SPDXRef-File-131",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "88e889ff673b651e52296b3734b2dd9d21819d2c0850d4af540b31257ffcde24"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/pipeline/RenderCallbackContext.swift",
+   "SPDXID": "SPDXRef-File-132",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9ceb9eaecd55694abb8014675a6f9927723717072f6221a94c49be7343e4c0b8"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/pipeline/RenderPipeline.swift",
+   "SPDXID": "SPDXRef-File-133",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "ca82481300f31a0f4885e2d89bc357ce254d90837351f93772b6d61e04f16ced"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/pipeline/capture/CaptureMode.swift",
+   "SPDXID": "SPDXRef-File-134",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "b49811d957455c685a0e37dab63a241e51e21c854d5f075ef816b1d86bec6fd9"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/pipeline/capture/CaptureModePolicy.swift",
+   "SPDXID": "SPDXRef-File-135",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9212374209b17d50d54e2336c3231d5234e3856c2e23fbbd5fdae160df5eea62"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/pipeline/capture/CaptureRoutePlanner.swift",
+   "SPDXID": "SPDXRef-File-136",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "6330efecc30f2a4ea297be9ab49acc817e90472221571a11b0f67b1c24255802"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/pipeline/capture/DriverCapture.swift",
+   "SPDXID": "SPDXRef-File-137",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "827daafff559c0467a21f3aa9ced095ffb39196d7cf2202748a998572a7593dc"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/pipeline/capture/ProcessTapCapture.swift",
+   "SPDXID": "SPDXRef-File-138",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "3a3d6f5a6eb84d6fb481a6e1d5b565ad232aedf03446cf4e482518801f751944"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/pipeline/capture/SharedMemoryCapture.swift",
+   "SPDXID": "SPDXRef-File-139",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "8b657765a784ae31d2e26c3fe89505d45f070e8c009c178285050ce9130d8ea0"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/pipeline/hal/DirectDeviceOutput.swift",
+   "SPDXID": "SPDXRef-File-140",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "8f1db90e315207cb682450b2b3e70a536413a014eab2cad193c90a06762ee4b4"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/pipeline/hal/HALIOError.swift",
+   "SPDXID": "SPDXRef-File-141",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "acf3c50c51e4c842a77a42385e950b2d4a38c32b7ca0da87e9f10526c31d8914"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/pipeline/hal/HALIOManager.swift",
+   "SPDXID": "SPDXRef-File-142",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "23d71d88eb92da043d64c89704c8af02e6dd8624fff1c0e2aba805bad2d61528"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/presets/AutoEqImporter.swift",
+   "SPDXID": "SPDXRef-File-143",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "e8dd2e1fe150a307a9a69a7a5cc76484d1f00ad8d69ab557a34e47c7f54e9150"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/presets/EasyEffectsExporter.swift",
+   "SPDXID": "SPDXRef-File-144",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "f72707dbb203690eabf205bbba1268aa6844f4fb2532a2707131cdfc809e4ab5"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/presets/EasyEffectsImporter.swift",
+   "SPDXID": "SPDXRef-File-145",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "4d71287444bb9b444221b73d1ec964e159c8a2d0319d80bc3d82300b6dbfbf58"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/presets/FactoryPresets.swift",
+   "SPDXID": "SPDXRef-File-146",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "5a472f6a6d04db1729229d1079c7cc54efc039c7316fb82b9e50f03467b6e17b"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/presets/PresetManager.swift",
+   "SPDXID": "SPDXRef-File-147",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9cdeb8f9c84920a7599eaa95f7a8286d64ffa81a931ecafd4178fbdd91106435"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/presets/PresetModel.swift",
+   "SPDXID": "SPDXRef-File-148",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "5d211ebf5cd54626a1536c4ac836ab9a97ab788898d329eb715b6637404d7a9c"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/presets/REWImporter.swift",
+   "SPDXID": "SPDXRef-File-149",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "cca9e8446fa2b0d411a3991c4f206c01e4eb791d0a477213c8bf9b01c62f24c7"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/routing/AudioRoutingCoordinator.swift",
+   "SPDXID": "SPDXRef-File-150",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "892f5d431d3160d14dd4006a84c778442222ce0f1528b9764368d6d965897837"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/routing/AutomaticRoutingMode.swift",
+   "SPDXID": "SPDXRef-File-151",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "fe741da31887b5d36d97919029c1c145450fb1ead0b8a9e6b04cd86d8d9d31d7"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/routing/DriverNameManager.swift",
+   "SPDXID": "SPDXRef-File-152",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "12923a2b64046013d307cce96557111a869d073a384a03a63f2aaeb86b0b2f60"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/routing/ManualRoutingMode.swift",
+   "SPDXID": "SPDXRef-File-153",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "2641bef14b0f4d578fdae2a2dac675019a4ec3f127fa53104a7df4de3d9de114"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/routing/RoutingMode.swift",
+   "SPDXID": "SPDXRef-File-154",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "8673fd072e9eba9400c2f9072979636aeb12791956e5ab1e97137752a2f13613"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/routing/RoutingStatus.swift",
+   "SPDXID": "SPDXRef-File-155",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9d1077f48772c3e239149d8b7e3fc485e214d03701ec823d9b9986e7f2c953ca"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/EQViewModel.swift",
+   "SPDXID": "SPDXRef-File-156",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "13bebb5e5035b40c4712b560b6844bdfacd4680d286156d52eca76285988748a"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/PresetViewModel.swift",
+   "SPDXID": "SPDXRef-File-157",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "560ea616c00ac72174b426690d651701e1c2fe22ecc414b6646b4816d4a8ff62"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/RoutingViewModel.swift",
+   "SPDXID": "SPDXRef-File-158",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "2199b30b06ea516a71ae3fadbcddf07b27bc83931a264e0669cb136fa9f9fd2d"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/views/device/CorrectionPillView.swift",
+   "SPDXID": "SPDXRef-File-159",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "597a0aec10ba896f20399444dfbfab1fa21fb9c720a6aa40b88f290e758c2e19"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/ui/views/device/DeviceCorrectionView.swift",
+   "SPDXID": "SPDXRef-File-160",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "1c6d1c62ce3337ec9ddd62df474245d131d8f13e27259d2c40d852157c79db26"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/ui/views/device/DevicePickerView.swift",
+   "SPDXID": "SPDXRef-File-161",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "a9200e0a3c1b60f7c280f668241bc4771e6aaf59432712e8bbd2dd83a505eba4"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/views/device/RoutePillView.swift",
+   "SPDXID": "SPDXRef-File-162",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "88051da8783884c6def3ac067b6c5464cdc7ccd7b60f14591c727dc2c757fd3e"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/ui/views/driver/DriverInstallationView.swift",
+   "SPDXID": "SPDXRef-File-163",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "449c8554328fbc0d80eea099717bd99aa388edb03e0e8e2f44ae8cb07280e2ff"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/views/eq/BandCountControl.swift",
+   "SPDXID": "SPDXRef-File-164",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "f299839f41442ae4018056906176e2115e64d955999e8e491008a55a29d3b800"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/views/eq/CompositeCurveCanvas.swift",
+   "SPDXID": "SPDXRef-File-165",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "df0bf531bec3a493b0455e84efddbd4a1c80f4e812750213bcc91836e0aef65d"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/ui/views/eq/EQBandGridView.swift",
+   "SPDXID": "SPDXRef-File-166",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "c3c05b0f85eedb6cb85af2eea33cc2b61d5c4c3eecf27e4d05c45ae0c78cb377"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/views/eq/EQBandSliderView.swift",
+   "SPDXID": "SPDXRef-File-167",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "b1b37cd7db942a4bf0c41ecd6baabd9c631b89d1b925fd47ad14502efdd5a3db"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/views/eq/GainStepperControl.swift",
+   "SPDXID": "SPDXRef-File-168",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "76bc4e77ee45aecab6b3bb8c24953d9a47f6447b60a48a1ef12f0e48e799260f"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/views/eq/QLFLattice.swift",
+   "SPDXID": "SPDXRef-File-169",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "493799b733a4df565a95446d1a038f21896a610afd1e456e821fa435cc925336"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/ui/views/eq/SpectrumCanvas.swift",
+   "SPDXID": "SPDXRef-File-170",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "a5582bcf9e2777f70a3868f64bfd95210b8631b46b3c45c7984abcbf76c9b5ea"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/ui/views/main/EQWindowView.swift",
+   "SPDXID": "SPDXRef-File-171",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "01cd4a3d973903418cfe63fc51b28a6477f2758a32035fc097ee26e4c8ac884b"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/views/main/MenuBarView.swift",
+   "SPDXID": "SPDXRef-File-172",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9650447676c59ddfb0d11500525c5ccd022bb2fd6d9fc550ed9b6880fbd3363f"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/views/main/SettingsView.swift",
+   "SPDXID": "SPDXRef-File-173",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "be236f52ce1cfae311ae3973418e3c98d060894a99f4b8d2728fe31d85404e98"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/views/meters/LoudnessReadoutView.swift",
+   "SPDXID": "SPDXRef-File-174",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "7c06827dbccbc3f358b89ade318775edada2897affde9b2653bcef0bd833d1f0"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/ui/views/meters/QLFMeterDeck.swift",
+   "SPDXID": "SPDXRef-File-175",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "cd85dd26e905a66e6ccd4c3e6a29487227eea4fd5ff115bcbad3e5014e643526"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/ui/views/presets/PresetViews.swift",
+   "SPDXID": "SPDXRef-File-176",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "502059154e44ab27c100962b56b485f851a5dd5f0c0bd602637850a18ee6ddf6"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/views/shared/InlineEditableValue.swift",
+   "SPDXID": "SPDXRef-File-177",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "52263532dcb3829266b5e62e3cd3108a0ebb073921f3860b7d314ebfd5262b0d"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/views/shared/StepperButton.swift",
+   "SPDXID": "SPDXRef-File-178",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "411403ada92bed7a2d788068f5fc320b837f02006b4d53567ded8cf3ba52a855"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/views/shared/V2Controls.swift",
+   "SPDXID": "SPDXRef-File-179",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "aca4ef71f4a8fbf3f7fa1ba22f5daffbf9312d7d39476d0903bfb9e31eaef4e0"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./src/ui/views/shared/ViewExtensions.swift",
+   "SPDXID": "SPDXRef-File-180",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "15a7d0e180cd80433cbf145895d4015f6ec1f9a43e5730a965480a8114825182"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/ui/views/shared/WindowAccessor.swift",
+   "SPDXID": "SPDXRef-File-181",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "f0a78f3001605a1c524d02ec5342452270e52775c154553c74bbaf649d0111cc"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/updates/UpdateCheckService.swift",
+   "SPDXID": "SPDXRef-File-182",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "559b557141709e3991a0616bb4fafa135a5a1c7d308a9f49673f4299fff896ec"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/updates/UpdateTypes.swift",
+   "SPDXID": "SPDXRef-File-183",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "cd6ef05cad417a3eb8d2e6ccdefc230bd530b6c52386b474358c9045b061fe71"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./src/updates/protocols/UpdateChecking.swift",
+   "SPDXID": "SPDXRef-File-184",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "28bfa7ce54e6eb2160c5f4f99fe457f9ac51e6b7ddc16d81d832d9385c8e9139"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/EqualiserTests.swift",
+   "SPDXID": "SPDXRef-File-185",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "24c293914f2bbb4af6cdd2fd50fcd2356f9dcea92a7d0d4376852c54e4804097"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/app/EqualiserStoreTests.swift",
+   "SPDXID": "SPDXRef-File-186",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "3f626c9ee61f54858600d548952fb32bfce0ff1b7de827a0709524eb1e661b9e"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/app/FlattenUndoTests.swift",
+   "SPDXID": "SPDXRef-File-187",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "10da84602154a348aa5dc0df1ead207b89586ffb4abb3c88d50e3afa259ab4d0"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./tests/app/WindowActivationControllerTests.swift",
+   "SPDXID": "SPDXRef-File-188",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9e7295651daabea3781e3ba11b391d191f22dc33731140a67590b5a0760be981"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/correction/CorrectionTier2Tests.swift",
+   "SPDXID": "SPDXRef-File-189",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "aba917171350ecc4e172d90b160eca8ca30139465293807af81bf57eb343cf3b"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./tests/device/change/DeviceChangeDetectorTests.swift",
+   "SPDXID": "SPDXRef-File-190",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "572fcfd8c723214df490b438786453432c06541bdfd95546b1cd966364eeda58"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/device/change/OutputDeviceHistoryTests.swift",
+   "SPDXID": "SPDXRef-File-191",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "d2f52b9ac21aa633085573be411b2886613d40b026506edece52d8b552442e6b"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/device/enumeration/DeviceManagerTests.swift",
+   "SPDXID": "SPDXRef-File-192",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "3dc45ebb886e4fdc636517622f238e872eeb39bf44ccbdfff176478a97d6a44c"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/dsp/CascadePreampTests.swift",
+   "SPDXID": "SPDXRef-File-193",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "e2309add561520fb2e63e8d9d0bbefd6d5fa34bfb432a94793077362c2efe1a2"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./tests/dsp/CompositeCurveTests.swift",
+   "SPDXID": "SPDXRef-File-194",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "e0254c34005bbce027d3a71be9ba31044cad41715ef2ac5cc3eee9ea467e9d90"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./tests/dsp/DeepDSPVerificationTests.swift",
+   "SPDXID": "SPDXRef-File-195",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "76d5dc8e32961e2860319a3ffe4c0ab1c5e3d13c389b888cf0a4ef62d4e66f9c"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./tests/dsp/MeasurementHarnessTests.swift",
+   "SPDXID": "SPDXRef-File-196",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9077ab36482ff18674996a039b4f7b9c5b7531c33c016af7a249f54da7507a0f"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./tests/dsp/biquad/BiquadFilterTests.swift",
+   "SPDXID": "SPDXRef-File-197",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "c4832f670993f73ed3b2550e66350710f3646f0274d76f992496124c73b518f6"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/dsp/biquad/BiquadMathTests.swift",
+   "SPDXID": "SPDXRef-File-198",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "dc1eb347b76c0add23dfe5bac7e3058d0df4e6802c8713d32167054b56d40fe7"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/dsp/biquad/BiquadStabilityTests.swift",
+   "SPDXID": "SPDXRef-File-199",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "442253c1f34a2c2c019b2f11145a037f83c52fa16332b40d1f71b3ee1c3c001d"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/dsp/chain/EQChainConcurrencyTests.swift",
+   "SPDXID": "SPDXRef-File-200",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "ada6f7a7eb9ae3741f0850bf396bb9fa82d708c84e77ad49f84b86bf39f23983"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/dsp/chain/EQChainTests.swift",
+   "SPDXID": "SPDXRef-File-201",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "650d0ed9b2710fa7ade63021fed111ca7159f317c2ec3876847770844211cc81"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors; Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: mixed; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/dsp/config/BandwidthConverterTests.swift",
+   "SPDXID": "SPDXRef-File-202",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "19731ea787afdf3366f69a7a3708485cea73867a7fb5ab57170e0f3491e9fae7"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/dsp/config/EQConfigurationTests.swift",
+   "SPDXID": "SPDXRef-File-203",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "bd4dfdd5764cbe1edd0c56f78363baecabf6765c228af6a2fb09c32a644406d2"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/dsp/config/FilterTypeTests.swift",
+   "SPDXID": "SPDXRef-File-204",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "97e0459d0792ea3da4e146f6ef4ab7d6636e860e3d06df8a0255cc3430cf6fc7"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/meters/LoudnessTests.swift",
+   "SPDXID": "SPDXRef-File-205",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "7b65c19841f35537b8e34aa1238b5828c9675066d30260cd2393fce7d56d87bf"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./tests/meters/MeterCalculationTests.swift",
+   "SPDXID": "SPDXRef-File-206",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "7f86bdbcf7473cc535e3df0b9aeb77a61709c072181348be1c41871bd762e004"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/meters/MeterStoreTests.swift",
+   "SPDXID": "SPDXRef-File-207",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "d908293940198dfc76f14ebb6c7b18ad709d1d50b3928c7ef795fa5a6db7a2b5"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/meters/SpectrumAnalyzerTests.swift",
+   "SPDXID": "SPDXRef-File-208",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "82df023908e386399915bada03e05a88df20eb95c2f8dd67038c3947230ee185"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./tests/meters/TruePeakLimiterTests.swift",
+   "SPDXID": "SPDXRef-File-209",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "c71e7abcd1e13297e51245fee1ea2265c703e7b2989a583b38c95e9ca849a15f"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./tests/pipeline/AudioMathTests.swift",
+   "SPDXID": "SPDXRef-File-210",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "64fae400b3929a8ca50bd6fc8786a835288fde9e5b53ed69a04bd318ef6b7447"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/pipeline/AudioRingBufferTests.swift",
+   "SPDXID": "SPDXRef-File-211",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "5fdc45c7479c20a1be9d9e40ff0582ee3d389887b11a1d3145e9e3d90613d531"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/pipeline/RenderPipelineTests.swift",
+   "SPDXID": "SPDXRef-File-212",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "983aaa98d4470f527a866d527ce5ef391a1c2995566b0c4f247831d622b7e367"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/pipeline/capture/CaptureLivenessTests.swift",
+   "SPDXID": "SPDXRef-File-213",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "3e6879d04db181c462fd843f1c4410202de4f847667df50b69632f92fa703b19"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./tests/pipeline/capture/CaptureModePolicyTests.swift",
+   "SPDXID": "SPDXRef-File-214",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "d794496a78e920283dc6af1e95ef063df573513fbef9aa89f2bced48efe1706f"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/presets/EasyEffectsImportExportTests.swift",
+   "SPDXID": "SPDXRef-File-215",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "cc788d86bcb9070377b8a80b2d0e6b274bf6b357d66f6de93757a7b07fed4e1b"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/presets/FactoryPresetEvidenceTests.swift",
+   "SPDXID": "SPDXRef-File-216",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "1cb8353717ec40d88209920d1eb7d2d376de62a3c47b7bf134fa13d8ccc5b40e"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./tests/presets/PresetCodableTests.swift",
+   "SPDXID": "SPDXRef-File-217",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "7557dfa25a85043c8600b4d3d1adb2c7939c0e3eecf37e3bf40e71b2cd2e956a"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/presets/PresetMigrationTests.swift",
+   "SPDXID": "SPDXRef-File-218",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "3a641e506ca9f4f89d6209dd9cab10dabe340e6eed9414bcb2d2c255b8fee90c"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/presets/REWImporterTests.swift",
+   "SPDXID": "SPDXRef-File-219",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "2bc1be76c76599c1f248225342eebf811e7cecf8c0214fad482755710ecafde2"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/ui/PresetViewModelTests.swift",
+   "SPDXID": "SPDXRef-File-220",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "768af4d865a792a08df58232dba40611da5c286f4eb85184bc049cdb638bce2f"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/ui/QLFLatticeTests.swift",
+   "SPDXID": "SPDXRef-File-221",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "69c847b5b27c9d2969270bf3457a5016c1efe771ae1062bb0cd80e88887da1c7"
+    }
+   ],
+   "copyrightText": "Copyright (C) 2026 obtentio",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: ours; upstream origin: NONE"
+  },
+  {
+   "fileName": "./tests/ui/RoutingViewModelTests.swift",
+   "SPDXID": "SPDXRef-File-222",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "9bcdb375a533ae27ee1d313c1b6961afb9eae1976f378c0b9049d76d0a54a92b"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  },
+  {
+   "fileName": "./tests/updates/UpdateCheckServiceTests.swift",
+   "SPDXID": "SPDXRef-File-223",
+   "checksums": [
+    {
+     "algorithm": "SHA256",
+     "checksumValue": "f21ae24f191379d735c2c77d06b5013f2966f9eb3e9c0ccdb2c36c603962f7fc"
+    }
+   ],
+   "copyrightText": "Copyright (C) Christophe Knage and contributors",
+   "licenseConcluded": "GPL-3.0-only",
+   "comment": "authorship class: upstream; upstream origin: cvknage/equaliser@8472be63f6c08333c21338da0c2be36ea2694234"
+  }
+ ],
+ "comment": "Historical census from 2026-11-13; private agent configuration omitted for public distribution. Not a current release file inventory."
+}

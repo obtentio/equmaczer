@@ -1,0 +1,1025 @@
+// equmaczer — modified by obtentio, 2026. Based on work Copyright (C) Christophe Knage and contributors. Licensed under the GNU GPL v3 (see LICENSE).
+import AudioToolbox
+import Atomics
+import CoreAudio
+import os.log
+
+/// Context passed to both the input and output HAL render callbacks.
+/// Contains ring buffers for inter-callback communication and all state
+/// needed for real-time audio processing without requiring any allocations or locks.
+///
+/// Data flow (HAL input mode — ring buffers):
+/// 1. Input callback captures audio from device → writes to ring buffers
+/// 2. Output callback reads from ring buffers → processes through EQ → outputs
+///
+/// Data flow (shared memory capture mode — direct):
+/// 1. Output callback polls driver shared memory → writes directly to inputBuffers
+/// 2. Output callback processes inputBuffers through EQ → outputs
+///    (bypasses intermediate AudioRingBuffer since both steps run on the same thread)
+///
+/// - Important: This class is `@unchecked Sendable` because it is accessed from
+///   both the main thread (for setup) and the audio render thread (for processing).
+///   All mutable state is designed for single-writer/single-reader access patterns.
+final class RenderCallbackContext: @unchecked Sendable {
+    // MARK: - Properties
+
+    private static let maxMeterChannels = MeterConstants.maxMeterChannels
+    private static let silenceDB: Float = MeterConstants.silenceDB
+
+    /// Ring buffers for audio samples (one per channel).
+    /// Written by input callback, read by output callback.
+    let ringBuffers: [AudioRingBuffer]
+
+    /// The INPUT HAL audio unit for pulling audio in the input callback.
+    /// The input callback uses AudioUnitRender on this unit to get captured samples.
+    let inputHALUnit: AudioComponentInstance?
+
+    /// Per-channel EQ chain arrays. Index = layer (0 = user EQ, 1+ = future layers).
+    /// Pre-allocated at init. Unused layers are passthrough (0 active bands).
+    /// Left channel chains for left speaker, right channel chains for right speaker.
+    let leftEQChains: [EQChain]
+    let rightEQChains: [EQChain]
+
+    /// Number of audio channels.
+    let channelCount: UInt32
+
+    /// Maximum number of frames per callback.
+    let maxFrameCount: UInt32
+
+    /// Driver capture for shared memory polling (optional, only in shared memory mode).
+    /// When set, the output callback will poll the driver before reading from ring buffers.
+    private nonisolated(unsafe) var driverCapture: DriverCapture?
+    /// The mixer instance for per-channel processing (card 4). Set by the pipeline during start.
+    nonisolated(unsafe) var mixer: ChannelMixer?
+    /// Stable order of channel slots that matches per-tap buffer order (card 4).
+    nonisolated(unsafe) var mixerTapSlots: [ChannelMixerSlot] = []
+
+    var recordingConfiguration = RecordingConfiguration()
+    let recordingFeed: RecordingFeed
+    var hardwareOutputChannelCount = 2
+    nonisolated(unsafe) var mixerInputChannelOffset = 0
+
+    /// Total input frames actually received from the capture source
+    /// (HAL input renders, shared-memory polls, process-tap IOProc).
+    /// The capture liveness watchdog samples this counter: a route
+    /// whose counter does not advance is producing silence, whatever
+    /// its start result claimed. Frames are counted, not levels —
+    /// digital silence from a live source still advances the counter.
+    private let inputFrameCounter = ManagedAtomic<UInt64>(0)
+
+    /// Records frames received from the capture source. Audio thread.
+    @inline(__always)
+    func noteInputFrames(_ count: Int) {
+        if count > 0 {
+            inputFrameCounter.wrappingIncrement(by: UInt64(count), ordering: .relaxed)
+        }
+    }
+
+    /// Total input frames received since this context was created.
+    var inputFramesReceived: UInt64 {
+        inputFrameCounter.load(ordering: .relaxed)
+    }
+
+    // MARK: - Loudness (BS.1770)
+
+    /// Loudness probes: `loudnessInProbe`/`loudnessOutProbe` bracket
+    /// the EQ in normal processing (their paired delta drives
+    /// loudness-matched bypass); `loudnessDisplayProbe` meters the
+    /// final processing buffers in every mode for the LUFS readout.
+    let loudnessInProbe = LoudnessProbe()
+    let loudnessOutProbe = LoudnessProbe()
+    let loudnessDisplayProbe = LoudnessProbe()
+
+    /// Match-gain target, stored as Float bits per the atomic
+    /// target-gain pattern used throughout this context.
+    private let targetBypassMatchGainAtomic = ManagedAtomic<Int32>(1065353216) // Float 1.0 bits
+    private nonisolated(unsafe) var bypassMatchGainLinear: Float = 1.0
+
+    func configureLoudness(sampleRate: Double) {
+        loudnessInProbe.configure(sampleRate: sampleRate)
+        loudnessOutProbe.configure(sampleRate: sampleRate)
+        loudnessDisplayProbe.configure(sampleRate: sampleRate)
+        spectrumAnalyzer.configure(sampleRate: sampleRate)
+    }
+
+    /// Derives the output limiters' hold and release from the sample rate.
+    func configureLimiters(sampleRate: Double) {
+        for limiter in outputTruePeakLimiters {
+            limiter.configure(sampleRate: sampleRate)
+        }
+    }
+
+    /// Whether the output limiters share one gain trajectory (Linked
+    /// channel mode). Written from the control side, read per buffer on
+    /// the audio thread.
+    private let limiterLinked = ManagedAtomic<Bool>(false)
+
+    func setLimiterLinked(_ linked: Bool) {
+        limiterLinked.store(linked, ordering: .relaxed)
+    }
+
+    /// The EQ changed, so the measured delta no longer describes it.
+    /// Incremented on every restage; the control side compares it
+    /// against the last value it saw to learn that the EQ changed.
+    let restageCounter = ManagedAtomic<UInt64>(0)
+
+    func resetDeltaLoudness() {
+        loudnessInProbe.reset()
+        loudnessOutProbe.reset()
+        restageCounter.wrappingIncrement(ordering: .relaxed)
+    }
+
+    /// Sets the gain applied to the flat-compare path so its loudness
+    /// matches the EQ path. Set from the control thread.
+    func setBypassMatchGain(linear: Float) {
+        targetBypassMatchGainAtomic.store(Int32(bitPattern: linear.bitPattern), ordering: .relaxed)
+    }
+
+    /// Peak limiter gain reduction per channel (dB, >= 0) since the
+    /// control side last asked. In linked mode both channels report
+    /// the shared trajectory's reduction. Control side only.
+    func limiterGainReductionDB() -> [Float] {
+        let left = outputTruePeakLimiters[0].consumeMaxGainReductionDB()
+        if limiterLinked.load(ordering: .relaxed) {
+            return [left, left]
+        }
+        return [left, outputTruePeakLimiters[1].consumeMaxGainReductionDB()]
+    }
+
+    /// Meters the processing buffers before EQ. Normal mode only —
+    /// engines call this conditionally.
+    func measureLoudnessIn(frameCount: UInt32) {
+        loudnessInProbe.feed(buffers: processingBufferPointers, frameCount: Int(frameCount))
+    }
+
+    /// Meters the final processing buffers: into the out probe when
+    /// the EQ ran (delta pair), and always into the display probe.
+    func measureLoudnessOut(frameCount: UInt32) {
+        if processingMode == 1 {
+            loudnessOutProbe.feed(buffers: processingBufferPointers, frameCount: Int(frameCount))
+        }
+        loudnessDisplayProbe.feed(buffers: processingBufferPointers, frameCount: Int(frameCount))
+        spectrumAnalyzer.feed(buffers: processingBufferPointers, frameCount: Int(frameCount))
+    }
+
+    /// Live output spectrum for the Zone D stage display.
+    let spectrumAnalyzer = SpectrumAnalyzer()
+
+    /// Applies the loudness-match gain on the flat-compare path,
+    /// ramped per callback like every other gain in this context.
+    func applyBypassMatchGain(frameCount: UInt32) {
+        applyGain(
+            to: processingBuffers,
+            frameCount: frameCount,
+            currentGain: &bypassMatchGainLinear,
+            targetGain: Float(bitPattern: UInt32(bitPattern: targetBypassMatchGainAtomic.load(ordering: .relaxed)))
+        )
+    }
+
+    /// Pre-allocated buffers for input audio samples (one per channel for deinterleaved layout).
+    /// Used by the input callback when pulling audio from the input HAL unit.
+    private let inputBuffers: [UnsafeMutablePointer<Float>]
+
+    /// Size of each channel buffer in samples (frames per channel).
+    private let framesPerBuffer: Int
+
+    /// Pre-allocated AudioBufferList with proper memory layout for multiple buffers.
+    /// Used by the input callback to receive audio from AudioUnitRender.
+    private let inputBufferListPtr: UnsafeMutablePointer<AudioBufferList>
+
+    /// Size of the allocated AudioBufferList in bytes.
+    private let inputBufferListSize: Int
+
+    /// Pre-allocated buffers for reading from ring buffers (output callback).
+    /// One per channel.
+    private let outputReadBuffers: [UnsafeMutablePointer<Float>]
+
+    /// The buffers that EQ and output copy operate on.
+    /// In direct capture mode: inputBuffers (no intermediate ring buffer).
+    /// In ring buffer mode: outputReadBuffers (read from AudioRingBuffer).
+    private nonisolated(unsafe) var processingBuffers: [UnsafeMutablePointer<Float>]!
+
+    /// Immutable pointers to processingBuffers (avoids array allocation in hot paths).
+    private nonisolated(unsafe) var processingBufferPointers: [UnsafePointer<Float>]!
+
+    // MARK: - Atomic Target Gains
+    // Target gains are written by the main thread and read by the audio thread.
+    // We use atomic Int32 storage with Float bit-casting for thread-safe access.
+    // Float is not directly supported by Swift Atomics, so we use Int32 bit patterns.
+    // Relaxed memory ordering is sufficient for single-writer/single-reader scenarios
+    // where slight staleness is acceptable for audio processing.
+
+    /// Target linear gain for input (stored as Int32 bit pattern of Float).
+    /// Written by main thread, read by audio thread.
+    private let targetInputGainAtomic: ManagedAtomic<Int32> = ManagedAtomic(1065353216) // Float 1.0 as Int32 bits (0x3F800000)
+
+    /// Target linear gain for output (stored as Int32 bit pattern of Float).
+    /// Written by main thread, read by audio thread.
+    private let targetOutputGainAtomic: ManagedAtomic<Int32> = ManagedAtomic(1065353216) // Float 1.0 as Int32 bits (0x3F800000)
+
+    /// Target boost gain (stored as Int32 bit pattern of Float).
+    /// Written by main thread, read by audio thread.
+    private let targetBoostGainAtomic: ManagedAtomic<Int32> = ManagedAtomic(1065353216) // Float 1.0 as Int32 bits (0x3F800000)
+
+    /// Target volume gain for shared memory mode (stored as Int32 bit pattern of Float).
+    /// 0.0 when muted or volume at 0%, 1.0 at normal volumes.
+    /// Written by main thread, read by audio thread.
+    private let targetVolumeGainAtomic: ManagedAtomic<Int32> = ManagedAtomic(0) // Float 0.0 — silent until VolumeManager sets correct value
+
+    /// Stopping flag (stored as Int32 for atomic access).
+    /// Set to 1 by main thread before stopping HAL units. Read by audio thread.
+    /// When true, callbacks zero-fill output and return immediately — prevents
+    /// use-after-free if HAL calls the callback between AudioOutputUnitStop and
+    /// callbackContext deallocation.
+    private let isStoppingAtomic: ManagedAtomic<Int32> = ManagedAtomic(0) // false
+
+    /// Meters enabled flag (stored as Int32 for atomic access).
+    /// Written by main thread, read by audio thread.
+    /// When false, meter calculations are skipped entirely.
+    private let metersEnabledAtomic: ManagedAtomic<Int32> = ManagedAtomic(0) // false
+
+    // MARK: - Current Gains (Audio Thread Only)
+    // Current gains are ONLY written by the audio thread during gain ramping.
+    // They can be read for diagnostics, but should not be written from any other thread.
+
+    /// Current linear gain for input (audio thread only).
+    nonisolated(unsafe) var inputGainLinear: Float = 1.0
+
+    /// Current linear gain for output (audio thread only).
+    nonisolated(unsafe) var outputGainLinear: Float = 1.0
+
+    /// Current boost gain (audio thread only).
+    nonisolated(unsafe) var boostGainLinear: Float = 1.0
+
+    /// Current volume gain for shared memory mode (audio thread only).
+    /// Ensures digital silence at 0% volume when using shared memory capture.
+    nonisolated(unsafe) var volumeGainLinear: Float = 0.0
+
+    // MARK: - Soft Start Ramp
+    // Soft start prevents speaker-damaging transients when routing starts.
+    // On pipeline start, output gain ramps from 0 to target over several seconds.
+    // State is written by the main thread (startSoftStart/cancelSoftStart) and
+    // read/decremented by the audio thread (applyOutputGainWithSoftStart).
+    // Atomic storage with releasing/acquiring ordering ensures cross-thread visibility.
+
+    /// Frames remaining in the soft start ramp (0 = ramp complete or not active).
+    /// Stored as Int32 — sufficient for ~5600s at 768kHz.
+    /// Written by main thread with .releasing, read by audio thread with .acquiring.
+    private let softStartFramesRemainingAtomic: ManagedAtomic<Int32> = ManagedAtomic(0)
+
+    /// Gain increment per frame during soft start, stored as Int32 bit pattern of Float.
+    /// Computed as `targetOutputGain / totalRampFrames` — ensures linear ramp from 0 to target.
+    /// Written by main thread with .releasing, read by audio thread after acquiring frames.
+    private let softStartGainPerFrameAtomic: ManagedAtomic<Int32> = ManagedAtomic(0)
+
+    // MARK: - Gain Update API (Main Thread)
+
+    /// Updates the target input gain (called from main thread).
+    /// - Parameter linear: Linear gain value (will be clamped to >= 0).
+    func setTargetInputGain(_ linear: Float) {
+        let clamped = max(0, linear)
+        let bits = Int32(bitPattern: clamped.bitPattern)
+        targetInputGainAtomic.store(bits, ordering: .relaxed)
+    }
+
+    /// Updates the target output gain (called from main thread).
+    /// - Parameter linear: Linear gain value (will be clamped to >= 0).
+    func setTargetOutputGain(_ linear: Float) {
+        let clamped = max(0, linear)
+        let bits = Int32(bitPattern: clamped.bitPattern)
+        targetOutputGainAtomic.store(bits, ordering: .relaxed)
+    }
+
+    /// Updates the target boost gain (called from main thread).
+    /// - Parameter linear: Linear gain value (will be clamped to >= 1).
+    func setTargetBoostGain(_ linear: Float) {
+        let clamped = max(1, linear)
+        let bits = Int32(bitPattern: clamped.bitPattern)
+        targetBoostGainAtomic.store(bits, ordering: .relaxed)
+    }
+
+    /// Updates the target volume gain for shared memory mode (called from main thread).
+    /// - Parameter linear: Linear gain value (0.0 = silence, 1.0 = pass-through, clamped to 0-1).
+    func setTargetVolumeGain(_ linear: Float) {
+        let clamped = max(0, min(1, linear))
+        let bits = Int32(bitPattern: clamped.bitPattern)
+        targetVolumeGainAtomic.store(bits, ordering: .relaxed)
+    }
+
+    /// Updates the meters enabled state (called from main thread).
+    /// When disabled, meter calculations are skipped on the audio thread.
+    func setMetersEnabled(_ enabled: Bool) {
+        metersEnabledAtomic.store(enabled ? 1 : 0, ordering: .relaxed)
+    }
+
+    /// Keeps meters measuring while the window is hidden, for the tap deafness proof.
+    private let meterProbeAtomic: ManagedAtomic<Int32> = ManagedAtomic(0)
+    func setMeterProbe(_ on: Bool) {
+        meterProbeAtomic.store(on ? 1 : 0, ordering: .relaxed)
+    }
+
+    /// Sets the stopping flag (called from main thread before HAL stop).
+    /// When true, render callbacks output silence and return early.
+    func setIsStopping(_ stopping: Bool) {
+        isStoppingAtomic.store(stopping ? 1 : 0, ordering: .relaxed)
+    }
+
+    /// Starts the soft start ramp (called from main thread before pipeline starts).
+    /// Sets output gain to 0 and configures a linear ramp to the target over the specified duration.
+    /// The audio thread's `applyOutputGainWithSoftStart()` handles the per-callback ramp.
+    /// - Parameters:
+    ///   - sampleRate: Current audio sample rate in Hz.
+    ///   - targetOutputGain: The linear output gain to ramp to.
+    ///   - duration: Ramp duration in seconds (default 4.0).
+    func startSoftStart(sampleRate: Double, targetOutputGain: Float, duration: Float = 4.0) {
+        let totalRampFrames = Int32(sampleRate * Double(duration))
+        softStartFramesRemainingAtomic.store(totalRampFrames, ordering: .releasing)
+        softStartGainPerFrameAtomic.store(Int32(bitPattern: (targetOutputGain / Float(totalRampFrames)).bitPattern), ordering: .releasing)
+        outputGainLinear = 0 // Start from silence
+    }
+
+    /// Cancels the soft start ramp (called from main thread during prepareForStop).
+    /// Allows the fade-out to work correctly without being limited by the ramp.
+    func cancelSoftStart() {
+        softStartFramesRemainingAtomic.store(0, ordering: .releasing)
+        softStartGainPerFrameAtomic.store(0, ordering: .releasing)
+    }
+
+    /// Checks if the pipeline is stopping (called from audio thread).
+    /// Returns true if callbacks should output silence and return early.
+    var isStopping: Bool {
+        isStoppingAtomic.load(ordering: .relaxed) != 0
+    }
+
+    // MARK: - Gain Read API (Audio Thread or Diagnostics)
+
+    /// Returns the current target input gain.
+    func getTargetInputGain() -> Float {
+        Float(bitPattern: UInt32(bitPattern: targetInputGainAtomic.load(ordering: .relaxed)))
+    }
+
+    /// Returns the current target output gain.
+    func getTargetOutputGain() -> Float {
+        Float(bitPattern: UInt32(bitPattern: targetOutputGainAtomic.load(ordering: .relaxed)))
+    }
+
+    /// Returns the current target boost gain.
+    func getTargetBoostGain() -> Float {
+        Float(bitPattern: UInt32(bitPattern: targetBoostGainAtomic.load(ordering: .relaxed)))
+    }
+
+    /// Returns the current target volume gain for shared memory mode.
+    func getTargetVolumeGain() -> Float {
+        Float(bitPattern: UInt32(bitPattern: targetVolumeGainAtomic.load(ordering: .relaxed)))
+    }
+
+    /// Processing mode for audio thread:
+    /// 0 = full bypass (System EQ OFF) - skip gains, bypass EQ
+    /// 1 = normal (EQ + gains)
+    /// 2 = gains only (Compare Flat mode) - apply gains, bypass EQ
+    nonisolated(unsafe) var processingMode: Int32 = 1
+
+    /// Number of channels exposed to the level meters (up to two for stereo visualization).
+    private let meterChannelCount: Int
+
+    /// Storage for latest input peak levels per channel (in dBFS).
+    private let inputMeterStorage: UnsafeMutablePointer<Float>
+
+    /// Storage for latest output peak levels per channel (in dBFS).
+    private let outputMeterStorage: UnsafeMutablePointer<Float>
+
+    /// Storage for latest input RMS levels per channel (in dBFS).
+    private let inputRmsStorage: UnsafeMutablePointer<Float>
+
+    /// Storage for latest output RMS levels per channel (in dBFS).
+    private let outputRmsStorage: UnsafeMutablePointer<Float>
+
+    /// Pre-allocated raw pointer buffers for audio thread hot paths
+    /// (avoids Swift Array `swift_beginAccess`/`swift_endAccess` runtime checks on the real-time thread).
+    private let gainBuffersPtr: UnsafeMutablePointer<UnsafeMutablePointer<Float>>
+    private let meterChannelPointersPtr: UnsafeMutablePointer<UnsafePointer<Float>>
+    private let maxBufferListChannels: Int
+
+    /// ITU-R BS.1770-4 4x oversampled True-Peak detectors per channel.
+    private let inputTruePeakDetectors: [TruePeakDetector]
+    private let outputTruePeakDetectors: [TruePeakDetector]
+
+    /// Transport-aware True-Peak ceiling limiters per channel to prevent inter-sample DAC clipping.
+    private let outputTruePeakLimiters: [TruePeakLimiter]
+
+    /// Pre-computed output buffer pointers (immutable, avoids array allocation on every callback).
+    private let outputBufferPointersPrecomputed: [UnsafePointer<Float>]
+
+    /// Pre-computed input buffer pointers (immutable, avoids array allocation in provideFrames).
+    private let inputBufferPointers: [UnsafePointer<Float>]
+
+    /// Pre-computed input buffer mutable pointers (immutable, avoids array allocation in provideFrames).
+    private let inputBufferMutablePointers: [UnsafeMutablePointer<Float>]
+
+    // MARK: - Driver Capture
+
+    /// Sets the driver capture instance for polling.
+    /// When set, the output callback uses direct capture mode: shared memory is polled
+    /// directly into inputBuffers, bypassing the intermediate AudioRingBuffer.
+    /// When cleared, reverts to ring buffer mode for HAL input capture.
+    func setDriverCapture(_ capture: DriverCapture?) {
+        driverCapture = capture
+        if capture != nil {
+            // Direct capture: EQ and output operate on inputBuffers directly,
+            // avoiding two unnecessary memcpy operations through the ring buffer.
+            processingBuffers = inputBuffers
+            processingBufferPointers = inputBufferPointers
+        } else {
+            // Ring buffer mode: EQ and output operate on outputReadBuffers
+            // (filled from AudioRingBuffer by readFromRingBuffers).
+            processingBuffers = outputReadBuffers
+            processingBufferPointers = outputBufferPointersPrecomputed
+        }
+    }
+
+    // MARK: - Initialization
+
+    /// Creates a new callback context with ring buffers and pre-allocated audio buffers.
+    /// - Parameters:
+    ///   - inputHALUnit: The INPUT HAL audio unit instance for capturing audio.
+    ///   - channelCount: Number of audio channels.
+    ///   - maxFrameCount: Maximum frames per callback (used for buffer sizing).
+    ///   - ringBufferCapacity: Capacity of each ring buffer in samples (default from AudioConstants).
+    init(
+        inputHALUnit: AudioComponentInstance?,
+        channelCount: UInt32,
+        maxFrameCount: UInt32,
+        ringBufferCapacity: Int = AudioConstants.ringBufferCapacity,
+        limiterCeilingDBTP: Float = AudioConstants.limiterCeilingDBTP
+    ) {
+        self.recordingFeed = RecordingFeed(capacity: Int(maxFrameCount))
+        self.inputHALUnit = inputHALUnit
+        self.channelCount = channelCount
+        self.maxFrameCount = maxFrameCount
+        self.framesPerBuffer = Int(maxFrameCount)
+        self.meterChannelCount = min(Int(channelCount), Self.maxMeterChannels)
+
+        // Create EQ chains (one per layer per channel)
+        let layerCount = EQLayerConstants.maxLayerCount
+        self.leftEQChains = (0..<layerCount).map { _ in EQChain(maxFrameCount: maxFrameCount) }
+        self.rightEQChains = (0..<layerCount).map { _ in EQChain(maxFrameCount: maxFrameCount) }
+
+        // Create ring buffers (one per channel)
+        var rings: [AudioRingBuffer] = []
+        for _ in 0..<channelCount {
+            rings.append(AudioRingBuffer(capacity: ringBufferCapacity))
+        }
+        self.ringBuffers = rings
+
+        // Pre-allocate one buffer per channel for input callback (deinterleaved layout)
+        var inputBufs: [UnsafeMutablePointer<Float>] = []
+        for _ in 0..<channelCount {
+            let buffer = UnsafeMutablePointer<Float>.allocate(capacity: framesPerBuffer)
+            buffer.initialize(repeating: 0, count: framesPerBuffer)
+            inputBufs.append(buffer)
+        }
+        self.inputBuffers = inputBufs
+
+        // Pre-allocate one buffer per channel for output callback reads
+        var outputBufs: [UnsafeMutablePointer<Float>] = []
+        for _ in 0..<channelCount {
+            let buffer = UnsafeMutablePointer<Float>.allocate(capacity: framesPerBuffer)
+            buffer.initialize(repeating: 0, count: framesPerBuffer)
+            outputBufs.append(buffer)
+        }
+        self.outputReadBuffers = outputBufs
+
+        // Pre-compute output buffer pointers (avoid array allocation on every callback)
+        self.outputBufferPointersPrecomputed = outputBufs.map { UnsafePointer($0) }
+
+        // Pre-compute input buffer pointer arrays (avoid array allocation in provideFrames)
+        self.inputBufferPointers = inputBufs.map { UnsafePointer($0) }
+        self.inputBufferMutablePointers = inputBufs
+
+        // Default processing buffers to outputReadBuffers (HAL input / ring buffer mode).
+        // Switched to inputBuffers when setDriverCapture() enables direct capture mode.
+        self.processingBuffers = outputReadBuffers
+        self.processingBufferPointers = outputBufferPointersPrecomputed
+
+        self.inputMeterStorage = UnsafeMutablePointer<Float>.allocate(capacity: meterChannelCount)
+        self.outputMeterStorage = UnsafeMutablePointer<Float>.allocate(capacity: meterChannelCount)
+        self.inputRmsStorage = UnsafeMutablePointer<Float>.allocate(capacity: meterChannelCount)
+        self.outputRmsStorage = UnsafeMutablePointer<Float>.allocate(capacity: meterChannelCount)
+        inputMeterStorage.initialize(repeating: Self.silenceDB, count: meterChannelCount)
+        outputMeterStorage.initialize(repeating: Self.silenceDB, count: meterChannelCount)
+        inputRmsStorage.initialize(repeating: Self.silenceDB, count: meterChannelCount)
+        outputRmsStorage.initialize(repeating: Self.silenceDB, count: meterChannelCount)
+
+        // Pre-allocate raw pointer arrays and True-Peak detectors/limiters for audio thread hot paths
+        self.maxBufferListChannels = max(Int(channelCount), 8)
+        self.gainBuffersPtr = UnsafeMutablePointer<UnsafeMutablePointer<Float>>.allocate(capacity: maxBufferListChannels)
+        self.meterChannelPointersPtr = UnsafeMutablePointer<UnsafePointer<Float>>.allocate(capacity: maxBufferListChannels)
+        self.inputTruePeakDetectors = (0..<meterChannelCount).map { _ in TruePeakDetector() }
+        self.outputTruePeakDetectors = (0..<meterChannelCount).map { _ in TruePeakDetector() }
+        self.outputTruePeakLimiters = (0..<Int(channelCount)).map { _ in TruePeakLimiter(ceilingDBTP: limiterCeilingDBTP) }
+
+        // Calculate size for AudioBufferList with `channelCount` buffers
+        // AudioBufferList has 1 AudioBuffer inline, so we need space for (channelCount - 1) additional
+        let additionalBuffers = max(0, Int(channelCount) - 1)
+        self.inputBufferListSize = MemoryLayout<AudioBufferList>.size
+            + additionalBuffers * MemoryLayout<AudioBuffer>.size
+
+        // Allocate and initialize the AudioBufferList
+        self.inputBufferListPtr = UnsafeMutableRawPointer
+            .allocate(byteCount: inputBufferListSize, alignment: MemoryLayout<AudioBufferList>.alignment)
+            .assumingMemoryBound(to: AudioBufferList.self)
+
+        // Set up the buffer list structure
+        inputBufferListPtr.pointee.mNumberBuffers = channelCount
+
+        // Get pointer to the mBuffers array
+        let buffersPtr = UnsafeMutableAudioBufferListPointer(inputBufferListPtr)
+        for (index, buffer) in buffersPtr.enumerated() {
+            // Each buffer holds one channel
+            var mutableBuffer = buffer
+            mutableBuffer.mNumberChannels = 1
+            mutableBuffer.mDataByteSize = UInt32(framesPerBuffer * MemoryLayout<Float>.size)
+            mutableBuffer.mData = UnsafeMutableRawPointer(inputBuffers[index])
+            buffersPtr[index] = mutableBuffer
+        }
+    }
+
+    deinit {
+        // Deallocate input channel buffers
+        for buffer in inputBuffers {
+            buffer.deinitialize(count: framesPerBuffer)
+            buffer.deallocate()
+        }
+
+        // Deallocate output read buffers
+        for buffer in outputReadBuffers {
+            buffer.deinitialize(count: framesPerBuffer)
+            buffer.deallocate()
+        }
+
+        inputMeterStorage.deinitialize(count: meterChannelCount)
+        inputMeterStorage.deallocate()
+        outputMeterStorage.deinitialize(count: meterChannelCount)
+        outputMeterStorage.deallocate()
+        inputRmsStorage.deinitialize(count: meterChannelCount)
+        inputRmsStorage.deallocate()
+        outputRmsStorage.deinitialize(count: meterChannelCount)
+        outputRmsStorage.deallocate()
+
+        gainBuffersPtr.deallocate()
+        meterChannelPointersPtr.deallocate()
+
+        // Deallocate the AudioBufferList
+        inputBufferListPtr.deallocate()
+    }
+
+    // MARK: - Input Callback Support
+
+    /// Returns a pointer to the pre-allocated input buffer list, sized for the given frame count.
+    /// Used by the input callback to receive audio from AudioUnitRender.
+    /// - Parameter frameCount: The number of frames to be rendered.
+    /// - Returns: A pointer to the AudioBufferList.
+    func prepareInputBufferList(frameCount: UInt32) -> UnsafeMutablePointer<AudioBufferList> {
+        // Update the byte size for this render pass on each buffer
+        let byteSize = frameCount * UInt32(MemoryLayout<Float>.size)
+        let buffersPtr = UnsafeMutableAudioBufferListPointer(inputBufferListPtr)
+
+        for index in 0..<Int(channelCount) {
+            buffersPtr[index].mDataByteSize = byteSize
+        }
+
+        return inputBufferListPtr
+    }
+
+    /// Writes captured audio samples to the ring buffers.
+    /// Called by the input callback after AudioUnitRender succeeds.
+    /// - Parameter frameCount: Number of frames to write.
+    @inline(__always)
+    func writeToRingBuffers(frameCount: UInt32) {
+        let count = Int(frameCount)
+        noteInputFrames(count)
+        let chCount = Int(channelCount)
+        for index in 0..<chCount {
+            _ = ringBuffers[index].write(inputBuffers[index], count: count)
+        }
+        meterInput(frameCount: count)
+    }
+
+    /// Feeds the input meters (and the tap deafness check) from the input buffers.
+    @inline(__always)
+    func meterInput(frameCount count: Int) {
+        let chCount = Int(channelCount)
+        for i in 0..<min(chCount, maxBufferListChannels) {
+            meterChannelPointersPtr[i] = inputBufferPointers[i]
+        }
+        updateMeterStorage(
+            storage: inputMeterStorage,
+            rmsStorage: inputRmsStorage,
+            with: meterChannelPointersPtr,
+            channelPointerCount: min(chCount, maxBufferListChannels),
+            detectors: inputTruePeakDetectors,
+            frameCount: count
+        )
+    }
+
+    /// Direct access to the input sample buffers (for diagnostics/debugging).
+    var inputSampleBuffers: [UnsafeMutablePointer<Float>] {
+        inputBuffers
+    }
+
+    /// Applies gain to a set of channel buffers, with per-callback ramping.
+    /// Skips the multiplication loop when gain is at unity and not ramping,
+    /// which is the common case for volume gain at 100%.
+    @inline(__always)
+    func applyGain(
+        to buffers: [UnsafeMutablePointer<Float>],
+        frameCount: UInt32,
+        currentGain: inout Float,
+        targetGain: Float
+    ) {
+        let count = Int(frameCount)
+        guard count > 0 else {
+            currentGain = targetGain
+            return
+        }
+
+        // Fast path: skip multiplication when at unity and not ramping.
+        // This is the common case for volume gain at 100% in shared memory mode,
+        // where applyGain runs every callback even though gain is ~1.0.
+        if abs(currentGain - targetGain) < Float.ulpOfOne && abs(targetGain - 1.0) < Float.ulpOfOne {
+            currentGain = targetGain
+            return
+        }
+
+        let gainDelta = targetGain - currentGain
+        let gainStep = gainDelta / Float(count)
+        var gain = currentGain
+        var index = 0
+
+        while index < count {
+            for buffer in buffers {
+                buffer[index] *= gain
+            }
+            gain += gainStep
+            index += 1
+        }
+
+        currentGain = targetGain
+    }
+
+    /// Applies output gain with soft start ramp support.
+    /// When soft start is active, limits the gain increase per callback so the output
+    /// fades in gradually from silence over the configured duration.
+    /// After the ramp completes, normal per-callback gain ramping takes over.
+    /// Gain decreases (target < current) are always applied instantly — only
+    /// gain increases are limited by the soft start.
+    @inline(__always)
+    func applyOutputGainWithSoftStart(
+        to bufferList: UnsafeMutablePointer<AudioBufferList>,
+        frameCount: UInt32
+    ) {
+        let targetGain = getTargetOutputGain()
+        let framesRemaining = softStartFramesRemainingAtomic.load(ordering: .acquiring)
+
+        if framesRemaining > 0 && targetGain > outputGainLinear {
+            // Soft start active: limit gain increase to maintain smooth ramp.
+            // The .acquiring load of framesRemaining ensures the .releasing store
+            // of gainPerFrame (from startSoftStart) is also visible.
+            let gainPerFrame = Float(bitPattern: UInt32(bitPattern: softStartGainPerFrameAtomic.load(ordering: .relaxed)))
+            let framesThisCallback = min(Int(frameCount), Int(framesRemaining))
+            let maxGainIncrease = gainPerFrame * Float(framesThisCallback)
+            let effectiveTarget = min(targetGain, outputGainLinear + maxGainIncrease)
+
+            applyGain(to: bufferList, frameCount: frameCount, currentGain: &outputGainLinear, targetGain: effectiveTarget)
+
+            let newRemaining = max(0, Int(framesRemaining) - Int(frameCount))
+            softStartFramesRemainingAtomic.store(Int32(newRemaining), ordering: .releasing)
+        } else {
+            // No soft start: normal per-callback gain ramping
+            applyGain(to: bufferList, frameCount: frameCount, currentGain: &outputGainLinear, targetGain: targetGain)
+        }
+    }
+
+    // MARK: - Output Callback Support
+
+    /// Provides frames for processing, handling both direct capture and ring buffer modes.
+    ///
+    /// In direct capture mode (driverCapture set): polls shared memory directly into
+    /// inputBuffers (= processingBuffers), bypassing the intermediate AudioRingBuffer.
+    ///
+    /// In ring buffer mode (driverCapture nil): reads from AudioRingBuffer into
+    /// outputReadBuffers (= processingBuffers). This is used by HAL input capture
+    /// where producer and consumer run on different threads.
+    ///
+    /// - Parameter frameCount: Maximum frames to provide (typically the output callback's frameCount).
+    /// - Returns: Number of frames available in processingBuffers, or 0 if no data.
+    @inline(__always)
+    func provideFrames(frameCount: UInt32) -> Int {
+        if let capture = driverCapture {
+            // Direct capture: poll shared memory → inputBuffers (= processingBuffers)
+            // Read exactly frameCount frames (the output device's requested amount).
+            // The shared memory ring (65536 frames) absorbs clock drift — we consume
+            // at the output device's rate, not the driver's rate. This prevents
+            // over-consumption that causes periodic overflow resets and artefacts.
+            guard let (polled, _, channelCount) = capture.pollIntoBuffers(
+                destBuffers: inputBuffers,
+                maxFrames: frameCount
+            ) else { return 0 }
+
+            guard channelCount == self.channelCount else { return 0 }
+
+            let polledCount = Int(polled)
+            noteInputFrames(polledCount)
+            let requestedCount = Int(frameCount)
+
+            // Zero-fill the remainder on underrun to prevent stale data from
+            // the previous callback leaking through.
+            if polledCount < requestedCount {
+                for buffer in inputBuffers {
+                    memset(buffer + polledCount, 0,
+                           (requestedCount - polledCount) * MemoryLayout<Float>.size)
+                }
+            }
+
+            // Apply volume gain to ensure digital silence at 0% volume (shared memory mode).
+            // The driver's WriteMix path writes pre-volume audio to shared memory, bypassing
+            // the driver's volume attenuation (applied only in ReadInput for HAL input mode).
+            // This gain is unconditional — even in bypass mode, 0% volume should produce silence.
+            let targetVolumeGain = getTargetVolumeGain()
+            applyGain(to: inputBufferMutablePointers, frameCount: frameCount,
+                      currentGain: &volumeGainLinear, targetGain: targetVolumeGain)
+
+            // Apply input gain to the full frameCount (skip in full bypass mode).
+            // Using frameCount (not polled) ensures gain ramp state stays correct
+            // across callbacks, even when partial data was read.
+            if processingMode != 0 {
+                let targetInputGain = getTargetInputGain()
+                applyGain(to: inputBufferMutablePointers, frameCount: frameCount,
+                          currentGain: &inputGainLinear, targetGain: targetInputGain)
+            }
+
+            // Update input meters (4x oversampled True-Peak in dBTP)
+            let chCount = Int(self.channelCount)
+            for i in 0..<min(chCount, maxBufferListChannels) {
+                meterChannelPointersPtr[i] = inputBufferPointers[i]
+            }
+            updateMeterStorage(
+                storage: inputMeterStorage,
+                rmsStorage: inputRmsStorage,
+                with: meterChannelPointersPtr,
+                channelPointerCount: min(chCount, maxBufferListChannels),
+                detectors: inputTruePeakDetectors,
+                frameCount: requestedCount
+            )
+            return requestedCount
+        } else {
+            // Ring buffer mode: read from AudioRingBuffer → outputReadBuffers (= processingBuffers)
+            return readFromRingBuffers(frameCount: frameCount)
+        }
+    }
+
+    /// Reads audio samples from ring buffers into the output read buffers.
+    /// Called by provideFrames() in ring buffer mode.
+    /// - Parameter frameCount: Number of frames to read.
+    /// - Returns: The number of frames actually read (may be less if underrun).
+    @inline(__always)
+    private func readFromRingBuffers(frameCount: UInt32) -> Int {
+        let count = Int(frameCount)
+        var minRead = count
+
+        for (index, ringBuffer) in ringBuffers.enumerated() {
+            let read = ringBuffer.read(into: outputReadBuffers[index], count: count)
+            minRead = min(minRead, read)
+        }
+
+        return minRead
+    }
+
+    /// Returns pointers to the processing buffers (immutable, for passing to render context).
+    /// Points to either outputReadBuffers (ring buffer mode) or inputBuffers (direct capture).
+    /// - Returns: Pre-computed array of immutable pointers to the active processing buffers.
+    var outputBufferPointers: [UnsafePointer<Float>] {
+        processingBufferPointers
+    }
+
+    /// Installed before AudioDeviceStart; never changed while callbacks run.
+    func useTapInputBuffers() {
+        processingBuffers = inputBuffers
+        processingBufferPointers = inputBufferPointers
+    }
+
+    /// Processes all EQ layers on processing buffers in-place, followed by True-Peak ceiling limiting.
+    /// Called from audio thread after provideFrames() fills the processing buffers.
+    /// - Parameter frameCount: Number of frames to process.
+    @inline(__always)
+    func processEQ(frameCount: UInt32, skipChannelLayer: Bool = false) {
+        let count = Int(frameCount)
+        // Process L channel through all layers in series
+        let layerCount = leftEQChains.count
+        for i in 0..<layerCount where !skipChannelLayer || i != EQLayerConstants.channelLayerIndex {
+            leftEQChains[i].applyPendingUpdates()
+            leftEQChains[i].process(buffer: processingBuffers[0], frameCount: frameCount)
+        }
+
+        // Process R channel through all layers in series (if stereo)
+        if channelCount > 1 {
+            let rightCount = rightEQChains.count
+            for i in 0..<rightCount where !skipChannelLayer || i != EQLayerConstants.channelLayerIndex {
+                rightEQChains[i].applyPendingUpdates()
+                rightEQChains[i].process(buffer: processingBuffers[1], frameCount: frameCount)
+            }
+        }
+
+        if skipChannelLayer, channelCount > 1 {
+            mixer?.addSkipped(left: processingBuffers[0], right: processingBuffers[1], frameCount: count)
+        }
+
+        // Ceiling limiting comes last, jointly: in Linked channel mode
+        // both channels share one gain trajectory; in Stereo mode each
+        // channel limits independently.
+        if channelCount > 1 && limiterLinked.load(ordering: .relaxed) {
+            outputTruePeakLimiters[0].processLinkedPairInPlace(
+                other: outputTruePeakLimiters[1],
+                leftBuffer: processingBuffers[0],
+                rightBuffer: processingBuffers[1],
+                frameCount: count
+            )
+        } else {
+            outputTruePeakLimiters[0].processInPlace(buffer: processingBuffers[0], frameCount: count)
+            if channelCount > 1 {
+                outputTruePeakLimiters[1].processInPlace(buffer: processingBuffers[1], frameCount: count)
+            }
+        }
+    }
+
+    /// Returns the latest per-channel meter snapshots in dBTP (True-Peak).
+    func meterSnapshot() -> (input: [Float], output: [Float]) {
+        let input = Array(UnsafeBufferPointer(start: inputMeterStorage, count: meterChannelCount))
+        let output = Array(UnsafeBufferPointer(start: outputMeterStorage, count: meterChannelCount))
+        return (input, output)
+    }
+
+    /// Returns the latest per-channel RMS meter snapshots in dBFS.
+    func rmsSnapshot() -> (input: [Float], output: [Float]) {
+        let input = Array(UnsafeBufferPointer(start: inputRmsStorage, count: meterChannelCount))
+        let output = Array(UnsafeBufferPointer(start: outputRmsStorage, count: meterChannelCount))
+        return (input, output)
+    }
+
+    func updateOutputMeters(from bufferList: UnsafeMutablePointer<AudioBufferList>, frameCount: UInt32) {
+        let bufferCount = min(Int(bufferList.pointee.mNumberBuffers), maxBufferListChannels)
+        var validCount = 0
+        withUnsafeMutablePointer(to: &bufferList.pointee.mBuffers) { buffersPtr in
+            for i in 0..<bufferCount {
+                if let data = buffersPtr[i].mData?.assumingMemoryBound(to: Float.self) {
+                    meterChannelPointersPtr[validCount] = UnsafePointer(data)
+                    validCount += 1
+                }
+            }
+        }
+        if validCount == 0 {
+            return
+        }
+        updateMeterStorage(
+            storage: outputMeterStorage,
+            rmsStorage: outputRmsStorage,
+            with: meterChannelPointersPtr,
+            channelPointerCount: validCount,
+            detectors: outputTruePeakDetectors,
+            frameCount: Int(frameCount)
+        )
+    }
+
+    @inline(__always)
+    func applyGain(
+        to bufferList: UnsafeMutablePointer<AudioBufferList>,
+        frameCount: UInt32,
+        currentGain: inout Float,
+        targetGain: Float
+    ) {
+        let bufferCount = min(Int(bufferList.pointee.mNumberBuffers), maxBufferListChannels)
+        var validCount = 0
+        withUnsafeMutablePointer(to: &bufferList.pointee.mBuffers) { buffersPtr in
+            for i in 0..<bufferCount {
+                if let data = buffersPtr[i].mData?.assumingMemoryBound(to: Float.self) {
+                    gainBuffersPtr[validCount] = data
+                    validCount += 1
+                }
+            }
+        }
+        if validCount == 0 {
+            currentGain = targetGain
+            return
+        }
+        let count = Int(frameCount)
+        guard count > 0 else {
+            currentGain = targetGain
+            return
+        }
+        if abs(currentGain - targetGain) < Float.ulpOfOne && abs(targetGain - 1.0) < Float.ulpOfOne {
+            currentGain = targetGain
+            return
+        }
+        let gainDelta = targetGain - currentGain
+        let gainStep = gainDelta / Float(count)
+        var gain = currentGain
+        for index in 0..<count {
+            for b in 0..<validCount {
+                gainBuffersPtr[b][index] *= gain
+            }
+            gain += gainStep
+        }
+        currentGain = targetGain
+    }
+
+    private func updateMeterStorage(
+        storage: UnsafeMutablePointer<Float>,
+        rmsStorage: UnsafeMutablePointer<Float>,
+        with channels: UnsafePointer<UnsafePointer<Float>>,
+        channelPointerCount: Int,
+        detectors: [TruePeakDetector],
+        frameCount: Int
+    ) {
+        // Skip all meter calculations when meters are disabled
+        guard metersEnabledAtomic.load(ordering: .relaxed) != 0
+                || meterProbeAtomic.load(ordering: .relaxed) != 0 else { return }
+
+        precondition(
+            frameCount <= framesPerBuffer,
+            "frameCount (\(frameCount)) exceeds framesPerBuffer (\(framesPerBuffer))"
+        )
+
+        guard frameCount > 0 else {
+            for index in 0..<meterChannelCount {
+                storage[index] = Self.silenceDB
+                rmsStorage[index] = Self.silenceDB
+            }
+            return
+        }
+
+        for channel in 0..<meterChannelCount {
+            guard channelPointerCount > 0 else {
+                storage[channel] = Self.silenceDB
+                rmsStorage[channel] = Self.silenceDB
+                continue
+            }
+
+            let sourceIndex = min(channel, channelPointerCount - 1)
+            let buffer = channels[sourceIndex]
+            let detector = detectors[channel]
+            var truePeak: Float = 0
+            var sumSquares: Float = 0
+            var frame = 0
+            while frame < frameCount {
+                let sample = buffer[frame]
+                let tp = detector.processSample(sample)
+                if tp > truePeak {
+                    truePeak = tp
+                }
+                sumSquares += sample * sample
+                frame += 1
+            }
+            let db = AudioMath.linearToDB(max(truePeak, 1e-7), silence: Self.silenceDB)
+            let rms = sqrt(sumSquares / Float(frameCount))
+            let rmsDb = AudioMath.linearToDB(max(rms, 1e-7), silence: Self.silenceDB)
+            storage[channel] = db
+            rmsStorage[channel] = rmsDb
+        }
+    }
+
+    // MARK: - Utility
+
+
+    /// Zeros out the given AudioBufferList.
+    /// - Parameters:
+    ///   - bufferList: The buffer list to zero.
+    ///   - frameCount: Number of frames to zero.
+    static func zeroFill(_ bufferList: UnsafeMutablePointer<AudioBufferList>, frameCount: UInt32) {
+        let bufferCount = Int(bufferList.pointee.mNumberBuffers)
+        withUnsafeMutablePointer(to: &bufferList.pointee.mBuffers) { buffersPtr in
+            for i in 0..<bufferCount {
+                if let data = buffersPtr[i].mData {
+                    memset(data, 0, Int(buffersPtr[i].mDataByteSize))
+                }
+            }
+        }
+    }
+
+    /// Resets all ring buffers to empty state.
+    /// - Warning: Only call when no audio is running.
+    func resetRingBuffers() {
+        for ringBuffer in ringBuffers {
+            ringBuffer.reset()
+        }
+        inputMeterStorage.initialize(repeating: Self.silenceDB, count: meterChannelCount)
+        outputMeterStorage.initialize(repeating: Self.silenceDB, count: meterChannelCount)
+    }
+
+    /// Returns diagnostic information about ring buffer state.
+    func getDiagnostics() -> (availableToRead: [Int], underruns: [UInt64], overflows: [UInt64]) {
+        let available = ringBuffers.map { $0.availableToRead() }
+        let underruns = ringBuffers.map { $0.getUnderrunCount() }
+        let overflows = ringBuffers.map { $0.getOverflowCount() }
+        return (available, underruns, overflows)
+    }
+}

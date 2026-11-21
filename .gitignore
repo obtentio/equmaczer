@@ -1,0 +1,12 @@
+.DS_Store
+.build/
+.swiftpm/
+release/
+*.log
+
+# Private working notes and agent configuration
+docs/handoffs/
+.claude/
+.opencode/
+.env
+.env.*

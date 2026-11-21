@@ -1,0 +1,27 @@
+warning: ~/Library/org.swift.swiftpm/configuration is not accessible or not writable, disabling user-level cache features.
+warning: ~/Library/org.swift.swiftpm/security is not accessible or not writable, disabling user-level cache features.
+[0/1] Planning build
+Building for production...
+[0/5] Write sources
+[1/5] Write swift-version--58304C5D6DBC2206.txt
+[2/5] Compiling AudioTransportAtomics AudioTransportAtomics.c
+[4/6] Compiling equmaczer AppStateSnapshot.swift
+<checkout>/src/driver/DriverLifecycleService.swift:204:75: warning: forming 'UnsafeMutableRawPointer' to a variable of type 'Optional<CFString>'; this is likely incorrect because 'Optional<CFString>' may contain an object reference.
+202 |         var value: CFString?
+203 |         var size = UInt32(MemoryLayout<CFString?>.size)
+204 |         guard AudioObjectGetPropertyData(device, &address, 0, nil, &size, &value) == noErr,
+    |                                                                           `- warning: forming 'UnsafeMutableRawPointer' to a variable of type 'Optional<CFString>'; this is likely incorrect because 'Optional<CFString>' may contain an object reference.
+205 |               let value else { return nil }
+206 |         return value as String
+
+<checkout>/src/driver/DriverPropertyService.swift:51:13: warning: forming 'UnsafeRawPointer' to a variable of type 'CFString'; this is likely incorrect because 'CFString' may contain an object reference.
+ 49 |             nil,
+ 50 |             UInt32(MemoryLayout<CFString>.stride),
+ 51 |             &nameRef
+    |             `- warning: forming 'UnsafeRawPointer' to a variable of type 'CFString'; this is likely incorrect because 'CFString' may contain an object reference.
+ 52 |         )
+ 53 | 
+[4/6] Write Objects.LinkFileList
+[5/6] Linking equmaczer
+Build complete! (20.74s)
+warning: '--build-system native' has been deprecated and will be removed in a future release; please report an issue at https://github.com/swiftlang/swift-package-manager/issues if you are unable to adopt the default build system.

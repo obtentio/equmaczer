@@ -1,0 +1,206 @@
+warning: ~/Library/org.swift.swiftpm/configuration is not accessible or not writable, disabling user-level cache features.
+warning: ~/Library/org.swift.swiftpm/security is not accessible or not writable, disabling user-level cache features.
+Building for debugging...
+[Planning 161 / 185]
+[Planning deferred tasks]
+[13 / 55] AudioTransportAtomics
+[31 / 63]
+[33 / 63] equmaczer
+[44 / 85] equmaczer-product
+[45 / 85] equmaczer-product
+[46 / 85] equmaczer
+<checkout>/src/driver/DriverLifecycleService.swift:204:75: warning: forming 'UnsafeMutableRawPointer' to a variable of type 'Optional<CFString>'; this is likely incorrect because 'Optional<CFString>' may contain an object reference.
+202 |         var value: CFString?
+203 |         var size = UInt32(MemoryLayout<CFString?>.size)
+204 |         guard AudioObjectGetPropertyData(device, &address, 0, nil, &size, &value) == noErr,
+    |                                                                           `- warning: forming 'UnsafeMutableRawPointer' to a variable of type 'Optional<CFString>'; this is likely incorrect because 'Optional<CFString>' may contain an object reference.
+205 |               let value else { return nil }
+206 |         return value as String
+
+<checkout>/src/driver/DriverPropertyService.swift:51:13: warning: forming 'UnsafeRawPointer' to a variable of type 'CFString'; this is likely incorrect because 'CFString' may contain an object reference.
+ 49 |             nil,
+ 50 |             UInt32(MemoryLayout<CFString>.stride),
+ 51 |             &nameRef
+    |             `- warning: forming 'UnsafeRawPointer' to a variable of type 'CFString'; this is likely incorrect because 'CFString' may contain an object reference.
+ 52 |         )
+ 53 | 
+[47 / 85] equmaczer
+[49 / 85] equmaczer
+<checkout>/src/pipeline/capture/DriverCapture.swift:118:13: warning: forming 'UnsafeRawPointer' to a variable of type 'CFString'; this is likely incorrect because 'CFString' may contain an object reference.
+116 |             nil,
+117 |             UInt32(MemoryLayout<CFString>.size),
+118 |             &cfPath
+    |             `- warning: forming 'UnsafeRawPointer' to a variable of type 'CFString'; this is likely incorrect because 'CFString' may contain an object reference.
+119 |         )
+120 | 
+[52 / 84] equmaczer-product
+[57 / 84] equmaczer
+[58 / 84] equmaczerTests-product
+[59 / 84] equmaczerTests-product
+[61 / 84] equmaczer
+[61 / 84] equmaczer-product
+[61 / 82] equmaczer
+<checkout>/src/pipeline/capture/DriverCapture.swift:118:13: warning: forming 'UnsafeRawPointer' to a variable of type 'CFString'; this is likely incorrect because 'CFString' may contain an object reference.
+116 |             nil,
+117 |             UInt32(MemoryLayout<CFString>.size),
+118 |             &cfPath
+    |             `- warning: forming 'UnsafeRawPointer' to a variable of type 'CFString'; this is likely incorrect because 'CFString' may contain an object reference.
+119 |         )
+120 | 
+<checkout>/src/driver/DriverLifecycleService.swift:204:75: warning: forming 'UnsafeMutableRawPointer' to a variable of type 'Optional<CFString>'; this is likely incorrect because 'Optional<CFString>' may contain an object reference.
+202 |         var value: CFString?
+203 |         var size = UInt32(MemoryLayout<CFString?>.size)
+204 |         guard AudioObjectGetPropertyData(device, &address, 0, nil, &size, &value) == noErr,
+    |                                                                           `- warning: forming 'UnsafeMutableRawPointer' to a variable of type 'Optional<CFString>'; this is likely incorrect because 'Optional<CFString>' may contain an object reference.
+205 |               let value else { return nil }
+206 |         return value as String
+
+<checkout>/src/driver/DriverPropertyService.swift:51:13: warning: forming 'UnsafeRawPointer' to a variable of type 'CFString'; this is likely incorrect because 'CFString' may contain an object reference.
+ 49 |             nil,
+ 50 |             UInt32(MemoryLayout<CFString>.stride),
+ 51 |             &nameRef
+    |             `- warning: forming 'UnsafeRawPointer' to a variable of type 'CFString'; this is likely incorrect because 'CFString' may contain an object reference.
+ 52 |         )
+ 53 | 
+[61 / 82] equmaczer-product
+[61 / 82] equmaczer
+[61 / 82] equmaczer-product
+[63 / 82] equmaczer-product
+[65 / 82] equmaczer
+[69 / 80] equmaczerTests-product
+[79 / 91] equmaczerTests-product
+[81 / 91] equmaczerTests-product
+[85 / 91] equmaczerTests-product
+<checkout>/tests/meters/MeterStoreTests.swift:82:13: warning: initialization of immutable value 'initialCount' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]
+ 80 | 
+ 81 |         store.addObserver(observer, for: .inputPeakLeft)
+ 82 |         let initialCount = observer.updateCount
+    |             `- warning: initialization of immutable value 'initialCount' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]
+ 83 | 
+ 84 |         store.metersEnabled = true
+
+[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>
+<checkout>/tests/dsp/biquad/BiquadFilterTests.swift:55:13: warning: variable 'input' was never mutated; consider changing to 'let' constant [#VariableNeverMutated]
+ 53 |         let filter = BiquadFilter()
+ 54 | 
+ 55 |         var input: [Float] = [Float](repeating: 0.5, count: Int(frameCount))
+    |             `- warning: variable 'input' was never mutated; consider changing to 'let' constant [#VariableNeverMutated]
+ 56 |         var output: [Float] = [Float](repeating: 0, count: Int(frameCount))
+ 57 | 
+
+[#VariableNeverMutated]: <https://docs.swift.org/compiler/documentation/diagnostics/variable-never-mutated>
+<checkout>/tests/dsp/chain/EQChainConcurrencyTests.swift:62:17: warning: capture of 'chain' with non-Sendable type 'EQChain' in a '@Sendable' closure [#SendableClosureCaptures]
+ 60 |                 let coeffIndex = i % coefficients.count
+ 61 |                 let bandIndex = i % 10
+ 62 |                 chain.stageBandUpdate(
+    |                 `- warning: capture of 'chain' with non-Sendable type 'EQChain' in a '@Sendable' closure [#SendableClosureCaptures]
+ 63 |                     index: bandIndex,
+ 64 |                     coefficients: SVFCoefficients(biquad: coefficients[coeffIndex]),
+
+equmaczer.EQChain:1:22: note: class 'EQChain' does not conform to the 'Sendable' protocol
+ 1 | final internal class EQChain {
+   |                      `- note: class 'EQChain' does not conform to the 'Sendable' protocol
+ 2 |     internal static let maxBandCount: Int
+ 3 |     internal init(maxFrameCount: UInt32)
+
+<checkout>/tests/dsp/chain/EQChainConcurrencyTests.swift:90:70: warning: capture of 'self' with non-Sendable type 'EQChainConcurrencyTests' in a '@Sendable' closure [#SendableClosureCaptures]
+  4 | @testable import equmaczer
+  5 | 
+  6 | final class EQChainConcurrencyTests: XCTestCase {
+    |             `- note: class 'EQChainConcurrencyTests' does not conform to the 'Sendable' protocol
+  7 | 
+  8 |     // MARK: - Test Constants
+    :
+ 88 |         // Thread B: Apply updates and process (simulates audio thread — serial)
+ 89 |         DispatchQueue.global(qos: .userInteractive).async {
+ 90 |             var buffer: [Float] = [Float](repeating: 0.5, count: Int(self.frameCount))
+    |                                                                      `- warning: capture of 'self' with non-Sendable type 'EQChainConcurrencyTests' in a '@Sendable' closure [#SendableClosureCaptures]
+ 91 |             for i in 0..<iterations {
+ 92 |                 // Wait for staging to complete
+
+<checkout>/tests/dsp/chain/EQChainConcurrencyTests.swift:96:21: warning: capture of 'chain' with non-Sendable type 'EQChain' in a '@Sendable' closure [#SendableClosureCaptures]
+ 94 | 
+ 95 |                 buffer.withUnsafeMutableBufferPointer { bufPtr in
+ 96 |                     chain.applyPendingUpdates()
+    |                     `- warning: capture of 'chain' with non-Sendable type 'EQChain' in a '@Sendable' closure [#SendableClosureCaptures]
+ 97 |                     chain.process(buffer: bufPtr.baseAddress!, frameCount: self.frameCount)
+ 98 |                 }
+
+equmaczer.EQChain:1:22: note: class 'EQChain' does not conform to the 'Sendable' protocol
+ 1 | final internal class EQChain {
+   |                      `- note: class 'EQChain' does not conform to the 'Sendable' protocol
+ 2 |     internal static let maxBandCount: Int
+ 3 |     internal init(maxFrameCount: UInt32)
+
+<checkout>/tests/dsp/chain/EQChainConcurrencyTests.swift:96:21: warning: capture of 'chain' with non-Sendable type 'EQChain' in an isolated closure
+ 94 | 
+ 95 |                 buffer.withUnsafeMutableBufferPointer { bufPtr in
+ 96 |                     chain.applyPendingUpdates()
+    |                     `- warning: capture of 'chain' with non-Sendable type 'EQChain' in an isolated closure
+ 97 |                     chain.process(buffer: bufPtr.baseAddress!, frameCount: self.frameCount)
+ 98 |                 }
+
+equmaczer.EQChain:1:22: note: class 'EQChain' does not conform to the 'Sendable' protocol
+ 1 | final internal class EQChain {
+   |                      `- note: class 'EQChain' does not conform to the 'Sendable' protocol
+ 2 |     internal static let maxBandCount: Int
+ 3 |     internal init(maxFrameCount: UInt32)
+
+<checkout>/tests/dsp/chain/EQChainConcurrencyTests.swift:97:76: warning: capture of 'self' with non-Sendable type 'EQChainConcurrencyTests' in an isolated closure
+  4 | @testable import equmaczer
+  5 | 
+  6 | final class EQChainConcurrencyTests: XCTestCase {
+    |             `- note: class 'EQChainConcurrencyTests' does not conform to the 'Sendable' protocol
+  7 | 
+  8 |     // MARK: - Test Constants
+    :
+ 95 |                 buffer.withUnsafeMutableBufferPointer { bufPtr in
+ 96 |                     chain.applyPendingUpdates()
+ 97 |                     chain.process(buffer: bufPtr.baseAddress!, frameCount: self.frameCount)
+    |                                                                            `- warning: capture of 'self' with non-Sendable type 'EQChainConcurrencyTests' in an isolated closure
+ 98 |                 }
+ 99 | 
+
+<checkout>/tests/dsp/chain/EQChainConcurrencyTests.swift:142:13: warning: variable 'initialCoeffs' was never mutated; consider changing to 'let' constant [#VariableNeverMutated]
+140 | 
+141 |         // Set up initial state
+142 |         var initialCoeffs = [BiquadCoefficients](repeating: .identity, count: EQChain.maxBandCount)
+    |             `- warning: variable 'initialCoeffs' was never mutated; consider changing to 'let' constant [#VariableNeverMutated]
+143 |         chain.stageFullUpdate(
+144 |             coefficients: initialCoeffs.map { SVFCoefficients(biquad: $0) },
+
+<checkout>/tests/dsp/chain/EQChainTests.swift:19:13: warning: variable 'input' was never mutated; consider changing to 'let' constant [#VariableNeverMutated]
+ 17 |         // Chain should start with 0 active bands
+ 18 |         // We can't directly check activeBandCount (private), but we can verify passthrough behavior
+ 19 |         var input: [Float] = [Float](repeating: 0.5, count: Int(frameCount))
+    |             `- warning: variable 'input' was never mutated; consider changing to 'let' constant [#VariableNeverMutated]
+ 20 |         var output: [Float] = [Float](repeating: 0, count: Int(frameCount))
+ 21 | 
+
+<checkout>/tests/dsp/chain/EQChainTests.swift:52:13: warning: variable 'bypassFlags' was never mutated; consider changing to 'let' constant [#VariableNeverMutated]
+ 50 |         var allCoeffs = [BiquadCoefficients](repeating: .identity, count: EQChain.maxBandCount)
+ 51 |         allCoeffs[0] = coeffs
+ 52 |         var bypassFlags = [Bool](repeating: false, count: EQChain.maxBandCount)
+    |             `- warning: variable 'bypassFlags' was never mutated; consider changing to 'let' constant [#VariableNeverMutated]
+ 53 | 
+ 54 |         // Stage full update with active band
+
+[#SendableClosureCaptures]: <https://docs.swift.org/compiler/documentation/diagnostics/sendable-closure-captures>
+[#VariableNeverMutated]: <https://docs.swift.org/compiler/documentation/diagnostics/variable-never-mutated>
+[87 / 91] equmaczerTests-product
+Build complete! (16.84 sec)
+Test Suite 'Selected tests' started at 2026-11-20 17:49:05.128.
+Test Suite 'equmaczerTests.xctest' started at 2026-11-20 17:49:05.129.
+Test Suite 'PublicationRecoveryTests' started at 2026-11-20 17:49:05.129.
+Test Case '-[equmaczerTests.PublicationRecoveryTests testAudioFileHasPrivateModeAndUniqueName]' started.
+Test Case '-[equmaczerTests.PublicationRecoveryTests testAudioFileHasPrivateModeAndUniqueName]' passed (0.136 seconds).
+Test Case '-[equmaczerTests.PublicationRecoveryTests testC11HeaderABIAndAcquireLoads]' started.
+Test Case '-[equmaczerTests.PublicationRecoveryTests testC11HeaderABIAndAcquireLoads]' passed (0.000 seconds).
+Test Case '-[equmaczerTests.PublicationRecoveryTests testSimultaneousPublicationAndRendering]' started.
+Test Case '-[equmaczerTests.PublicationRecoveryTests testSimultaneousPublicationAndRendering]' passed (0.356 seconds).
+Test Suite 'PublicationRecoveryTests' passed at 2026-11-20 17:49:05.622.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.493 (0.494) seconds
+Test Suite 'equmaczerTests.xctest' passed at 2026-11-20 17:49:05.622.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.493 (0.494) seconds
+Test Suite 'Selected tests' passed at 2026-11-20 17:49:05.622.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.493 (0.495) seconds
