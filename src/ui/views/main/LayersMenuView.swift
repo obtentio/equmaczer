@@ -27,9 +27,11 @@ struct LayersMenuView: View {
                     }
                     layer("Hearing", source: hearing.state.sourceLabel + " · estimate, not medical", isOn: Binding(get: { hearing.state.enabled }, set: { hearing.setEnabled($0) }))
                     layer("Channel", source: channelSource, isOn: $channel.enabled)
-                    layer("Loudness", source: "\(Int(store.loudnessStrength * 100))% · follows volume", isOn: Binding(get: { store.loudnessEnabled }, set: { store.loudnessEnabled = $0 }))
-                    Slider(value: Binding(get: { store.loudnessStrength }, set: { store.loudnessStrength = $0 }), in: 0...1)
-                        .accessibilityLabel("Loudness strength")
+                    layer("Loudness", source: loudnessSource, isOn: Binding(get: { store.loudnessEnabled }, set: { store.loudnessEnabled = $0 }))
+                    if store.loudnessEnabled {
+                        Slider(value: Binding(get: { store.loudnessStrength }, set: { store.loudnessStrength = $0 }), in: 0...1)
+                            .accessibilityLabel("Loudness strength")
+                    }
                 }.font(.eqT1).padding(14).frame(width: 390).tint(Color.eqG80)
             }
             .sheet(isPresented: $showCorrection) {
@@ -38,6 +40,19 @@ struct LayersMenuView: View {
                     Button("Done") { showCorrection = false }
                 }.padding(12)
             }
+    }
+    private var loudnessSource: String {
+        let pct = Int(store.loudnessStrength * 100)
+        guard store.loudnessEnabled else { return "Off · follows volume" }
+        guard let volume = correction.currentVolumeScalar, volume >= CorrectionComposer.audibleVolumeFloor else {
+            return "\(pct)% · muted"
+        }
+        let phon = LoudnessCompensation.estimatedPhon(volumeScalar: volume)
+        let gains = LoudnessCompensation.compensation(phons: phon, strength: Double(store.loudnessStrength))
+        if gains.lowDB <= 0.05 {
+            return "\(pct)% · 0 dB at high vol"
+        }
+        return String(format: "%d%% · +%.1f dB bass", pct, gains.lowDB)
     }
     private var channelSource: String {
         guard let active = channel.activeChannel else { return "Automatic · no channel" }

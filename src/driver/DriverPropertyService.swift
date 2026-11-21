@@ -118,7 +118,16 @@ public final class DriverPropertyService: ObservableObject, DriverPropertyAccess
             mScope: kAudioObjectPropertyScopeGlobal,
             mElement: kAudioObjectPropertyElementMain
         )
-        
+
+        // Skip redundant HAL set if the virtual driver is already at the target rate.
+        var currentRate: Float64 = 0
+        var currentSize = UInt32(MemoryLayout<Float64>.size)
+        if AudioObjectGetPropertyData(deviceID, &address, 0, nil, &currentSize, &currentRate) == noErr,
+           abs(currentRate - closestRate) < 1.0 {
+            driverSampleRate = currentRate
+            return currentRate
+        }
+
         var rate = closestRate
         let status = AudioObjectSetPropertyData(
             deviceID,

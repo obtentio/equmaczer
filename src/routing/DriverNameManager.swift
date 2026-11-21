@@ -41,6 +41,10 @@ final class DriverNameManager {
         category: "DriverNameManager"
     )
 
+    /// Last name applied to the driver; avoids bouncing macOS default output on
+    /// same-device reconfigures (which interrupts active recorders like Voice Memos).
+    private var lastAppliedName: String?
+
     // MARK: - Initialization
 
     init(
@@ -96,24 +100,18 @@ final class DriverNameManager {
     
     /// Resets driver name to "equmaczer" (manual mode).
     private func resetDriverName(outputUID: String?) -> Bool {
+        if lastAppliedName == "equmaczer" { return true }
         let success = driverAccess.setDeviceName("equmaczer")
+        if success { lastAppliedName = "equmaczer" }
         
         guard success, let outputUID = outputUID else {
             return success
         }
         
-        // Trigger macOS Control Center refresh
-        // When switching from automatic to manual mode:
-        // - Driver is already default (from automatic mode)
-        // - Setting driver as default again is a no-op (no notification)
-        // - Toggle to output device and back to trigger CoreAudio notifications
-        // Note: Driver must be set as default for audio routing to work in manual mode
-
         systemDefaultObserver.restoreSystemDefaultOutput(to: outputUID)
 
         // Schedule UI refresh for 100ms later (fire-and-forget)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            self?.systemDefaultObserver.setDriverAsDefault(shortTimeout: true)
             self?.deviceProvider.refreshDevices()
             self?.logger.debug("Device list refreshed after driver name reset")
         }
@@ -123,19 +121,15 @@ final class DriverNameManager {
     
     /// Sets driver name to reflect output device (automatic mode).
     private func setDriverName(_ name: String, outputUID: String) -> Bool {
+        if lastAppliedName == name { return true }
         let success = driverAccess.setDeviceName(name)
+        if success { lastAppliedName = name }
         
         guard success, driverAccess.deviceID != nil else {
             return success
         }
         
-        // Trigger macOS Control Center refresh
-        // When switching devices in automatic mode:
-        // - Toggle to output device to ensure CoreAudio notifications fire
-        // Note: setDriverAsDefault() is called by AudioRoutingCoordinator.reconfigureRouting()
-        // synchronously after this method returns, before starting the pipeline.
-        // We only need to refresh the device list here for the updated name.
-
+        // Trigger macOS Control Center refresh only when the name actually changed.
         systemDefaultObserver.restoreSystemDefaultOutput(to: outputUID)
 
         // Schedule UI refresh for 100ms later (fire-and-forget)

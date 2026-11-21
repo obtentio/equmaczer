@@ -56,7 +56,8 @@ final class LoudnessCompensationTests: XCTestCase {
 
     func testEstimatedPhonMapping() {
         XCTAssertEqual(LoudnessCompensation.estimatedPhon(volumeScalar: 1.0), 85, accuracy: 0.01)
-        XCTAssertEqual(LoudnessCompensation.estimatedPhon(volumeScalar: 0.1), 65, accuracy: 0.01)
+        XCTAssertEqual(LoudnessCompensation.estimatedPhon(volumeScalar: 0.5), 55, accuracy: 0.01)
+        XCTAssertEqual(LoudnessCompensation.estimatedPhon(volumeScalar: 0.1), 31, accuracy: 0.01)
         XCTAssertEqual(LoudnessCompensation.estimatedPhon(volumeScalar: 0), 25, accuracy: 0.01)
     }
 }
@@ -167,9 +168,9 @@ final class CorrectionComposerTests: XCTestCase {
     }
 
     func testLoudnessShelvesAtLowVolume() {
-        // Volume 0.1 → 65 phon → ≈ +4.7 dB low shelf, +1.1 dB high shelf.
+        // Perceptual scalar 2/3 (67% macOS volume) → 65 phon → ≈ +4.66 dB low shelf, +1.08 dB high shelf.
         let bands = CorrectionComposer.composeBands(
-            profile: nil, loudnessEnabled: true, volumeScalar: 0.1, loudnessStrength: 1.0
+            profile: nil, loudnessEnabled: true, volumeScalar: Float(2.0 / 3.0), loudnessStrength: 1.0
         )
         XCTAssertEqual(bands.count, 2)
         XCTAssertEqual(bands[0].filterType, .lowShelf)

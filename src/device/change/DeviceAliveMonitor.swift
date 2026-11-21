@@ -41,6 +41,15 @@ final class DeviceAliveMonitor: DeviceAliveMonitoring {
     /// Callback to invoke when the monitored device is removed.
     private var onDeviceDied: (@MainActor () -> Void)?
 
+    /// Dedicated background queue for CoreAudio property listener callbacks.
+    /// Never pass `DispatchQueue.main` to `AudioObjectAddPropertyListenerBlock`:
+    /// CoreAudio calls `dispatch_sync` on the listener queue during `HALDevice::Teardown()`,
+    /// which deadlocks if the main thread is simultaneously disposing an AUHAL unit.
+    private nonisolated let listenerQueue = DispatchQueue(
+        label: "com.obtentio.equmaczer.deviceAlive",
+        qos: .utility
+    )
+
     private let logger = Logger(subsystem: "com.obtentio.equmaczer", category: "DeviceAliveMonitor")
 
     deinit {
@@ -65,8 +74,7 @@ final class DeviceAliveMonitor: DeviceAliveMonitoring {
             mElement: kAudioObjectPropertyElementMain
         )
 
-        // The listener block is dispatched to DispatchQueue.main by CoreAudio.
-        // Since this class is @MainActor, capture self and dispatch via MainActor.
+        // CoreAudio invokes the block on `listenerQueue`; hop to MainActor asynchronously.
         let block: AudioObjectPropertyListenerBlock = { [weak self] _, _ in
             Task { @MainActor in
                 self?.handleDeviceAliveChange(deviceID: deviceID)
@@ -78,7 +86,7 @@ final class DeviceAliveMonitor: DeviceAliveMonitoring {
         let status = AudioObjectAddPropertyListenerBlock(
             deviceID,
             &address,
-            DispatchQueue.main,
+            listenerQueue,
             block
         )
 
@@ -143,7 +151,7 @@ final class DeviceAliveMonitor: DeviceAliveMonitoring {
         _ = AudioObjectRemovePropertyListenerBlock(
             deviceID,
             &address,
-            DispatchQueue.main,
+            listenerQueue,
             block
         )
     }

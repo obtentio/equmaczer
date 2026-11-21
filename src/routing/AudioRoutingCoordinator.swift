@@ -384,29 +384,24 @@ final class AudioRoutingCoordinator: ObservableObject {
                 // Rename driver to match output device
                 _ = updateDriverName()
 
-                // Set driver as macOS default IMMEDIATELY (before pipeline starts)
-                systemDefaultObserver.setDriverAsDefault(
-                    onSuccess: { [weak self] in
-                        self?.logger.info("Automatic mode: set driver as system default output")
-                    },
-                    onFailure: { [weak self] in
-                        self?.routingStatus = .error("Failed to set system default output device")
-                        self?.logger.error("Automatic mode: failed to set driver as system default")
-                        self?.driverAccess.restoreToBuiltInSpeakers()
-                    }
-                )
+                // Set driver as macOS default only if it isn't already the default
+                // (re-setting during a Bluetooth HFP rate change triggers a route interruption in recorders like Voice Memos).
+                if systemDefaultObserver.getCurrentSystemDefaultOutputUID() != DRIVER_DEVICE_UID {
+                    systemDefaultObserver.setDriverAsDefault(
+                        onSuccess: { [weak self] in
+                            self?.logger.info("Automatic mode: set driver as system default output")
+                        },
+                        onFailure: { [weak self] in
+                            self?.routingStatus = .error("Failed to set system default output device")
+                            self?.logger.error("Automatic mode: failed to set driver as system default")
+                            self?.driverAccess.restoreToBuiltInSpeakers()
+                        }
+                    )
+                }
             }
         }
 
-        // Sync driver sample rate to match output device (driver-backed automatic modes only)
-        if routingMode.requiresSampleRateSync && !driverlessTap {
-            syncDriverSampleRate(to: devices.outputDeviceID)
-        }
-
-        // Set up listener for output device sample rate changes
-        setupSampleRateListener(for: devices.outputDeviceID)
-
-        // Determine capture mode early - needed to decide if we need rate sync delay
+        // Determine capture mode early - needed to decide if we need driver rate sync or rate sync delay.
         // A one-shot override from the liveness watchdog takes
         // precedence over the stored preference for this attempt.
         let capturePreference: CaptureMode = captureModeOverride ?? (routingMode.isManual ? .halInput : self.captureMode)
@@ -425,10 +420,25 @@ final class AudioRoutingCoordinator: ObservableObject {
             resolvedCaptureMode = .halInput
         }
 
-        // For HAL input mode in automatic mode, add delay after sample rate sync
+        // Sync driver sample rate ONLY when our virtual driver is the capture input
+        // (sharedMemory / halInput). In Process Tap mode, CoreAudio drift-compensates the
+        // virtual driver inside the aggregate; mutating its nominal rate mid-stream (e.g. on
+        // Bluetooth A2DP <-> HFP 16 kHz switches) fires AVAudioEngineConfigurationChangeNotification
+        // and aborts active recorders like Voice Memos.
+        let shouldSyncDriverRate = resolvedCaptureMode != .processTap
+            && (routingMode.requiresSampleRateSync || devices.inputUID == DRIVER_DEVICE_UID)
+            && !driverlessTap
+        if shouldSyncDriverRate {
+            syncDriverSampleRate(to: devices.outputDeviceID)
+        }
+
+        // Set up listener for output device sample rate changes
+        setupSampleRateListener(for: devices.outputDeviceID)
+
+        // For HAL input mode when syncing driver rate, add delay after sample rate sync
         // to allow CoreAudio to propagate the rate change before creating input HAL unit.
         // In shared memory mode, no input HAL unit is created, so no delay needed.
-        let needsRateSyncDelay = !routingMode.isManual && resolvedCaptureMode == .halInput
+        let needsRateSyncDelay = shouldSyncDriverRate && resolvedCaptureMode == .halInput
 
         if needsRateSyncDelay {
             // Delay to allow CoreAudio to propagate sample rate change
@@ -929,6 +939,13 @@ final class AudioRoutingCoordinator: ObservableObject {
         // Reset driver volume to 100% for clean state when returning to automatic mode
         if let driverID = driverAccess.deviceID {
             volumeService.setDeviceVolumeScalar(deviceID: driverID, volume: 1.0)
+        }
+
+        // Restore macOS default output off the virtual driver so keyboard volume keys
+        // continue controlling the physical headphones/speakers in manual mode.
+        if systemDefaultObserver.getCurrentSystemDefaultOutputUID() == DRIVER_DEVICE_UID,
+           let outputUID = selectedOutputDeviceID, outputUID != DRIVER_DEVICE_UID {
+            _ = systemDefaultObserver.restoreSystemDefaultOutput(to: outputUID)
         }
 
         logger.info("Switched to manual mode")
@@ -1459,18 +1476,23 @@ final class AudioRoutingCoordinator: ObservableObject {
         sampleRateService.observeSampleRateChanges(on: outputDeviceID) { [weak self] newRate in
             guard let self = self else { return }
             
-            // Only sync if routing is active and in automatic mode
-            guard case .active = self.routingStatus, !self.manualModeEnabled else { return }
+            // Sync if routing is active and either automatic mode or manual mode using our driver as input
+            guard case .active = self.routingStatus,
+                  (!self.manualModeEnabled || self.selectedInputDeviceID == DRIVER_DEVICE_UID) else { return }
             
+            // Skip redundant notifications if the pipeline is already running at this rate.
+            if let currentRate = self.pipelineManager.renderPipeline?.sampleRate,
+               abs(currentRate - newRate) < 1.0 {
+                return
+            }
+
             self.logger.info("Output device sample rate changed to \(newRate) Hz")
 
-            // In Process Tap mode, the aggregate device slaves directly to the physical output DAC
-            // (including Bluetooth HFP 16/24 kHz): reconfigure directly without gating on the HAL driver.
+            // In Process Tap mode, Bluetooth A2DP <-> HFP switches fire bursts of rate notifications
+            // (10+ in 1 ms). Coalesce through RouteSeam's wake window (250 ms) instead of firing
+            // back-to-back reconfigures that interrupt active recorders (e.g. Voice Memos).
             if self.currentCaptureMode == .processTap {
-                self.bumpRouteGeneration()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                    self?.reconfigureRouting()
-                }
+                self.scheduleQuiescentCommit(window: .wake)
                 return
             }
 

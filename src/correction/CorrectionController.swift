@@ -73,7 +73,7 @@ final class CorrectionController: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
     private var observedVolumeDeviceID: AudioDeviceID?
-    private var currentVolumeScalar: Float?
+    @Published private(set) var currentVolumeScalar: Float?
     private var lastRefreshAt = Date.distantPast
     private var trailingRefreshTask: Task<Void, Never>?
 

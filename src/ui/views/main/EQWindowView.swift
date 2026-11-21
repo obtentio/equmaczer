@@ -52,7 +52,7 @@ struct EQWindowView: View {
                 HStack(spacing: 6) {
                     VStack(spacing: 8) {
                         clayHeader
-                        RecordingControls(store: store)
+                        RecordingControls(store: store, inline: true)
                         ClayStageView(sketchArmed: $sketchArmed)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .dropDestination(for: String.self) { names, _ in

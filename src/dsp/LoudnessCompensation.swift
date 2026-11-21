@@ -103,15 +103,15 @@ enum LoudnessCompensation {
     // MARK: - Level estimate
 
     /// Estimates the listening level (phon) from the output device's
-    /// volume scalar. Full volume is assumed to be a few dB above the
-    /// reference (85 phon ≈ a loud home listening level); each halving
-    /// of amplitude is −6 phon. This is an estimate by construction —
-    /// device sensitivity varies — which is exactly what the strength
-    /// control calibrates. Floored at 25 phon so compensation saturates
-    /// instead of growing without bound near silence.
+    /// macOS CoreAudio volume scalar (0...1).
+    ///
+    /// CoreAudio's `kAudioDevicePropertyVolumeScalar` is already perceptually
+    /// (logarithmically) tapered across ~60 dB (not a linear amplitude ratio),
+    /// so linear interpolation from 25 phon (0%) to 85 phon (100%) tracks real
+    /// listening level: 50% ≈ 55 phon, 75% ≈ 70 phon, ≥92% ≥ 80 phon (0 dB).
     static func estimatedPhon(volumeScalar: Float) -> Double {
         guard volumeScalar > 0 else { return 25.0 }
-        let phon = 85.0 + 20.0 * log10(Double(volumeScalar))
-        return min(max(phon, 25.0), 85.0)
+        let clamped = min(max(Double(volumeScalar), 0.0), 1.0)
+        return 25.0 + 60.0 * clamped
     }
 }
