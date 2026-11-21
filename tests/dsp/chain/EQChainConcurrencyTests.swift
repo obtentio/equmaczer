@@ -50,11 +50,13 @@ final class EQChainConcurrencyTests: XCTestCase {
         let iterations = 1_000
         let stagingSemaphore = DispatchSemaphore(value: 0)
         let processingSemaphore = DispatchSemaphore(value: 0)
+        let stagingQueue = DispatchQueue(label: "com.obtentio.equmaczer.test.eqchain.staging")
+        let processingQueue = DispatchQueue(label: "com.obtentio.equmaczer.test.eqchain.processing")
         let stagingDone = XCTestExpectation(description: "Staging complete")
         let processingDone = XCTestExpectation(description: "Processing complete")
 
         // Thread A: Stage coefficient updates (simulates main thread — serial)
-        DispatchQueue.global(qos: .userInteractive).async {
+        stagingQueue.async {
             for i in 0..<iterations {
                 // Wait for previous processing to complete
                 stagingSemaphore.wait()
@@ -88,7 +90,7 @@ final class EQChainConcurrencyTests: XCTestCase {
         }
 
         // Thread B: Apply updates and process (simulates audio thread — serial)
-        DispatchQueue.global(qos: .userInteractive).async {
+        processingQueue.async {
             var buffer: [Float] = [Float](repeating: 0.5, count: Int(frameCount))
             for i in 0..<iterations {
                 // Wait for staging to complete
@@ -119,7 +121,7 @@ final class EQChainConcurrencyTests: XCTestCase {
         // Kick off the first staging
         stagingSemaphore.signal()
 
-        wait(for: [stagingDone, processingDone], timeout: 120.0)
+        wait(for: [stagingDone, processingDone], timeout: 30.0)
     }
 
     // MARK: - Rapid Staging Without Applying
