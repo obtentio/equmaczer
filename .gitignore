@@ -10,3 +10,5 @@ docs/handoffs/
 .opencode/
 .env
 .env.*
+__pycache__/
+*.pyc
